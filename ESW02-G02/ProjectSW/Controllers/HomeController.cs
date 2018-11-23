@@ -22,7 +22,7 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult ListAnimals()
         {
             ViewData["Message"] = "Your contact page.";
 

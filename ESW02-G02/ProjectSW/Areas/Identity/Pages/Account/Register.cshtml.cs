@@ -42,7 +42,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
         {
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Full name")]
+            [Display(Name = "Nome completo")]
             public string Name { get; set; }
 
             [Required]

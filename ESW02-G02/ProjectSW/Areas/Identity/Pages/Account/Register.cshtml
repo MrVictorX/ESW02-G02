@@ -11,19 +11,23 @@
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.Name"></label>
-                <input asp-for="Input.Name" class="form-control"/>
+                <label asp-for="Input.Name">Nome Completo*</label> 
+                <div class="popup" onclick="myFunction()">
+                    <img src="~/images/info_popup.png" style="height:1em; width:1em;" />
+                    <span class="popuptext" id="myPopup">Popup text...</span>
+                </div>
+                <input asp-for="Input.Name" class="form-control" />          
             </div>
             <div class="form-group">
-                <label asp-for="Input.Address"></label>
+                <label asp-for="Input.Address">Morada*</label>
                 <input asp-for="Input.Address" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Input.DateOfBirth"></label>
+                <label asp-for="Input.DateOfBirth">Data de Nascimento*</label>
                 <input asp-for="Input.DateOfBirth" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Input.UserType"></label>
+                <label asp-for="Input.UserType">Tipo de Utilizador*</label>
                 <select asp-for="Input.UserType" class="form-control custom-select">
                       <option selected>Tipo de utilizador</option>
                       <option value="Funcionario">Funcionario</option>
@@ -31,20 +35,21 @@
                     </select>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
+                <label asp-for="Input.Email">Email*</label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
+                <label asp-for="Input.Password">Password*</label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
+                <label asp-for="Input.ConfirmPassword">Confirmar Password*</label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            Campos com * são obrigatórios<br /><br />
             <button type="submit" class="btn btn-default" style="margin-left: 32%">Registar</button>
         </form>
     </div>

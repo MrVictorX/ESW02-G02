@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectSW.Models.Account>
+﻿@model IEnumerable<ProjectSW.Areas.Identity.Data.ProjectSWUser>
 @{
     ViewData["Title"] = "AccountList";
 }
@@ -19,7 +19,6 @@
                 @Html.DisplayNameFor(model => model.UserType)
             </th>
             <th>
-                Selecionado
             </th>
             <th></th>
         </tr>
@@ -38,10 +37,12 @@
                     @Html.DisplayFor(modelItem => item.UserType)
                 </td>
                 <td>
-                    <input type="checkbox" name="Selected" value="" />
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
 

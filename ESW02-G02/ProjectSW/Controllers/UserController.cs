@@ -7,16 +7,15 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
-    public class AccountController : Controller
+    public class UserController : Controller
     {
         private readonly ProjectSWContext _context;
 
-        public AccountController(ProjectSWContext context)
+        public UserController(ProjectSWContext context)
         {
             _context = context;
         }
-
-
+        
         public IActionResult Index()
         {
             return View();
@@ -31,11 +30,20 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult List()
+        public IActionResult UserList()
         {
-            var accounts = _context.Users;
-            return View(accounts.ToList());
+            return View(_context.Users.ToList());
         }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

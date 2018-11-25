@@ -1,11 +1,12 @@
-﻿<!DOCTYPE html>
+﻿<!<!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href='@Url.Content("~/Content/Proximet_free/HTML/css/base.css")'>
+        <link rel="stylesheet" href='@Url.Content("~/lib/bootstrap/dist/css/bootstrap.css")'>
+        <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,7 +18,7 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top .text-primary">
-        <div class="container">
+        <div class="container" style="width:100%">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -28,25 +29,29 @@
             </div>
             <div class="navbar-collapse collapse text-white">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião </b></a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Funcionários</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Animais</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Adoções</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Estatisticas</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião</b></a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Development">Funcionários</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Development">Animais</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Development">Adoções</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Development">Estatisticas</a></li>
                     <li><a asp-area="" asp-controller="User" asp-action="UserList">Contas</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
+
+
     <partial name="_CookieConsentPartial" />
+
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2018 - ProjectSW</p>
+        <footer style="background-color:#689999; width:100%">
+            <p>&copy; 2018 - Quinta do Mião</p>
         </footer>
     </div>
+
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -57,14 +62,17 @@
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"></script>
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

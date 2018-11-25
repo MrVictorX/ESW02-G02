@@ -109,37 +109,6 @@ button {
     margin-left: .5em;
 }
 
-.register-login-btns {
-    float: right;
-    width: 30%;
-    padding: 5px;
-}
-
-.register-login-btns a {
-    color: #689999;
-    font-size: large;
-    margin-left: 20%;
-}
-
-.profile-logout-btns {
-    float: right;
-    width: 30%;
-    transform : translateY(-15%);
-}
-
-.profile-logout-btns a {
-    color: #689999;
-    font-size: large;
-    margin-left: 20%;
-}
-
-.logo {
-    position: absolute;
-    transform: translate(740%, 50%);
-    width: 10%;
-    height: 10%;
-}
-
 .div-perfil {
     width: 50%;
     display: inline-block;

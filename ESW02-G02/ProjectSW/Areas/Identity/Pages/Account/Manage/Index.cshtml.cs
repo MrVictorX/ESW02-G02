@@ -63,7 +63,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             public string Email { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Numero de telemovel")]
             public string PhoneNumber { get; set; }
         }
 
@@ -150,7 +150,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "O seu perfil foi editado";
             return RedirectToPage();
         }
 
@@ -178,10 +178,10 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Confirma o teu email",
+                $"Porfavor confirme a sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Email de verificação enviado.";
             return RedirectToPage();
         }
     }

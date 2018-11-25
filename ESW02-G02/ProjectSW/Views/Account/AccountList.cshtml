@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ProjectSW.Models.Account>
+@{
+    ViewData["Title"] = "AccountList";
+}
+
+<h2>Funcionários</h2>
+<h3>Lista de funcionários</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+            <th>
+                Selecionado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType)
+                </td>
+                <td>
+                    <input type="checkbox" name="Selected" value="" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

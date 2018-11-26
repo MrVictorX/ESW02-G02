@@ -17,7 +17,7 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top .text-primary">
-        <div class="container">
+        <div class="container" style="width: 100%">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -27,8 +27,10 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse text-white">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião </b></a></li>
+                <ul class="nav navbar-nav" style="flex-direction: unset">
+                    <li style="float:left"><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião</b></a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="flex-direction: unset; font-size:1em">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Funcionários</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Animais</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Adoções</a></li>

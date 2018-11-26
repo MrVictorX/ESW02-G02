@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ProjectSW.Areas.Identity.Data;
 
+
+
 namespace ProjectSW.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -40,40 +42,40 @@ namespace ProjectSW.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required (ErrorMessage = "O Nome Completo é um campo obrigatório.")]
             [DataType(DataType.Text)]
             [Display(Name = "Nome completo")]
             public string Name { get; set; }
 
-            [Required]
+            [Required (ErrorMessage = "A Morada é um campo obrigatório.")]
             [DataType(DataType.Text)]
             [Display(Name = "Morada")]
             public string Address { get; set; }
 
-            [Required]
+            [Required (ErrorMessage = "A Data de Nascimento é um campo obrigatório.")]
             [DataType(DataType.Date)]
             [Display(Name = "Data de Nascimento")]
             public DateTime DateOfBirth { get; set; }
 
-            [Required]
+            [Required (ErrorMessage = "O Tipo de Utilizador é um campo obrigatório.")]
             [DataType(DataType.Text)]
             [Display(Name = "Tipo Utilizador")]
             public string UserType { get; set; }
 
-            [Required]
+            [Required (ErrorMessage = "O Email é um campo obrigatório.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required (ErrorMessage = "A Password é um campo obrigatório.")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$", ErrorMessage = "A {0} necessita de conter pelo menos uma letra Maiúscula, uma letra minúscula, um número, um caracter especial e no mínimo 6 caracteres.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar password")]
+            [Compare("Password", ErrorMessage = "A password e a confirmação da password não são iguais.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -121,5 +123,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
+
 }

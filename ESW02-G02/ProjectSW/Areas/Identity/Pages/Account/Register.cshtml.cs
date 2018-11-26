@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ProjectSW.Areas.Identity.Data;
 
+
+
 namespace ProjectSW.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -121,5 +123,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
+
 }

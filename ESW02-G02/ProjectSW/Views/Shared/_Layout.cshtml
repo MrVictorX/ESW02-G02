@@ -13,8 +13,11 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </environment>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top .text-primary">
@@ -28,7 +31,6 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse text-white">
-
                 <ul class="nav navbar-nav" style="flex-direction: unset">
                     <li style="float:left"><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião</b></a></li>
                 </ul>
@@ -44,12 +46,11 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-
+    <div class="container body-content" style="margin-top:5%">
         @RenderBody()
         <hr />
-        <footer class="footer">
-            <p>&copy;2018 Quinta do Mião - Centro Intermunicipal de Recolha de Animais Errantes Barreiro/Moita Telefone: 212068625</p>
+        <footer style="background-color:#689999; width:100%">
+            <p>&copy; 2018 - Quinta do Mião</p>
         </footer>
     </div>
 
@@ -73,7 +74,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-    @RenderSection("Scripts", required: false)
 
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

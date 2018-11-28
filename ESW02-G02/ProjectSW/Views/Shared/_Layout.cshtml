@@ -28,8 +28,10 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse text-white">
+
                 <ul class="nav navbar-nav" style="flex-direction: unset">
-                    <li style="float:left"><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião</b></a></li></ul>
+                    <li style="float:left"><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião</b></a></li>
+                </ul>
                 <ul class="nav navbar-nav" style="flex-direction: unset">
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Quem somos</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="ListAnimals">Animais para Adoção</a></li>
@@ -43,10 +45,11 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
+
         @RenderBody()
         <hr />
-        <footer style="background-color:#689999; width:100%">
-            <p>&copy; 2018 - Quinta do Mião</p>
+        <footer class="footer">
+            <p>&copy;2018 Quinta do Mião - Centro Intermunicipal de Recolha de Animais Errantes Barreiro/Moita Telefone: 212068625</p>
         </footer>
     </div>
 
@@ -70,7 +73,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

@@ -9,12 +9,6 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 /* Carousel */
 .carousel-caption p {
@@ -46,13 +40,31 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 /* CSS adicionado */
+
+
+.footer {
+    background-color: #689999;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+
+
+#logo{
+    width:5%;
+    height:5%;
+}
 .navbar-inverse {
     background-color: #689999;
 }
 
-.nav a{
+.nav a {
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -81,8 +93,6 @@ for details on configuring this project to bundle and minify static web assets. 
     width: 20%;
     display: inline-block;
 }
-
-
 
 /*Form*/
 form {

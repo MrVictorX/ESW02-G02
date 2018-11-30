@@ -5,10 +5,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    var user = await UserManager.FindByNameAsync(User.Identity.Name);
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" style="border:hidden;">
         <ul class="nav navbar-nav navbar-right" style="display:inline">
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@user.Name</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link" style="color:black; font-weight: bold; font-size:1.3em">Sair</button>

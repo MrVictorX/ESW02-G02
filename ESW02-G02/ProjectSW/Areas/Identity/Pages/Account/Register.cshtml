@@ -4,24 +4,18 @@
     ViewData["Title"] = "Registar";
 }
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
 <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 
-        $(function () {
-            $('[data-toggle="popover"]').popover() 
-        })
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
 
-        $('.popover-dismiss').popover({
-            trigger: 'focus'
-        })
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
 </script>
 
 <h2 style="margin-left:36%">@ViewData["Title"]</h2>
@@ -35,28 +29,36 @@
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome Completo" data-content="Aqui irá de inserir o seu nome completo.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <input asp-for="Input.Name" class="form-control" />
+<<<<<<< HEAD
+                <input asp-for="Input.Name" class="form-control" placeholder="ex: Victor Miguel Geraldes Ramos" />
+=======
+                <input asp-for="Input.Name" class="form-control" id="Registar-name"/>
+>>>>>>> e0471567decf3a049d09e050f1cfc427ca252fb6
             </div>
             <div class="form-group">
                 <label asp-for="Input.Address">Morada*</label>
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Morada" data-content="Aqui irá inserir a sua morada.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <input asp-for="Input.Address" class="form-control" />
+<<<<<<< HEAD
+                <input asp-for="Input.Address" class="form-control" placeholder="ex: Rua Josefino Esteves, Lote 25, 1ºEsq" />
+=======
+                <input asp-for="Input.Address" class="form-control" id="Registar-address"/>
+>>>>>>> e0471567decf3a049d09e050f1cfc427ca252fb6
             </div>
             <div class="form-group">
                 <label asp-for="Input.DateOfBirth">Data de Nascimento*</label>
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data de Nascimento" data-content="Aqui irá de inserir a sua data de nascimento no seguinte formato DD/MM/AAAA">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <input asp-for="Input.DateOfBirth" class="form-control" />
+                <input asp-for="Input.DateOfBirth" class="form-control" id="Registar-date"/>
             </div>
             <div class="form-group">
                 <label asp-for="Input.UserType">Tipo de Utilizador*</label>
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Tipo de utilizador" data-content="Aqui irá escolher o tipo de utilizador que irá ser, Funcionário ou Voluntário.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <select asp-for="Input.UserType" class="form-control custom-select">
+                <select asp-for="Input.UserType" class="form-control custom-select" id="Registar-user-type">
                     <option selected>Tipo de utilizador</option>
                     <option value="Funcionario">Funcionario</option>
                     <option value="Voluntario">Voluntario</option>
@@ -67,7 +69,11 @@
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o seu email não institucional.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <input asp-for="Input.Email" class="form-control" />
+<<<<<<< HEAD
+                <input asp-for="Input.Email" class="form-control" placeholder="ex: victor.miguel@hotmail.com" />
+=======
+                <input asp-for="Input.Email" class="form-control" id="Registar-email"/>
+>>>>>>> e0471567decf3a049d09e050f1cfc427ca252fb6
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -75,7 +81,11 @@
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Password" data-content="Aqui irá de inserir a sua password. Este deverá ter o seguinte formato, um caracter maiúscula, um caracter minúsculo, um número, um caracter especial e um tamanho mínimo de 6 caracteres.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <input asp-for="Input.Password" class="form-control" />
+<<<<<<< HEAD
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+=======
+                <input asp-for="Input.Password" class="form-control" id="Registar-password"/>
+>>>>>>> e0471567decf3a049d09e050f1cfc427ca252fb6
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -83,15 +93,19 @@
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Confirmar Password" data-content="Aqui irá de confirmar a password inserida préviamente.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
+<<<<<<< HEAD
+                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Repetir password" />
+=======
+                <input asp-for="Input.ConfirmPassword" class="form-control" id="Registar-confirm"/>
+>>>>>>> e0471567decf3a049d09e050f1cfc427ca252fb6
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             Campos com * são obrigatórios<br /><br />
-            <button type="submit" class="btn btn-default" style="margin-left: 32%">Registar</button>
+            <button type="submit" class="btn btn-default" style="margin-left: 32%" id="Registar-submit">Registar</button>
         </form>
     </div>
 </div>
-<img src="~/images/Image_1.png" />
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -3,10 +3,10 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+
+
+@import url('https://fonts.googleapis.com/css?family=Cookie');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
 
 
@@ -39,8 +39,54 @@ for details on configuring this project to bundle and minify static web assets. 
     margin: 0 auto;
 }
 
+
+
+
+
 /* CSS adicionado */
 
+
+/* BODY */
+body {
+    background-image: url('../images/page-1_slide02.jpg');
+    font-family: 'Inconsolata', monospace;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* HEADER */
+.navbar-inverse {
+    background-color: #689999;
+}
+
+.nav a {
+    color: white;
+    font-size: 3em;
+    font-family: 'Cookie', cursive;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: dimgray;
+}
+
+
+/* FOOTER */
+.icon{
+    text-align: left;
+
+}
+
+.social{
+    float:right;
+    margin-right:5%;
+}
 
 .footer {
     background-color: #689999;
@@ -50,37 +96,16 @@ for details on configuring this project to bundle and minify static web assets. 
     width: 100%;
     color: white;
     text-align: center;
+    font-size: 1em;
 }
 
-
-
-#logo{
-    width:5%;
-    height:5%;
-}
-.navbar-inverse {
-    background-color: #689999;
-}
-
-.nav a {
-    color: white;
-    font-size: 2em;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: white;
-}
-
-
-.navbar-inverse .navbar-nav > li > a:hover {
-    color: black;
-}
-
-
+/* QUEM SOMOS */
 .div-home{
-    margin-top: 1%;
+    margin-top: 10%;
     width: 90%;
     text-align: justify;
+    background-color:white;
+    padding:inherit;
 }
 
 .box {
@@ -89,9 +114,11 @@ for details on configuring this project to bundle and minify static web assets. 
     padding: 10%;
 }
 
+/* REGISTAR */
 .div-registo {
     width: 20%;
     display: inline-block;
+
 }
 
 /*Form*/
@@ -101,6 +128,7 @@ form {
     padding: 1em;
     border: 1px solid #CCC;
     border-radius: 1em;
+    background-color: white;
 }
 
 form div + div {

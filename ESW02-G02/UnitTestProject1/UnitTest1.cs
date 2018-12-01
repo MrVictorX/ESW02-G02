@@ -20,14 +20,14 @@ namespace UnitTestProject1
         [Test]
         public void Test()
         {
-            driver.Navigate().GoToUrl("https://localhost:44384/Identity/Account/Register");
+            driver.Navigate().GoToUrl("https://projetoesw.azurewebsites.net/Identity/Account/Register");
 
 
             // Find the link to registration form
-            IWebElement link = driver.FindElement(By.Id("Registar"));
+            //IWebElement link = driver.FindElement(By.Id("Registar"));
 
             // Click the link
-            link.Click();
+            //link.Click();
 
             // Find the email form field
             IWebElement name = driver.FindElement(By.Id("Registar-name"));
@@ -52,7 +52,7 @@ namespace UnitTestProject1
             string currentURL = driver.Url;
             /*Assert.AreEqual(currentURL, "https://localhost:44384/");*/
 
-            if (currentURL.Equals("https://localhost:44384/"))
+            if (currentURL.Equals("https://projetoesw.azurewebsites.net/"))
             {
                 s.Stop();
                 System.Console.WriteLine("Tempo decorrido: " + (s.ElapsedMilliseconds / 100));

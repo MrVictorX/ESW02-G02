@@ -10,7 +10,9 @@
     })
 
     $(function () {
-        $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        })
     })
 
     $('.popover-dismiss').popover({
@@ -26,7 +28,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.Name">Nome Completo*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome Completo" data-content="Aqui irá de inserir o seu nome completo.">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome Completo" data-content="Aqui irá inserir o seu nome completo.">
                     <i class="fas fa-info-circle"></i>
                 </button>
                 <input asp-for="Input.Name" class="form-control" id="Registar-name" placeholder="ex: Victor Miguel Geraldes Ramos" />
@@ -40,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.DateOfBirth">Data de Nascimento*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data de Nascimento" data-content="Aqui irá de inserir a sua data de nascimento no seguinte formato DD/MM/AAAA">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data de Nascimento" data-content="Aqui irá inserir a sua data de nascimento no seguinte formato DD/MM/AAAA">
                     <i class="fas fa-info-circle"></i>
                 </button>
                 <input asp-for="Input.DateOfBirth" class="form-control" id="Registar-date"/>
@@ -66,7 +68,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password">Password*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Password" data-content="Aqui irá de inserir a sua password. Este deverá ter o seguinte formato, um caracter maiúscula, um caracter minúsculo, um número, um caracter especial e um tamanho mínimo de 6 caracteres.">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Password" data-content="Aqui irá inserir a sua password. Este deverá ter o seguinte formato, um caracter maiúscula, um caracter minúsculo, um número, um caracter especial e um tamanho mínimo de 6 caracteres.">
                     <i class="fas fa-info-circle"></i>
                 </button>
                 <input asp-for="Input.Password" class="form-control" id="Registar-password" placeholder="Password" />
@@ -74,7 +76,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword">Confirmar Password*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Confirmar Password" data-content="Aqui irá de confirmar a password inserida préviamente.">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Confirmar Password" data-content="Aqui irá confirmar a password inserida préviamente.">
                     <i class="fas fa-info-circle"></i>
                 </button>
                 <input asp-for="Input.ConfirmPassword" class="form-control" id="Registar-confirm" placeholder="Repetir password" />

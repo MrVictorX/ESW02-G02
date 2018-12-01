@@ -5,7 +5,7 @@
     ViewData["Title"] = "Autenticar";
 }
 
-<h2 style="margin-left:36%">@ViewData["Title"]</h2>
+<h2>@ViewData["Title"]</h2>
 <div class="row">
     <div class="col-md-4" style="left:25%;">
         <section>
@@ -28,14 +28,11 @@
                     <p>
                         <a asp-page="./ForgotPassword">Esqueci-me da password?</a>
                     </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registar um novo utilizador</a>
-                    </p>
                 </div>
             </form>
         </section>
     </div>
-    <img src="~/images/Image_1.png" />
+  
 
 </div>
 

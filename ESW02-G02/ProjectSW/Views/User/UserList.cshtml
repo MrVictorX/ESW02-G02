@@ -3,33 +3,27 @@
     ViewData["Title"] = "AccountList";
 }
 
-<h2>Funcionários</h2>
-<h3>Lista de funcionários</h3>
 
-<table class="table">
+<h2>Lista de Contas</h2>
+
+<table class="table" >
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+               Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserType)
+               Função
             </th>
             <th>
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -37,10 +31,11 @@
                     @Html.DisplayFor(modelItem => item.UserType)
                 </td>
                 <td>
-                    <a asp-action="DeleteUser" asp-route-id="@item.Id">Eliminar</a>
+                    <a asp-action="DeleteUser" asp-route-id="@item.Id"><img src="~/images/delete.png" />
+                    </a>
                 </td>
             </tr>
-        }
+        }   
     </tbody>
 </table>
 

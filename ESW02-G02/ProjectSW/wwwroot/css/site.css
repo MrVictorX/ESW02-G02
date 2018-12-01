@@ -171,12 +171,25 @@ button {
     display: inline-block;
 }
 
+/*TABLES*/
+table {
+    border: 2px solid #CCC;
+    text-align: center;
+    position: relative;
+    background-color: white;
+}
 
+td {
+    text-align: center;
+}
 
+th {
+    font-size: 20px;
+    text-align: center;
+    color: #689999;
+}
 /* -----------------------RESPONSIVE----------------------- */
 @media screen and (max-width: 500px) {
-
-
     /* BODY */
     body {
         background-position: top;

@@ -5,6 +5,10 @@
     <UserSecretsId>ff716595-e62b-4c82-a212-4dd1bad45e09</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Devil\source\repos\ProjectSW\ESW02-G02\ProjectSW\ProjectSW.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />

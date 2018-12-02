@@ -39,6 +39,9 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 
+
+
+
 /* CSS adicionado */
 h2 {
    margin-left:30%;
@@ -171,44 +174,13 @@ button {
     display: inline-block;
 }
 
-
-
-/* -----------------------RESPONSIVE----------------------- */
+/* RESPONSIVE */
 @media screen and (max-width: 500px) {
-
-
-    /* BODY */
-    body {
-        background-position: top;
-    }
-
-    .body-content {
-        margin-top: 10%;
-    }
-
-    .row {
-        margin-right: 30%;
-    }
-
-    h2 {
-        margin-left: 15%;
-    }
-
-    /* QUEM SOMOS */
-    .div-about {
-        margin-top: 15%;
-        margin-left: 7%;
-    }
-
-    /*FOOTER*/
-    footer {
-        display: none;
+ 
+    .div-registo{
+        display:block;
     }
 }
-
-
-
-
 
 /* Popup container */
 .popup {

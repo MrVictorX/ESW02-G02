@@ -22,7 +22,7 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult ListAnimals()
         {
             ViewData["Message"] = "Your contact page.";
 
@@ -38,6 +38,11 @@ namespace ProjectSW.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Development()
+        {
+            return View();
         }
     }
 }

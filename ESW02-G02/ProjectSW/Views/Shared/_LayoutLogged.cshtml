@@ -41,16 +41,19 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Estatisticas</a></li>
                     <li><a asp-area="" asp-controller="User" asp-action="UserList">Contas</a></li>
                 </ul>
-                <partial name="_LoginPartial" />
+
             </div>
         </div>
     </nav>
+    <partial name="_LoginPartial" />
     <partial name="_CookieConsentPartial" />
     <div class="container body-content" style="margin-top:5%">
         @RenderBody()
-        <hr />
-        <footer>
-            <p style =" position:fixed">&copy; 2018 - Quinta do Mião</p>
+        <footer class="footer">
+            &copy;2018 Quinta do Mião - Centro Intermunicipal de Recolha de Animais Errantes Barreiro/Moita&nbsp;&nbsp; Telefone: 212068625
+            <div class="social">
+                <a href="https://www.facebook.com/quintamiao/"><img class="icon" src="~/images/facebook.png" alt="Facebook Logo"></a>
+            </div>
         </footer>
     </div>
     <environment include="Development">

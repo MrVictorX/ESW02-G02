@@ -10,7 +10,9 @@
     })
 
     $(function () {
-        $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        })
     })
 
     $('.popover-dismiss').popover({
@@ -18,37 +20,29 @@
     })
 </script>
 
-<h2>@ViewData["Title"]</h2>
+<h2 style="margin-left:36%">@ViewData["Title"]</h2>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="left:25%;">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.Name">Nome Completo*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome Completo" data-content="Aqui irá de inserir o seu nome completo.">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome Completo" data-content="Aqui irá inserir o seu nome completo.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-
-                <input asp-for="Input.Name" class="form-control" placeholder="ex: Victor Miguel Geraldes Ramos"id="Registar-name" />
-
-             
-
+                <input asp-for="Input.Name" class="form-control" id="Registar-name" placeholder="ex: Victor Miguel Geraldes Ramos" />
             </div>
             <div class="form-group">
                 <label asp-for="Input.Address">Morada*</label>
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Morada" data-content="Aqui irá inserir a sua morada.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-
-                <input asp-for="Input.Address" class="form-control" placeholder="ex: Rua Josefino Esteves, Lote 25, 1ºEsq" id="Registar-address"/>
-
-               
-
+                <input asp-for="Input.Address" class="form-control" id="Registar-address" placeholder="ex: Rua Josefino Esteves, Lote 25, 1ºEsq" />
             </div>
             <div class="form-group">
                 <label asp-for="Input.DateOfBirth">Data de Nascimento*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data de Nascimento" data-content="Aqui irá de inserir a sua data de nascimento no seguinte formato DD/MM/AAAA">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data de Nascimento" data-content="Aqui irá inserir a sua data de nascimento no seguinte formato DD/MM/AAAA">
                     <i class="fas fa-info-circle"></i>
                 </button>
                 <input asp-for="Input.DateOfBirth" class="form-control" id="Registar-date"/>
@@ -69,35 +63,23 @@
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o seu email não institucional.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-
-                <input asp-for="Input.Email" class="form-control" placeholder="ex: victor.miguel@hotmail.com" id="Registar-email" />
-
-     
-
+                <input asp-for="Input.Email" class="form-control" id="Registar-email" placeholder="ex: victor.miguel@hotmail.com" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password">Password*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Password" data-content="Aqui irá de inserir a sua password. Este deverá ter o seguinte formato, um caracter maiúscula, um caracter minúsculo, um número, um caracter especial e um tamanho mínimo de 6 caracteres.">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Password" data-content="Aqui irá inserir a sua password. Este deverá ter o seguinte formato, um caracter maiúscula, um caracter minúsculo, um número, um caracter especial e um tamanho mínimo de 6 caracteres.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-
-                <input asp-for="Input.Password" class="form-control" placeholder="Password" id="Registar-password"/>
-
-                
-
+                <input asp-for="Input.Password" class="form-control" id="Registar-password" placeholder="Password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword">Confirmar Password*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Confirmar Password" data-content="Aqui irá de confirmar a password inserida préviamente.">
+                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Confirmar Password" data-content="Aqui irá confirmar a password inserida préviamente.">
                     <i class="fas fa-info-circle"></i>
                 </button>
-
-                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Repetir password" id="Registar-confirm"/>
-
-              
-
+                <input asp-for="Input.ConfirmPassword" class="form-control" id="Registar-confirm" placeholder="Repetir password" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             Campos com * são obrigatórios<br /><br />

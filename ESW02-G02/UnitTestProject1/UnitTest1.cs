@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 using System.Diagnostics;
 
 namespace UnitTestProject1
@@ -17,10 +18,10 @@ namespace UnitTestProject1
             driver = new ChromeDriver(@"C:\Users\victo\Documents\LEI\3ºAno\1ºSem\ESW\ESW02-G02\ESW02-G02\UnitTestProject1");
         }
 
-        [Test]
-        public void Test()
+        
+        private double RegisterTime()
         {
-            driver.Navigate().GoToUrl("https://localhost:44384//Identity/Account/Register");
+            driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Identity/Account/Register");
 
             // Find the email form field
             IWebElement name = driver.FindElement(By.Id("Registar-name"));
@@ -41,15 +42,23 @@ namespace UnitTestProject1
             IWebElement submit = driver.FindElement(By.Id("Registar-submit"));
             submit.Submit();
             Stopwatch s = Stopwatch.StartNew();
+            
+            s.Stop();
+            return s.ElapsedMilliseconds / 100; 
+        }
 
-            string currentURL = driver.Url;
+        [Test]
+        public void Test()
+        {
+            double time = 0;
 
-            if (currentURL.Equals("https://localhost:44384/"))
+            for (int i = 0; i < 10; i++)
             {
-                s.Stop();
-                System.Console.WriteLine("Tempo decorrido: " + (s.ElapsedMilliseconds / 100));
-                NUnit.Framework.Assert.Less(s.ElapsedMilliseconds, 3000);
+                time += RegisterTime(); 
             }
+            time = time / 10;
+            Console.WriteLine("Média do tempo decorrido: " + time);
+            NUnit.Framework.Assert.LessOrEqual(time, 3);
         }
 
         [TearDown]

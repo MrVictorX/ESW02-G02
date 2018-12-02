@@ -68,7 +68,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required (ErrorMessage = "A Password é um campo obrigatório.")]
-            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$", ErrorMessage = "A {0} necessita de conter pelo menos uma letra Maiúscula, uma letra minúscula, um número, um caracter especial e no mínimo 6 caracteres.")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!_%*?&.,:;<>'-+])[A-Za-z\d@$!_%*?&.,:;<>'-+]{6,}$", ErrorMessage = "A {0} necessita de conter pelo menos uma letra Maiúscula, uma letra minúscula, um número, um caracter especial e no mínimo 6 caracteres.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }

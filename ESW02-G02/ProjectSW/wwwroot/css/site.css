@@ -41,9 +41,10 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* CSS adicionado */
 h2 {
-   margin-left:30%;
+    width:30%;
     font-family: 'Cookie', cursive;
     font-size: 300%;
+    text-align: center;
 }
 
 /* BODY */
@@ -59,8 +60,9 @@ body {
 }
 
 .row {
-    margin-right: -15%;
-    margin-left: -15%;
+  
+       
+    
 }
 
 /* HEADER */
@@ -219,7 +221,8 @@ th {
     }
 
     .row {
-        margin-right: 30%;
+    text-align:center;
+
     }
 
     h2 {
@@ -235,6 +238,11 @@ th {
     /*FOOTER*/
     footer {
         display: none;
+    }
+
+    /* PERFIL */
+    col-md-6{
+        width:100%;
     }
 }
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -184,10 +186,24 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                email,
-                "Confirma o teu email",
-                $"Porfavor confirme a sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+
+            //Envio de email
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("quintaMiao@hotmail.com");
+                mail.To.Add(email);
+                mail.Subject = "Confirma o teu email";
+                mail.Body = $"Porfavor confirme a sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.";
+                mail.IsBodyHtml = true;
+                // mail.Attachments.Add(new Attachment("C:\\file.zip"));
+
+                using (SmtpClient smtp = new SmtpClient("Smtp.live.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("quintaMiao@hotmail.com", "projetoSWMiao");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail); //Email enviado
+                }
+            }
 
             StatusMessage = "Email de verificação enviado.";
             return RedirectToPage();

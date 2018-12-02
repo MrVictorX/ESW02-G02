@@ -41,9 +41,10 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* CSS adicionado */
 h2 {
-   margin-left:30%;
+    width:30%;
     font-family: 'Cookie', cursive;
     font-size: 300%;
+    text-align: center;
 }
 
 /* BODY */
@@ -59,8 +60,9 @@ body {
 }
 
 .row {
-    margin-right: -15%;
-    margin-left: -15%;
+  
+       
+    
 }
 
 /* HEADER */
@@ -171,12 +173,44 @@ button {
     display: inline-block;
 }
 
+.nav-pills > li {
+    float: left;
+}
 
+    .nav-pills > li > a {
+        border-radius: 4px;
+    }
 
+    .nav-pills > li + li {
+        margin-left: 2px;
+    }
+
+    .nav-pills > li.active > a,
+    .nav-pills > li.active > a:hover,
+    .nav-pills > li.active > a:focus {
+        color: #fff;
+        background-color: #689999;
+    }
+
+/*TABLES*/
+table {
+    border: 2px solid #CCC;
+    text-align: center;
+    position: relative;
+    background-color: white;
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    font-size: 20px;
+    text-align: center;
+    color: #689999;
+}
 /* -----------------------RESPONSIVE----------------------- */
 @media screen and (max-width: 500px) {
-
-
     /* BODY */
     body {
         background-position: top;
@@ -187,7 +221,8 @@ button {
     }
 
     .row {
-        margin-right: 30%;
+    text-align:center;
+
     }
 
     h2 {
@@ -203,6 +238,11 @@ button {
     /*FOOTER*/
     footer {
         display: none;
+    }
+
+    /* PERFIL */
+    col-md-6{
+        width:100%;
     }
 }
 

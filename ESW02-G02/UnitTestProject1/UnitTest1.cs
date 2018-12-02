@@ -20,14 +20,7 @@ namespace UnitTestProject1
         [Test]
         public void Test()
         {
-            driver.Navigate().GoToUrl("https://projetoesw.azurewebsites.net/Identity/Account/Register");
-
-
-            // Find the link to registration form
-            //IWebElement link = driver.FindElement(By.Id("Registar"));
-
-            // Click the link
-            //link.Click();
+            driver.Navigate().GoToUrl("https://localhost:44384//Identity/Account/Register");
 
             // Find the email form field
             IWebElement name = driver.FindElement(By.Id("Registar-name"));
@@ -41,25 +34,22 @@ namespace UnitTestProject1
             IWebElement email = driver.FindElement(By.Id("Registar-email"));
             email.SendKeys("manuel@hotmail.com");
             IWebElement password = driver.FindElement(By.Id("Registar-password"));
-            password.SendKeys("123");
+            password.SendKeys("Boasbro12?");
             IWebElement confirm = driver.FindElement(By.Id("Registar-confirm"));
-            confirm.SendKeys("123");
+            confirm.SendKeys("Boasbro12?");
 
             IWebElement submit = driver.FindElement(By.Id("Registar-submit"));
             submit.Submit();
             Stopwatch s = Stopwatch.StartNew();
 
             string currentURL = driver.Url;
-            /*Assert.AreEqual(currentURL, "https://localhost:44384/");*/
 
-            if (currentURL.Equals("https://projetoesw.azurewebsites.net/"))
+            if (currentURL.Equals("https://localhost:44384/"))
             {
                 s.Stop();
                 System.Console.WriteLine("Tempo decorrido: " + (s.ElapsedMilliseconds / 100));
-                NUnit.Framework.Assert.LessOrEqual(s.ElapsedMilliseconds, 30000);
+                NUnit.Framework.Assert.Less(s.ElapsedMilliseconds, 3000);
             }
-            //Close the browser
-            driver.Quit();
         }
 
         [TearDown]

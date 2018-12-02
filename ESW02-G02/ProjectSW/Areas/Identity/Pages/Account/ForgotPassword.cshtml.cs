@@ -55,7 +55,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     protocol: Request.Scheme);
 
                 await _emailSender.SendEmailAsync(
-                    Input.Email,
+                    Input.,
                     "ResetEmail Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 

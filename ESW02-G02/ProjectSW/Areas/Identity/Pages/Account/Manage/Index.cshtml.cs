@@ -135,6 +135,9 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             if (Input.Email != email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
+                await _userManager.SetUserNameAsync(user, Input.Email);
+                await _userManager.UpdateNormalizedEmailAsync(user);
+                await _userManager.UpdateNormalizedUserNameAsync(user);
                 if (!setEmailResult.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);

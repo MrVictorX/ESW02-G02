@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Identity;
 namespace ProjectSW.Areas.Identity.Data
 {
     // Add profile data for application users by adding properties to the ProjectSWUser class
-
-    /// <summary> Representa o modelo do utilizador, usada em conjunto com a classe IdentityUser para representar toda a informação dos utilizadores</summary>
     public class ProjectSWUser : IdentityUser
     {
         [PersonalData]

@@ -8,17 +8,13 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
-    /// <summary>Controlador Home, onde são executadas as ações da pagina inicial</summary>
     public class HomeController : Controller
     {
-
-        /// <summary>Ação que resulta na pagina inicial</summary>
         public IActionResult Index()
         {
             return View();
         }
 
-        /// <summary>Ação que resulta na pagina da descrição</summary>
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -26,7 +22,6 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        /// <summary>Ação que resulta na pagina com a lista de animais para adoção</summary>
         public IActionResult ListAnimals()
         {
             ViewData["Message"] = "Your contact page.";
@@ -34,7 +29,17 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        /// <summary>Ação que representa uma pagina em desenvolvimento</summary>
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
         public IActionResult Development()
         {
             return View();

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -47,11 +49,6 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             [Display(Name = "Nome completo")]
             public string Name { get; set; }
 
-            [Required (ErrorMessage = "A Morada é um campo obrigatório.")]
-            [DataType(DataType.Text)]
-            [Display(Name = "Morada")]
-            public string Address { get; set; }
-
             [Required (ErrorMessage = "A Data de Nascimento é um campo obrigatório.")]
             [DataType(DataType.Date)]
             [Display(Name = "Data de Nascimento")]
@@ -91,7 +88,6 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             {
                 var user = new ProjectSWUser {
                     Name = Input.Name,
-                    Address = Input.Address,
                     DateOfBirth = Input.DateOfBirth,
                     UserType = Input.UserType,
                     UserName = Input.Email,
@@ -108,10 +104,24 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //Envio de email
+                    using (MailMessage mail = new MailMessage())
+                    {
+                        mail.From = new MailAddress("quintaMiao@hotmail.com");
+                        mail.To.Add(Input.Email);
+                        mail.Subject = "Confirma o teu email";
+                        mail.Body = $"Porfavor confirme a sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.";
+                        mail.IsBodyHtml = true;
+                        // mail.Attachments.Add(new Attachment("C:\\file.zip"));
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                        using (SmtpClient smtp = new SmtpClient("Smtp.live.com", 587))
+                        {
+                            smtp.Credentials = new NetworkCredential("quintaMiao@hotmail.com", "projetoSWMiao");
+                            smtp.EnableSsl = true;
+                            smtp.Send(mail); //Email enviado
+                        }
+                    }
+                   
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
@@ -119,7 +129,6 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return Page();
         }

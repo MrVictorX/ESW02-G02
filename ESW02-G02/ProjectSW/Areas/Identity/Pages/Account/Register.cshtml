@@ -24,7 +24,7 @@
 
 <div class="row">
     <div class="col-md-4" style="left:25%;">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.Name">Nome Completo*</label>
@@ -33,13 +33,7 @@
                 </button>
                 <input asp-for="Input.Name" class="form-control" id="Registar-name" placeholder="ex: Victor Miguel Geraldes Ramos" />
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Address">Morada*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Morada" data-content="Aqui irá inserir a sua morada.">
-                    <img style="width:100%" src="~/images/info_popup.png" alt="info">
-                </button>
-                <input asp-for="Input.Address" class="form-control" id="Registar-address" placeholder="ex: Rua Josefino Esteves, Lote 25, 1ºEsq" />
-            </div>
+
             <div class="form-group">
                 <label asp-for="Input.DateOfBirth">Data de Nascimento*</label>
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data de Nascimento" data-content="Aqui irá inserir a sua data de nascimento no seguinte formato DD/MM/AAAA">

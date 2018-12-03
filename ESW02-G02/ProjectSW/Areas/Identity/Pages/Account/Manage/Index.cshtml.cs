@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -40,7 +42,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Full name")]
+            [Display(Name = "Nome completo")]
             public string Name { get; set; }
 
             [Required]
@@ -50,7 +52,8 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [DataType(DataType.Date)]
-            [Display(Name = "Data de Nascimento")]
+            [ValidateYears]
+            [Display(Name = "Data de nascimento")]
             public DateTime DateOfBirth { get; set; }
 
             [Required]
@@ -63,7 +66,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             public string Email { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Numero de telemovel")]
             public string PhoneNumber { get; set; }
         }
 
@@ -102,7 +105,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             }
 
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            if (user.Id == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
@@ -110,27 +113,34 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
+                await _userManager.UpdateAsync(user);
             }
 
             if (Input.Address != user.Address)
             {
                 user.Address = Input.Address;
+                await _userManager.UpdateAsync(user);
             }
 
             if (Input.DateOfBirth != user.DateOfBirth)
             {
                 user.DateOfBirth = Input.DateOfBirth;
+                await _userManager.UpdateAsync(user);
             }
 
             if (Input.UserType != user.UserType)
             {
                 user.UserType = Input.UserType;
+                await _userManager.UpdateAsync(user);
             }
 
             var email = await _userManager.GetEmailAsync(user);
             if (Input.Email != email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
+                await _userManager.SetUserNameAsync(user, Input.Email);
+                await _userManager.UpdateNormalizedEmailAsync(user);
+                await _userManager.UpdateNormalizedUserNameAsync(user);
                 if (!setEmailResult.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -150,7 +160,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "O seu perfil foi editado";
             return RedirectToPage();
         }
 
@@ -176,12 +186,26 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            //Envio de email
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("quintaMiao@hotmail.com");
+                mail.To.Add(email);
+                mail.Subject = "Confirma o teu email";
+                mail.Body = $"Porfavor confirme a sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.";
+                mail.IsBodyHtml = true;
+                // mail.Attachments.Add(new Attachment("C:\\file.zip"));
+
+                using (SmtpClient smtp = new SmtpClient("Smtp.live.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("quintaMiao@hotmail.com", "projetoSWMiao");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail); //Email enviado
+                }
+            }
+
+            StatusMessage = "Email de verificação enviado.";
             return RedirectToPage();
         }
     }

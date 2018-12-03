@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +41,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
+                var email = await _userManager.GetEmailAsync(user);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -54,10 +57,23 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     values: new { code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "ResetEmail Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                //Envio de email
+                using (MailMessage mail = new MailMessage())
+                {
+                    mail.From = new MailAddress("quintaMiao@hotmail.com");
+                    mail.To.Add(email);
+                    mail.Subject = "ResetEmail Password";
+                    mail.Body = $"Porfavor resete a sua password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                    mail.IsBodyHtml = true;
+                    // mail.Attachments.Add(new Attachment("C:\\file.zip"));
+
+                    using (SmtpClient smtp = new SmtpClient("Smtp.live.com", 587))
+                    {
+                        smtp.Credentials = new NetworkCredential("quintaMiao@hotmail.com", "projetoSWMiao");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail); //Email enviado
+                    }
+                }
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

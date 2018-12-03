@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectSW.Areas.Identity.Data;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace ProjectSW.Areas.Identity.Pages.Account.Manage
 {
@@ -45,7 +47,6 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Nome completo")]
             public string Name { get; set; }
 
-            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Morada")]
             public string Address { get; set; }
@@ -187,23 +188,19 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
 
-            //Envio de email
-            using (MailMessage mail = new MailMessage())
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+            var client = new SendGridClient("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");
+            var msg = new SendGridMessage()
             {
-                mail.From = new MailAddress("quintaMiao@hotmail.com");
-                mail.To.Add(email);
-                mail.Subject = "Confirma o teu email";
-                mail.Body = $"Porfavor confirme a sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.";
-                mail.IsBodyHtml = true;
-                // mail.Attachments.Add(new Attachment("C:\\file.zip"));
+                From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
+                PlainTextContent = "Porfavor confirme o seu Email",
+                Subject = "Confirmar conta",
+                HtmlContent = $"Porfavor confirme o seu Email < a href = '{HtmlEncoder.Default.Encode(callbackUrl)}' > clicando aqui</ a >."
+            };
+            msg.AddTo(new EmailAddress(user.Email, user.Name));
+            var response = await client.SendEmailAsync(msg);
 
-                using (SmtpClient smtp = new SmtpClient("Smtp.live.com", 587))
-                {
-                    smtp.Credentials = new NetworkCredential("quintaMiao@hotmail.com", "projetoSWMiao");
-                    smtp.EnableSsl = true;
-                    smtp.Send(mail); //Email enviado
-                }
-            }
+           // await _signInManager.SignInAsync(user, isPersistent: false);
 
             StatusMessage = "Email de verificação enviado.";
             return RedirectToPage();

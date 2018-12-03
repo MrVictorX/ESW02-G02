@@ -11,6 +11,7 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         IWebDriver driver;
+        
 
         [SetUp]
         public void StartBrowser()
@@ -19,7 +20,7 @@ namespace UnitTestProject1
         }
 
         
-        private double RegisterTime()
+        private long RegisterTime(string mail)
         {
             driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Identity/Account/Register");
 
@@ -33,7 +34,7 @@ namespace UnitTestProject1
             IWebElement type = driver.FindElement(By.Id("Registar-user-type"));
             type.SendKeys("Funciario");
             IWebElement email = driver.FindElement(By.Id("Registar-email"));
-            email.SendKeys("manuel@hotmail.com");
+            email.SendKeys(mail);
             IWebElement password = driver.FindElement(By.Id("Registar-password"));
             password.SendKeys("Boasbro12?");
             IWebElement confirm = driver.FindElement(By.Id("Registar-confirm"));
@@ -48,16 +49,18 @@ namespace UnitTestProject1
         }
 
         [Test]
-        public void Test()
+        public void Register10TimeTest()
         {
-            double time = 0;
+            long time = 0;
+            string mail = "";
 
             for (int i = 0; i < 10; i++)
             {
-                time += RegisterTime(); 
+                mail = "manuel" + i + "@hotmail.com";
+                time += RegisterTime(mail); 
             }
             time = time / 10;
-            Console.WriteLine("Média do tempo decorrido: " + time);
+            NUnit.Framework.TestContext.WriteLine("Média do tempo decorrido: " + time);
             NUnit.Framework.Assert.LessOrEqual(time, 3);
         }
 

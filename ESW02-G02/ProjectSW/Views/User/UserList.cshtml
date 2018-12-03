@@ -1,29 +1,29 @@
 ﻿@model IEnumerable<ProjectSW.Areas.Identity.Data.ProjectSWUser>
-@{
+    @{
     ViewData["Title"] = "AccountList";
-}
+    }
 
 
-<h2>Lista de Contas</h2>
+    <h2>Lista de Contas</h2>
 
-<table class="table" >
-    <thead>
-        <tr>
-            <th>
-               Nome
-            </th>
-            <th>
-               Função
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-               
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Função
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -31,13 +31,14 @@
                     @Html.DisplayFor(modelItem => item.UserType)
                 </td>
                 <td>
-                    <a asp-action="DeleteUser" asp-route-id="@item.Id"><img src="~/images/delete.png" />
+                    <a asp-action="DeleteUser" asp-route-id="@item.Id">
+                        <img src="~/images/delete.png" />
                     </a>
                 </td>
             </tr>
-        }   
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
 
 
 

@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ProjectSW.Areas.Identity.Data;
-
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 
 namespace ProjectSW.Areas.Identity.Pages.Account
@@ -46,8 +47,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             [DataType(DataType.Text)]
             [Display(Name = "Nome completo")]
             public string Name { get; set; }
-
-            [Required (ErrorMessage = "A Morada é um campo obrigatório.")]
+            
             [DataType(DataType.Text)]
             [Display(Name = "Morada")]
             public string Address { get; set; }
@@ -108,8 +108,20 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+                    var client = new SendGridClient(apiKey);
+                    var msg = new SendGridMessage()
+                    {
+                        From = new EmailAddress("quintaMiao@hotmail.com", "Quinta do Miao"),
+                        Subject = "confirmar conta",
+                        PlainTextContent = "Please confirm your account by < a href = '{HtmlEncoder.Default.Encode(callbackUrl)}' > clicking here </ a >.",
+                    HtmlContent = "<strong>Hello, Email!</strong>"
+                    };
+                    msg.AddTo(new EmailAddress(user.Email, user.Name));
+                    var response = await client.SendEmailAsync(msg);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

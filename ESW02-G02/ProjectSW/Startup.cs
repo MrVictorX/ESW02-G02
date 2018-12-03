@@ -35,7 +35,7 @@ namespace ProjectSW
             services.Configure<IdentityOptions>(options =>
             {
                 // Default SignIn settings.
-                //options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             });
 

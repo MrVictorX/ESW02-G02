@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Net;
-using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ProjectSW.Areas.Identity.Data;
-
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 
 namespace ProjectSW.Areas.Identity.Pages.Account
@@ -104,31 +103,31 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    //Envio de email
-                    using (MailMessage mail = new MailMessage())
-                    {
-                        mail.From = new MailAddress("quintaMiao@hotmail.com");
-                        mail.To.Add(Input.Email);
-                        mail.Subject = "Confirma o teu email";
-                        mail.Body = $"Porfavor confirme a sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.";
-                        mail.IsBodyHtml = true;
-                        // mail.Attachments.Add(new Attachment("C:\\file.zip"));
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                        using (SmtpClient smtp = new SmtpClient("Smtp.live.com", 587))
-                        {
-                            smtp.Credentials = new NetworkCredential("quintaMiao@hotmail.com", "projetoSWMiao");
-                            smtp.EnableSsl = true;
-                            smtp.Send(mail); //Email enviado
-                        }
-                    }
-                   
+                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                    var client = new SendGridClient("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");
+                    var msg = new SendGridMessage()
+                    {
+                        From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
+                        PlainTextContent = "Porfavor confirme o seu Email",
+                        Subject = "Confirmar conta",
+                        HtmlContent = $"Porfavor confirme o seu Email < a href = '{HtmlEncoder.Default.Encode(callbackUrl)}' > clicando aqui</ a >."
+                    };
+                    msg.AddTo(new EmailAddress(user.Email, user.Name));
+                    var response = await client.SendEmailAsync(msg);
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
+
             // If we got this far, something failed, redisplay form
             return Page();
         }

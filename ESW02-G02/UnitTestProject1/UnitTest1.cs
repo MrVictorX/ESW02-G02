@@ -56,7 +56,7 @@ namespace UnitTestProject1
 
             for (int i = 0; i < 10; i++)
             {
-                mail = "manuel" + i + "@hotmail.com";
+                mail = "Jose" + i + "@hotmail.com";
                 time += RegisterTime(mail); 
             }
             time = time / 10;

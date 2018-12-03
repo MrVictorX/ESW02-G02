@@ -16,7 +16,7 @@
         firstLast = user.Name.Split(' ').First() + " " + user.Name.Split(' ').Last();
     }
 
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" style="border:hidden; background-color:transparent;margin-top:2%;">
+    <form asp-area="Identity" asp-page="/Account/Logout"  asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" style="border:hidden; background-color:transparent;margin-top:2%;">
         <ul class="nav navbar-nav navbar-right" style="display:inline">
             <li>
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@firstLast</a>

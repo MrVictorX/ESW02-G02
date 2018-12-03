@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
     /// <summary>Controlador Users, onde são executadas as ações relacionadas com os utilizadores</summary>
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ProjectSWContext _context;

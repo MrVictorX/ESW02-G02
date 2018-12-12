@@ -44,5 +44,10 @@ namespace ProjectSW.Controllers
         {
             return View();
         }
+
+        public IActionResult EmailSent()
+        {
+            return View();
+        }
     }
 }

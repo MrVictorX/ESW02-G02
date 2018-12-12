@@ -2,34 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
+    /// <summary>Controlador Users, onde são executadas as ações relacionadas com os utilizadores</summary>
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ProjectSWContext _context;
 
+        /// <summary>Construtor que guarda o contexto da build</summary>
         public UserController(ProjectSWContext context)
         {
             _context = context;
         }
-        
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult ViewProfile()
-        {
-            return View();
-        }
 
-        public IActionResult EditProfile()
-        {
-            return View();
-        }
-
+        /// <summary>Ação que resulta na pagina com a lista de todos os utilizadores</summary>
         public IActionResult UserList()
         {
             return View(_context.Users.ToList());
@@ -60,6 +51,5 @@ namespace ProjectSW.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(UserList));
         }
-
     }
 }

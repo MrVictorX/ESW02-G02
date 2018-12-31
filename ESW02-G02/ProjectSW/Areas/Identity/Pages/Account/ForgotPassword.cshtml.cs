@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ProjectSW.Areas.Identity.Data;
+using ProjectSW.Data;
 
 namespace ProjectSW.Areas.Identity.Pages.Account
 {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using ProjectSW.Areas.Identity.Data;
+using ProjectSW.Data;
 
 namespace ProjectSW.Areas.Identity.Pages.Account
 {

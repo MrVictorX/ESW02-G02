@@ -7,14 +7,12 @@ namespace ProjectSW.Models
 {
     public class Job
     {
+        public string Id { get; set; }
         public string Name { get; set; }
-
-        public DateTime Date { get; set; }
-
-        public DateTime Time { get; set; }
-
+        public DateTime Day { get; set; }
+        public DateTime Hour { get; set; }
         public string Description { get; set; }
 
-        //public Employee Employee { get; set; }
+
     }
 }

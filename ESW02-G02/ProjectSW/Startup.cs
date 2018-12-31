@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjectSW.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectSW.Models;
 
 namespace ProjectSW
 {
@@ -33,10 +34,13 @@ namespace ProjectSW
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<ProjectSWUser>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddDbContext<ProjectSWContext>(options => 
-                    options.UseSqlServer(Configuration.GetConnectionString("ProjectSWContext")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +49,7 @@ namespace ProjectSW
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -54,8 +59,9 @@ namespace ProjectSW
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseAuthentication();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

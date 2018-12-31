@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using ProjectSW.Areas.Identity.Data;
+using ProjectSW.Data;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
@@ -82,7 +82,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Page("./EmailSent");
             if (ModelState.IsValid)
             {
                 var user = new ProjectSWUser {

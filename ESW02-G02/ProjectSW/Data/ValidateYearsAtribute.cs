@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectSW.Areas.Identity.Data
+namespace ProjectSW.Data
 {
     /// <summary> Classe de validação, usada para validar a data inserida no campo "Data de nascimento"</summary>
     public class ValidateYearsAttribute : ValidationAttribute

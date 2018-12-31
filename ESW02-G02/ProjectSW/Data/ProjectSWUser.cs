@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace ProjectSW.Areas.Identity.Data
+namespace ProjectSW.Data
 {
     // Add profile data for application users by adding properties to the ProjectSWUser class
 

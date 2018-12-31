@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using ProjectSW.Areas.Identity.Data;
+using ProjectSW.Data;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 

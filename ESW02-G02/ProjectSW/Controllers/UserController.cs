@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectSW.Models;
+using ProjectSW.Data;
 
 namespace ProjectSW.Controllers
 {
@@ -12,10 +13,10 @@ namespace ProjectSW.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private readonly ProjectSWContext _context;
+        private readonly ApplicationDbContext _context;
 
         /// <summary>Construtor que guarda o contexto da build</summary>
-        public UserController(ProjectSWContext context)
+        public UserController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,7 +24,7 @@ namespace ProjectSW.Controllers
         /// <summary>Ação que resulta na pagina com a lista de todos os utilizadores</summary>
         public IActionResult UserList()
         {
-            return View(_context.Users.ToList());
+            return View(_context.User.ToList());
         }
 
         public IActionResult DeleteUser(string id)

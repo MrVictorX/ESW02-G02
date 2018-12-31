@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectSW.Data;
 
-namespace ProjectSW.Data.Migrations
+namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -15,7 +15,7 @@ namespace ProjectSW.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -189,6 +189,26 @@ namespace ProjectSW.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.Employee", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AccountId");
+
+                    b.Property<string>("AditionalInformation");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Employee");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Job", b =>
                 {
                     b.Property<string>("Id")
@@ -215,7 +235,7 @@ namespace ProjectSW.Data.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<string>("FotoFile");
+                    b.Property<byte[]>("FotoFile");
 
                     b.Property<string>("Name");
 
@@ -269,6 +289,13 @@ namespace ProjectSW.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Employee", b =>
+                {
+                    b.HasOne("ProjectSW.Data.ProjectSWUser", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId");
                 });
 #pragma warning restore 612, 618
         }

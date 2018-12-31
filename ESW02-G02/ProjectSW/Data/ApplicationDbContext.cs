@@ -17,5 +17,7 @@ namespace ProjectSW.Data
         public DbSet<ProjectSW.Data.ProjectSWUser> User { get; set; }
 
         public DbSet<ProjectSW.Models.Job> Job { get; set; }
+
+        public DbSet<ProjectSW.Models.Employee> Employee { get; set; }
     }
 }

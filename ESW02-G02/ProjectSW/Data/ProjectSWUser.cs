@@ -24,6 +24,6 @@ namespace ProjectSW.Data
         public string UserType { get; set; }
 
         [PersonalData]
-        public string FotoFile { get; set; }
+        public byte[] FotoFile { get; set; }
     }
 }

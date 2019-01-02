@@ -11,14 +11,20 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
+        [Display(Name = "Email")]
+        public string AccountId { get; set; }
+
         [Display(Name = "Cargo")]
         public string Type { get; set; }
-
-        public string Email { get; set; }
 
         [Display(Name = "Informação Adicional")]
         public string AditionalInformation { get; set; }
 
         public ProjectSWUser Account { get; set; }
+
+        public override string ToString()
+        {
+            return Account.Name;
+        }
     }
 }

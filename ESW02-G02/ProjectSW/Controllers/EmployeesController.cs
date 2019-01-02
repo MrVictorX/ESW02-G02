@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +24,8 @@ namespace ProjectSW.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employee.ToListAsync());
+            var applicationDbContext = _context.Employee.Include(e => e.Account);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -34,6 +37,7 @@ namespace ProjectSW.Controllers
             }
 
             var employee = await _context.Employee
+                .Include(e => e.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
@@ -44,9 +48,10 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Create
+        
         public IActionResult Create()
         {
-            ViewData["Email"] = new SelectList(_context.Set<ProjectSWUser>(), "Id", "Email");
+            ViewData["AccountId"] = new SelectList(_context.User, "Id", "Email");
             return View();
         }
 
@@ -55,7 +60,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Email,AditionalInformation")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,AccountId,Type,AditionalInformation")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +68,7 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AccountId"] = new SelectList(_context.User, "Id", "Id", employee.AccountId);
             return View(employee);
         }
 
@@ -79,6 +85,7 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
+            ViewData["AccountId"] = new SelectList(_context.User, "Id", "Email", employee.AccountId);
             return View(employee);
         }
 
@@ -87,7 +94,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Type,Email,AditionalInformation")] Employee employee)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,AccountId,Type,AditionalInformation")] Employee employee)
         {
             if (id != employee.Id)
             {
@@ -114,6 +121,7 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AccountId"] = new SelectList(_context.User, "Id", "Id", employee.AccountId);
             return View(employee);
         }
 
@@ -126,6 +134,7 @@ namespace ProjectSW.Controllers
             }
 
             var employee = await _context.Employee
+                .Include(e => e.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {

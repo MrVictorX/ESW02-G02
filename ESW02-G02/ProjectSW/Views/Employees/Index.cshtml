@@ -2,10 +2,10 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<h2>@ViewBag.Email</h2>
+<h2>Index</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -17,10 +17,13 @@
                 @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.AditionalInformation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AditionalInformation)
+                @Html.DisplayNameFor(model => model.Account.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Name)
             </th>
             <th></th>
         </tr>
@@ -32,10 +35,13 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.AditionalInformation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AditionalInformation)
+                @Html.DisplayFor(modelItem => item.Account.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

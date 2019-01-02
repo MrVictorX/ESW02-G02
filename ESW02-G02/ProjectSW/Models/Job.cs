@@ -12,7 +12,7 @@ namespace ProjectSW.Models
         public string Name { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime? Day { get; set; }
+        public DateTime Day { get; set; }
 
         [DataType(DataType.Time)]
         public DateTime Hour { get; set; }

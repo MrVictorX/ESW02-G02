@@ -198,8 +198,6 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AditionalInformation");
 
-                    b.Property<string>("Email");
-
                     b.Property<string>("Type");
 
                     b.HasKey("Id");

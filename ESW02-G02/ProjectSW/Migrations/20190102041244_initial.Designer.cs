@@ -10,7 +10,7 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190102024611_initial")]
+    [Migration("20190102041244_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,8 +199,6 @@ namespace ProjectSW.Migrations
                     b.Property<string>("AccountId");
 
                     b.Property<string>("AditionalInformation");
-
-                    b.Property<string>("Email");
 
                     b.Property<string>("Type");
 

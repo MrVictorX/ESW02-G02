@@ -10,23 +10,23 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
-    public class JobController : Controller
+    public class JobsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public JobController(ApplicationDbContext context)
+        public JobsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Job
+        // GET: Jobs
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Job.Include(j => j.Employee);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Job/Details/5
+        // GET: Jobs/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -45,14 +45,14 @@ namespace ProjectSW.Controllers
             return View(job);
         }
 
-        // GET: Job/Create
+        // GET: Jobs/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Account.Email");
+            ViewData["EmployeeId"] = new SelectList(_context.Job.Include(j => j.Employee), "Account.Name", "Account.Name");
             return View();
         }
 
-        // POST: Job/Create
+        // POST: Jobs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -69,7 +69,7 @@ namespace ProjectSW.Controllers
             return View(job);
         }
 
-        // GET: Job/Edit/5
+        // GET: Jobs/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -86,7 +86,7 @@ namespace ProjectSW.Controllers
             return View(job);
         }
 
-        // POST: Job/Edit/5
+        // POST: Jobs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -122,7 +122,7 @@ namespace ProjectSW.Controllers
             return View(job);
         }
 
-        // GET: Job/Delete/5
+        // GET: Jobs/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -141,7 +141,7 @@ namespace ProjectSW.Controllers
             return View(job);
         }
 
-        // POST: Job/Delete/5
+        // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

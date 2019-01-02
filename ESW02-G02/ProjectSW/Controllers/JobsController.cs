@@ -22,7 +22,7 @@ namespace ProjectSW.Controllers
         // GET: Jobs
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Job.Include(j => j.Employee);
+            var applicationDbContext = _context.Job.Include(j => j.Employee).Include(j => j.Employee.Account);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace ProjectSW.Controllers
             }
 
             var job = await _context.Job
-                .Include(j => j.Employee)
+                .Include(j => j.Employee).Include(j => j.Employee.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {
@@ -48,7 +48,18 @@ namespace ProjectSW.Controllers
         // GET: Jobs/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Job.Include(j => j.Employee), "Account.Name", "Account.Name");
+
+            //ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(j => j.Account), "Account.Email", "Account.Email");
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
+                   _context.User,
+                   employee => employee.AccountId,
+                   account => account.Id,
+                      (employee, account) => new  // result selector
+                      {
+                          employeeId = employee.Id,
+                          accountMail = account.Email
+                      }), "employeeId", "accountMail");
+
             return View();
         }
 
@@ -57,7 +68,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Day,Hour,Description,EmployeeId")] Job job)
+        public async Task<IActionResult> Create([Bind("Id,EmployeeId,Name,Day,Hour,Description")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +76,16 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
+
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
+                   _context.User,
+                   employee => employee.AccountId,
+                   account => account.Id,
+                      (employee, account) => new  // result selector
+                      {
+                          employeeId = employee.Id,
+                          accountMail = account.Email
+                      }), "employeeId", "accountMail");
             return View(job);
         }
 
@@ -82,7 +102,15 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
+                   _context.User,
+                   employee => employee.AccountId,
+                   account => account.Id,
+                      (employee, account) => new  // result selector
+                      {
+                          employeeId = employee.Id,
+                          accountMail = account.Email
+                      }), "employeeId", "accountMail");
             return View(job);
         }
 
@@ -91,7 +119,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Day,Hour,Description,EmployeeId")] Job job)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,EmployeeId,Name,Day,Hour,Description")] Job job)
         {
             if (id != job.Id)
             {
@@ -118,7 +146,15 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
+                   _context.User,
+                   employee => employee.AccountId,
+                   account => account.Id,
+                      (employee, account) => new  // result selector
+                      {
+                          employeeId = employee.Id,
+                          accountMail = account.Email
+                      }), "employeeId", "accountMail");
             return View(job);
         }
 

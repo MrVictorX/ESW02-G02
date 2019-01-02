@@ -54,21 +54,6 @@ namespace ProjectSW.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Job",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Day = table.Column<DateTime>(nullable: false),
-                    Hour = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Job", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -181,7 +166,6 @@ namespace ProjectSW.Migrations
                     Id = table.Column<string>(nullable: false),
                     AccountId = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
                     AditionalInformation = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -191,6 +175,28 @@ namespace ProjectSW.Migrations
                         name: "FK_Employee_AspNetUsers_AccountId",
                         column: x => x.AccountId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Job",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    EmployeeId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Day = table.Column<DateTime>(nullable: false),
+                    Hour = table.Column<DateTime>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Job", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Job_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -238,6 +244,11 @@ namespace ProjectSW.Migrations
                 name: "IX_Employee_AccountId",
                 table: "Employee",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Job_EmployeeId",
+                table: "Job",
+                column: "EmployeeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -258,13 +269,13 @@ namespace ProjectSW.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Employee");
-
-            migrationBuilder.DropTable(
                 name: "Job");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

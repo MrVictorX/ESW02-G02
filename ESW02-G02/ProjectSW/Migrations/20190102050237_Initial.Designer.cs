@@ -10,7 +10,7 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190102005051_Initial")]
+    [Migration("20190102050237_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -200,8 +200,6 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AditionalInformation");
 
-                    b.Property<string>("Email");
-
                     b.Property<string>("Type");
 
                     b.HasKey("Id");
@@ -220,11 +218,15 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("EmployeeId");
+
                     b.Property<DateTime>("Hour");
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Job");
                 });
@@ -298,6 +300,13 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Data.ProjectSWUser", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Job", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
                 });
 #pragma warning restore 612, 618
         }

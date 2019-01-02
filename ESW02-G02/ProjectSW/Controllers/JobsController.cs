@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,23 +10,23 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
-    [Authorize]
-    public class JobController : Controller
+    public class JobsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public JobController(ApplicationDbContext context)
+        public JobsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Job
+        // GET: Jobs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Job.ToListAsync());
+            var applicationDbContext = _context.Job.Include(j => j.Employee).Include(j => j.Employee.Account);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Job/Details/5
+        // GET: Jobs/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -36,6 +35,7 @@ namespace ProjectSW.Controllers
             }
 
             var job = await _context.Job
+                .Include(j => j.Employee).Include(j => j.Employee.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {
@@ -45,18 +45,30 @@ namespace ProjectSW.Controllers
             return View(job);
         }
 
-        // GET: Job/Create
+        // GET: Jobs/Create
         public IActionResult Create()
         {
+
+            //ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(j => j.Account), "Account.Email", "Account.Email");
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
+                   _context.User,
+                   employee => employee.AccountId,
+                   account => account.Id,
+                      (employee, account) => new  // result selector
+                      {
+                          employeeId = employee.Id,
+                          accountMail = account.Email
+                      }), "employeeId", "accountMail");
+
             return View();
         }
 
-        // POST: Job/Create
+        // POST: Jobs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Day,Hour,Description")] Job job)
+        public async Task<IActionResult> Create([Bind("Id,EmployeeId,Name,Day,Hour,Description")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -64,10 +76,20 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
+                   _context.User,
+                   employee => employee.AccountId,
+                   account => account.Id,
+                      (employee, account) => new  // result selector
+                      {
+                          employeeId = employee.Id,
+                          accountMail = account.Email
+                      }), "employeeId", "accountMail");
             return View(job);
         }
 
-        // GET: Job/Edit/5
+        // GET: Jobs/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -80,15 +102,16 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
             return View(job);
         }
 
-        // POST: Job/Edit/5
+        // POST: Jobs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Day,Hour,Description")] Job job)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,EmployeeId,Name,Day,Hour,Description")] Job job)
         {
             if (id != job.Id)
             {
@@ -115,10 +138,11 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
             return View(job);
         }
 
-        // GET: Job/Delete/5
+        // GET: Jobs/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -127,6 +151,7 @@ namespace ProjectSW.Controllers
             }
 
             var job = await _context.Job
+                .Include(j => j.Employee)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {
@@ -136,7 +161,7 @@ namespace ProjectSW.Controllers
             return View(job);
         }
 
-        // POST: Job/Delete/5
+        // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

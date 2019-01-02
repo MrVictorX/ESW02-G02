@@ -22,7 +22,8 @@ namespace ProjectSW.Controllers
         // GET: Job
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Job.ToListAsync());
+            var applicationDbContext = _context.Job.Include(j => j.Employee);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Job/Details/5
@@ -34,6 +35,7 @@ namespace ProjectSW.Controllers
             }
 
             var job = await _context.Job
+                .Include(j => j.Employee)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {
@@ -46,6 +48,7 @@ namespace ProjectSW.Controllers
         // GET: Job/Create
         public IActionResult Create()
         {
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Account.Email");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Day,Hour,Description")] Job job)
+        public async Task<IActionResult> Create([Bind("Id,Name,Day,Hour,Description,EmployeeId")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
             return View(job);
         }
 
@@ -78,6 +82,7 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
             return View(job);
         }
 
@@ -86,7 +91,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Day,Hour,Description")] Job job)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Day,Hour,Description,EmployeeId")] Job job)
         {
             if (id != job.Id)
             {
@@ -113,6 +118,7 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Id", job.EmployeeId);
             return View(job);
         }
 
@@ -125,6 +131,7 @@ namespace ProjectSW.Controllers
             }
 
             var job = await _context.Job
+                .Include(j => j.Employee)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {

@@ -15,7 +15,7 @@ namespace ProjectSW.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -214,15 +214,19 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Day");
+                    b.Property<DateTime?>("Day");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("EmployeeId");
 
                     b.Property<DateTime>("Hour");
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Job");
                 });
@@ -296,6 +300,13 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Data.ProjectSWUser", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Job", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
                 });
 #pragma warning restore 612, 618
         }

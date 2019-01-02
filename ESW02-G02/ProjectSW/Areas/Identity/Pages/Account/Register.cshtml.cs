@@ -113,7 +113,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                         From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
                         PlainTextContent = "Porfavor confirme o seu Email",
                         Subject = "Confirmar conta",
-                        HtmlContent = $"Porfavor confirme o seu Email < a href = '{HtmlEncoder.Default.Encode(callbackUrl)}' > clicando aqui</ a >."
+                        HtmlContent = $"Porfavor confirme o seu Email <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicando aqui</a>."
                     };
                     msg.AddTo(new EmailAddress(user.Email, user.Name));
                     var response = await client.SendEmailAsync(msg);

@@ -179,10 +179,10 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    AccountId = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    AditionalInformation = table.Column<string>(nullable: true),
-                    AccountId = table.Column<string>(nullable: true)
+                    AditionalInformation = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

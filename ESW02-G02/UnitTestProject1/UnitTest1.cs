@@ -22,7 +22,7 @@ namespace UnitTestProject1
         
         private long RegisterTime(string mail)
         {
-            driver.Navigate().GoToUrl("https://quinta-miao.azurewebsites.net/Identity/Account/Register");
+            driver.Navigate().GoToUrl("https://quinta-miao-02.azurewebsites.net/Identity/Account/Register");
 
             // Find the email form field
             IWebElement name = driver.FindElement(By.Id("Registar-name"));

@@ -107,7 +107,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-                    var client = new SendGridClient("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");
+                    var client = new SendGridClient("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");
                     var msg = new SendGridMessage()
                     {
                         From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),

@@ -20,12 +20,10 @@ namespace ProjectSW.Models
         [Display(Name = "Informação Adicional")]
         public string AditionalInformation { get; set; }
 
+        
         public ProjectSWUser Account { get; set; }
 
-        public override string ToString()
-        {
-            return Account.Name;
-        }
+        
     }
 
 

@@ -206,48 +206,79 @@ th {
     text-align: center;
     color: #689999;
 }
-/* -----------------------RESPONSIVE----------------------- */
-@media screen and (max-width: 500px) {
-    /* BODY */
-    body {
-        background-position: top;
-    }
 
-    .body-content {
-        margin-top: 10%;
-    }
-
-    .row {
-        text-align: center;
-    }
-
-    h2 {
-        margin-left: 15%;
-    }
-
-    /* QUEM SOMOS */
-    .div-about {
-        margin-top: 15%;
-        margin-left: 7%;
-    }
-
-    /*FOOTER*/
-    footer {
-        display: none;
-    }
-
-    /* PERFIL */
-    col-md-6 {
-        width: 100%;
-    }
+/*FUNCIONARIOS*/
+.title-link {
+    text-decoration: none;
+    color: #333;
+    font-family: 'Cookie', cursive;
+    font-size: 28px;
 }
 
 
+.title-link:hover {
+    color: #333;
+    text-decoration: underline;
+}
 
+.return-link, .edit-link, .delete-link, .details-link {
+    text-decoration: none;
+    color: #333;
+}
 
+.return-link:hover, .edit-link:hover, .delete-link:hover, .details-link:hover {
+    color: black;
+}
+.form-delete {
+    width: 40%;
+    margin-left: 10%;
+}
 
-/* Popup container */
-.popup {
+.dl-horizontal dt{
+    text-align: left;
+}
+
+.div-return{
+    margin-bottom: 10%;
+}
+
+    /* -----------------------RESPONSIVE----------------------- */
+    @media screen and (max-width: 500px) {
+        /* BODY */
+        body {
+            background-position: top;
+        }
+
+        .body-content {
+            margin-top: 10%;
+        }
+
+        .row {
+            text-align: center;
+        }
+
+        h2 {
+            margin-left: 15%;
+        }
+
+        /* QUEM SOMOS */
+        .div-about {
+            margin-top: 15%;
+            margin-left: 7%;
+        }
+
+        /*FOOTER*/
+        footer {
+            display: none;
+        }
+
+        /* PERFIL */
+        col-md-6 {
+            width: 100%;
+        }
+    }
+    /* Popup container */
+    .popup {
     position: relative;
     display: inline-block;
     cursor: pointer;

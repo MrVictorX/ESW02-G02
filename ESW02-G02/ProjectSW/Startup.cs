@@ -80,7 +80,7 @@ namespace ProjectSW
             //initializing custom roles 
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ProjectSWUser>>();
-            string[] roleNames = { "Admin", "Store-Manager", "Member" };
+            string[] roleNames = { "Administrador", "Voluntario", "Funcionario" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
@@ -115,7 +115,7 @@ namespace ProjectSW
                 if (createPowerUser.Succeeded)
                 {
                     //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(poweruser, "Admin");
+                    await UserManager.AddToRoleAsync(poweruser, "Administrador");
 
                 }
             }

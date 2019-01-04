@@ -7,9 +7,10 @@
 
 <h2>Editar</h2>
 
-<h4>Tarefa</h4>
+<h4 class="title-link">Tarefa</h4>
 <hr />
-<div class="row">
+<div>
+    <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -44,10 +45,12 @@
             </div>
         </form>
     </div>
-</div>
+    </div>
 
-<div>
-    <a asp-action="Index">Voltar</a>
+    <div class="div-return">
+    <a asp-action="Index" class="return-link">Voltar</a>
+    </div>
+
 </div>
 
 @section Scripts {

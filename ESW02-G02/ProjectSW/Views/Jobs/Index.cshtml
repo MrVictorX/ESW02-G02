@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Lista de Tarefas</h2>
 
 <p>
-    <a asp-action="Create">Criar nova tarefa</a>
+    <a asp-action="Create"  class="title-link">Criar nova tarefa</a>
 </p>
 <table class="table">
     <thead>
@@ -56,9 +56,9 @@
                 @Html.DisplayFor(modelItem => item.Employee.Account.Email)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="edit-link">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="details-link">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"class="delete-link">Eliminar</a>
             </td>
         </tr>
 }

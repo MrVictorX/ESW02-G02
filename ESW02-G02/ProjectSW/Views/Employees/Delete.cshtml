@@ -1,0 +1,38 @@
+﻿@model ProjectSW.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Tem a certeza que pretende eliminar esta ficha?</h3>
+<div><hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AditionalInformation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AditionalInformation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Account.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" class="form-delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-action="Index" class="return-link">Voltar</a>
+    </form>
+</div>

@@ -34,13 +34,6 @@
                 <input asp-for="Input.Name" class="form-control" id="Registar-name" placeholder="ex: Victor Miguel Geraldes Ramos" />
             </div>
             <div class="form-group">
-                <label asp-for="Input.Address">Morada*</label>
-                <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Morada" data-content="Aqui irá inserir a sua morada.">
-                    <img style="width:100%" src="~/images/info_popup.png" alt="info">
-                </button>
-                <input asp-for="Input.Address" class="form-control" id="Registar-address" placeholder="ex: Rua Josefino Esteves, Lote 25, 1ºEsq" />
-            </div>
-            <div class="form-group">
                 <label asp-for="Input.DateOfBirth">Data de Nascimento*</label>
                 <button style="width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data de Nascimento" data-content="Aqui irá inserir a sua data de nascimento no seguinte formato DD/MM/AAAA">
                     <img style="width:100%" src="~/images/info_popup.png" alt="info">
@@ -56,6 +49,7 @@
                     <option selected>Tipo de utilizador</option>
                     <option value="Funcionario">Funcionario</option>
                     <option value="Voluntario">Voluntario</option>
+                    <option value="Voluntario">Administrador</option>
                 </select>
             </div>
             <div class="form-group">

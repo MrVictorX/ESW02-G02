@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ProjectSW.Models.Employee>
+
+@{
+    ViewData["Title"] = "Funcionários";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<h2>Lista de Funcionários</h2>
+
+<p>
+    <a asp-action="Create" class="title-link">Criar nova ficha</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AditionalInformation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AditionalInformation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="edit-link">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="details-link">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="delete-link">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

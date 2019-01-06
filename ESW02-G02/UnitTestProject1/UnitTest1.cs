@@ -22,13 +22,11 @@ namespace UnitTestProject1
         
         private long RegisterTime(string mail)
         {
-            driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Identity/Account/Register");
+            driver.Navigate().GoToUrl("https://quinta-miao-02.azurewebsites.net/Identity/Account/Register");
 
             // Find the email form field
             IWebElement name = driver.FindElement(By.Id("Registar-name"));
             name.SendKeys("Manuel");
-            IWebElement address = driver.FindElement(By.Id("Registar-address"));
-            address.SendKeys("Rua");
             IWebElement date = driver.FindElement(By.Id("Registar-date"));
             date.SendKeys("05/01/1997");
             IWebElement type = driver.FindElement(By.Id("Registar-user-type"));
@@ -41,9 +39,8 @@ namespace UnitTestProject1
             confirm.SendKeys("Boasbro12?");
 
             IWebElement submit = driver.FindElement(By.Id("Registar-submit"));
-            submit.Submit();
             Stopwatch s = Stopwatch.StartNew();
-            
+            submit.Submit();
             s.Stop();
             return s.ElapsedMilliseconds / 100; 
         }

@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using ProjectSW.Areas.Identity.Data;
-
+using ProjectSW.Data;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 
 namespace ProjectSW.Areas.Identity.Pages.Account
@@ -47,11 +48,6 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             [Display(Name = "Nome completo")]
             public string Name { get; set; }
 
-            [Required (ErrorMessage = "A Morada é um campo obrigatório.")]
-            [DataType(DataType.Text)]
-            [Display(Name = "Morada")]
-            public string Address { get; set; }
-
             [Required (ErrorMessage = "A Data de Nascimento é um campo obrigatório.")]
             [DataType(DataType.Date)]
             [Display(Name = "Data de Nascimento")]
@@ -86,12 +82,11 @@ namespace ProjectSW.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Page("./EmailSent");
             if (ModelState.IsValid)
             {
                 var user = new ProjectSWUser {
                     Name = Input.Name,
-                    Address = Input.Address,
                     DateOfBirth = Input.DateOfBirth,
                     UserType = Input.UserType,
                     UserName = Input.Email,
@@ -108,12 +103,25 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                    var client = new SendGridClient("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");
+                    var msg = new SendGridMessage()
+                    {
+                        From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
+                        PlainTextContent = "Porfavor confirme o seu Email",
+                        Subject = "Confirmar conta",
+                        HtmlContent = $"Porfavor confirme o seu Email <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicando aqui</a>."
+                    };
+                    msg.AddTo(new EmailAddress(user.Email, user.Name));
+                    var response = await client.SendEmailAsync(msg);
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

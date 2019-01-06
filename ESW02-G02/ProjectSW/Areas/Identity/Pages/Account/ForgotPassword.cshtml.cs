@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjectSW.Data;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace ProjectSW.Areas.Identity.Pages.Account
 {
@@ -57,23 +59,17 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     values: new { code },
                     protocol: Request.Scheme);
 
-                //Envio de email
-                using (MailMessage mail = new MailMessage())
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                var client = new SendGridClient("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");
+                var msg = new SendGridMessage()
                 {
-                    mail.From = new MailAddress("quintaMiao@hotmail.com");
-                    mail.To.Add(email);
-                    mail.Subject = "ResetEmail Password";
-                    mail.Body = $"Porfavor resete a sua password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
-                    mail.IsBodyHtml = true;
-                    // mail.Attachments.Add(new Attachment("C:\\file.zip"));
-
-                    using (SmtpClient smtp = new SmtpClient("Smtp.live.com", 587))
-                    {
-                        smtp.Credentials = new NetworkCredential("quintaMiao@hotmail.com", "projetoSWMiao");
-                        smtp.EnableSsl = true;
-                        smtp.Send(mail); //Email enviado
-                    }
-                }
+                    From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
+                    PlainTextContent = "Porfavor resete a sua password",
+                    Subject = "Resetar password",
+                    HtmlContent = $"Porfavor resete a sua password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicando aqui</a>."
+                };
+                msg.AddTo(new EmailAddress(user.Email, user.Name));
+                var response = await client.SendEmailAsync(msg);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

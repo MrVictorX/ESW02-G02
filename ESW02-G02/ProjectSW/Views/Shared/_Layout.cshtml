@@ -5,10 +5,11 @@
     <link rel="icon" type="png" href="~/images/icon.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <environment include="Staging,Production">
+    <environment include="Development">
         <link rel="stylesheet" href='@Url.Content("~/lib/bootstrap/dist/css/bootstrap.css")'>
+        <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
     </environment>
-    <environment exclude="Staging,Production">
+    <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
@@ -16,7 +17,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </environment>
-    <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
 </head>
 
 <body>
@@ -79,7 +79,7 @@
         </environment>
     </div>
 
-     @RenderSection("Scripts", required: false)
-      
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

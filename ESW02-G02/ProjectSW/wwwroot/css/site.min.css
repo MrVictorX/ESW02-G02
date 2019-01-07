@@ -190,18 +190,18 @@ button {
     }
 
 /*TABLES*/
-table {
+.table {
     border: 2px solid #CCC;
     text-align: center;
     position: relative;
     background-color: white;
 }
 
-td {
+.td {
     text-align: center;
 }
 
-th {
+.th {
     font-size: 20px;
     text-align: center;
     color: #689999;

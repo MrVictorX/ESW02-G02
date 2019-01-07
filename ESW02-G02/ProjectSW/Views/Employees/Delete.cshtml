@@ -4,7 +4,6 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
-
 <h2>Eliminar</h2>
 
 <h3>Tem a certeza que pretende eliminar esta ficha?</h3>
@@ -23,10 +22,10 @@
             @Html.DisplayFor(model => model.AditionalInformation)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Account)
+            @Html.DisplayNameFor(model => model.Account.Email)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Account.Id)
+            @Html.DisplayFor(model => model.Account.Email)
         </dd>
     </dl>
     

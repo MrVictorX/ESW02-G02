@@ -4,17 +4,18 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <environment include="Development">
+    <environment include="Staging,Production">
         <link rel="stylesheet" href='@Url.Content("~/lib/bootstrap/dist/css/bootstrap.css")'>
-        <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
     </environment>
-    <environment exclude="Development">
+    <environment exclude="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </environment>
+
+    <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top .text-primary">
@@ -39,11 +40,10 @@
                     <li><a asp-area="" asp-controller="Employees" asp-action="Index">Funcionários</a></li>
                     <li><a asp-area="" asp-controller="Jobs" asp-action="Index">Tarefas</a></li>
                 </ul>
-
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
-    <partial name="_LoginPartial" />
     <partial name="_CookieConsentPartial" />
     <div class="container body-content" style="margin-top:5%">
         @RenderBody()

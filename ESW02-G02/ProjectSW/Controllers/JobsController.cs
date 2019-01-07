@@ -167,7 +167,7 @@ namespace ProjectSW.Controllers
             }
 
             var job = await _context.Job
-                .Include(j => j.Employee)
+                .Include(j => j.Employee.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {

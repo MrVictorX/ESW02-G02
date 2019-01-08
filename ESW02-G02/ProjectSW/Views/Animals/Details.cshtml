@@ -3,6 +3,14 @@
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+
+    string base64 = null;
+    string imgSrc = null;
+    if (Model.Foto != null)
+    {
+        base64 = Convert.ToBase64String(Model.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
 }
 
 <h2>Details</h2>
@@ -45,7 +53,7 @@
             @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Foto)
+            <img src="@imgSrc" height="200px" width="200px" alt="Sem foto disponivel" />
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Attachment)

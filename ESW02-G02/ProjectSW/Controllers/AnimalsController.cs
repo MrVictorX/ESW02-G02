@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectSW.Data;
 using ProjectSW.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace ProjectSW.Controllers
 {
@@ -54,10 +54,25 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal)
+        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto)
         {
             if (ModelState.IsValid)
             {
+                var filePath = Path.GetTempFileName();
+
+                if (foto.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await foto.CopyToAsync(stream);
+                    }
+                }
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    await foto.CopyToAsync(memoryStream);
+                    animal.Foto = memoryStream.ToArray();
+                }
                 _context.Add(animal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +101,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto)
         {
             if (id != animal.Id)
             {
@@ -97,6 +112,22 @@ namespace ProjectSW.Controllers
             {
                 try
                 {
+                    var filePath = Path.GetTempFileName();
+
+                    if (foto.Length > 0)
+                    {
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await foto.CopyToAsync(stream);
+                        }
+                    }
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await foto.CopyToAsync(memoryStream);
+                        animal.Foto = memoryStream.ToArray();
+                    }
+
                     _context.Update(animal);
                     await _context.SaveChangesAsync();
                 }

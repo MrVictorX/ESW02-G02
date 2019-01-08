@@ -114,18 +114,21 @@ namespace ProjectSW.Controllers
                 {
                     var filePath = Path.GetTempFileName();
 
-                    if (foto.Length > 0)
+                if(foto != null)
                     {
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        if (foto.Length > 0)
                         {
-                            await foto.CopyToAsync(stream);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await foto.CopyToAsync(stream);
+                            }
                         }
-                    }
 
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await foto.CopyToAsync(memoryStream);
-                        animal.Foto = memoryStream.ToArray();
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await foto.CopyToAsync(memoryStream);
+                            animal.Foto = memoryStream.ToArray();
+                        }
                     }
 
                     _context.Update(animal);

@@ -10,14 +10,14 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190104175853_initial")]
-    partial class initial
+    [Migration("20190108040154_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -189,6 +189,30 @@ namespace ProjectSW.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Animal", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Attachment");
+
+                    b.Property<DateTime>("EntryDate");
+
+                    b.Property<byte[]>("Foto");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Race");
+
+                    b.Property<string>("Size");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Animal");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Employee", b =>

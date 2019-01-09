@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+
+    string fotoSrc = null;
+
+    if (Model.Foto != null)
+    {
+        fotoSrc = String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(Model.Foto));
+    }
 }
 
 <h2>Edit</h2>
@@ -41,12 +48,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" type="file" name="foto" id="foto" onchange="loadFile(event)" />
+                <input asp-for="Foto" class="form-control" type="file" name="foto" id="foto" onchange="loadFile(event)" value="fileSrc = String.Format('data:application/pdf;base64,{0}', Convert.ToBase64String(Model.Attachment));" />
                 <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Attachment" class="control-label"></label>
-                <input asp-for="Attachment" class="form-control" />
+                <input asp-for="Attachment" class="form-control" type="file" name="attachment" id="attachment" onchange="loadFile(event)" />
                 <span asp-validation-for="Attachment" class="text-danger"></span>
             </div>
             <div class="form-group">

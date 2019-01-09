@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,7 @@ namespace ProjectSW.Migrations
                     Race = table.Column<string>(nullable: true),
                     EntryDate = table.Column<DateTime>(nullable: false),
                     Foto = table.Column<byte[]>(nullable: true),
+                    FileName = table.Column<string>(nullable: true),
                     Attachment = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>

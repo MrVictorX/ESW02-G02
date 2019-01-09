@@ -4,12 +4,17 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 
-    string base64 = null;
+    string imgBase64 = null;
     string imgSrc = null;
+    string fileSrc = null;
     if (Model.Foto != null)
     {
-        base64 = Convert.ToBase64String(Model.Foto);
-        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        imgBase64 = Convert.ToBase64String(Model.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", imgBase64);
+    }
+    if(Model.Attachment != null)
+    {
+        fileSrc = String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(Model.Attachment));
     }
 }
 
@@ -59,7 +64,7 @@
             @Html.DisplayNameFor(model => model.Attachment)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Attachment)
+            <button value="Download"><a href="@fileSrc" download>Download Anexo</a></button>
         </dd>
     </dl>
 </div>

@@ -48,6 +48,7 @@
                 base64 = Convert.ToBase64String(item.Foto);
                 imgSrc = String.Format("data:image/gif;base64,{0}", base64);
             }
+            
 
             <tr>
                 <td>
@@ -66,10 +67,10 @@
                     @Html.DisplayFor(modelItem => item.EntryDate)
                 </td>
                 <td>
-                    <img src="@imgSrc" height="200px" width="200px" alt="Sem foto disponivel"/>
+                    <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel"/>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Attachment)
+                    @Html.DisplayFor(modelItem => item.FileName)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

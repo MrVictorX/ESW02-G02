@@ -10,14 +10,14 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190108040154_Initial")]
-    partial class Initial
+    [Migration("20190109015152_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -199,6 +199,8 @@ namespace ProjectSW.Migrations
                     b.Property<byte[]>("Attachment");
 
                     b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("FileName");
 
                     b.Property<byte[]>("Foto");
 

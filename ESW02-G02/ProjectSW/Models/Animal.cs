@@ -29,6 +29,8 @@ namespace ProjectSW.Models
         [Display(Name = "Foto")]
         public byte[] Foto { get; set; }
 
+        public string FileName { get; set; }
+
         [Display(Name = "Anexos")]
         public byte[] Attachment { get; set; }
     }

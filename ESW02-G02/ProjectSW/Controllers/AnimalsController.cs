@@ -7,6 +7,8 @@ using ProjectSW.Data;
 using ProjectSW.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Hosting.Server;
 
 namespace ProjectSW.Controllers
 {
@@ -54,7 +56,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto)
+        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto, IFormFile attachment)
         {
             if (ModelState.IsValid)
             {
@@ -67,16 +69,30 @@ namespace ProjectSW.Controllers
                         await foto.CopyToAsync(stream);
                     }
                 }
-
                 using (var memoryStream = new MemoryStream())
                 {
                     await foto.CopyToAsync(memoryStream);
                     animal.Foto = memoryStream.ToArray();
                 }
+
+                if (attachment.Length > 0)
+                {
+                    animal.FileName = (attachment.FileName != null) ? attachment.FileName : "Sem Anexo";
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await attachment.CopyToAsync(stream);
+                    }
+                }
+                using (var memoryStream = new MemoryStream())
+                {
+                    await attachment.CopyToAsync(memoryStream);
+                    animal.Attachment = memoryStream.ToArray();
+                }
+
                 _context.Add(animal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+         }
             return View(animal);
         }
 
@@ -101,7 +117,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto, IFormFile attachment)
         {
             if (id != animal.Id)
             {
@@ -114,7 +130,7 @@ namespace ProjectSW.Controllers
                 {
                     var filePath = Path.GetTempFileName();
 
-                if(foto != null)
+                    if(foto != null)
                     {
                         if (foto.Length > 0)
                         {
@@ -129,6 +145,19 @@ namespace ProjectSW.Controllers
                             await foto.CopyToAsync(memoryStream);
                             animal.Foto = memoryStream.ToArray();
                         }
+                    }
+                    if (attachment.Length > 0)
+                    {
+                        animal.FileName = (attachment.FileName != null) ? attachment.FileName : "Sem Anexo";
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await attachment.CopyToAsync(stream);
+                        }
+                    }
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await attachment.CopyToAsync(memoryStream);
+                        animal.Attachment = memoryStream.ToArray();
                     }
 
                     _context.Update(animal);

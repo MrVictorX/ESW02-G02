@@ -3,6 +3,14 @@
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+
+    string imgBase64 = null;
+    string imgSrc = null;
+    if (Model.Foto != null)
+    {
+        imgBase64 = Convert.ToBase64String(Model.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", imgBase64);
+    }
 }
 
 <h2>Delete</h2>
@@ -46,13 +54,13 @@
             @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Foto)
+            <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Attachment)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Attachment)
+            @Html.DisplayFor(model => model.FileName)
         </dd>
     </dl>
 

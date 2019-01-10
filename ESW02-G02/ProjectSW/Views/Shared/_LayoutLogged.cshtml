@@ -4,48 +4,50 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <environment include="Staging,Production">
+    <environment include="Development">
         <link rel="stylesheet" href='@Url.Content("~/lib/bootstrap/dist/css/bootstrap.css")'>
+        <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
     </environment>
-    <environment exclude="Staging,Production">
+    <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </environment>
-
-    <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top .text-primary">
-        <div class="container" style="width: 100%">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+        <nav class="navbar navbar-inverse navbar-fixed-top .text-primary">
+            <div class="container" style="width: 100%">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse text-white" style="margin-left: 15%;">
+                    <ul class="nav navbar-nav" style="flex-direction: unset">
+                        <li class="link-homepage" style="float:left"><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião <img src="~/images/pawprint.png" /></b></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="flex-direction: unset; font-size:1em">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Animais</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Adoções</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Estatisticas</a></li>
+                        <li><a asp-area="" asp-controller="User" asp-action="UserList">Contas</a></li>
+                        <li><a asp-area="" asp-controller="Employees" asp-action="Index">Funcionários</a></li>
+                        <li><a asp-area="" asp-controller="Jobs" asp-action="Index">Tarefas</a></li>
+                    </ul>
+                        <partial name="_LoginPartial" />    
+                        
+                     
+                </div>
             </div>
-            <div class="navbar-collapse collapse text-white">
-                <ul class="nav navbar-nav" style="flex-direction: unset">
-                    <li style="float:left"><a asp-area="" asp-controller="Home" asp-action="Index"><b>Quinta do Mião</b></a></li>
-                </ul>
-                <ul class="nav navbar-nav" style="flex-direction: unset; font-size:1em">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Animais</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Adoções</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Estatisticas</a></li>
-                    <li><a asp-area="" asp-controller="User" asp-action="UserList">Contas</a></li>
-                    <li><a asp-area="" asp-controller="Employees" asp-action="Index">Funcionários</a></li>
-                    <li><a asp-area="" asp-controller="Jobs" asp-action="Index">Tarefas</a></li>
-                </ul>
-                <partial name="_LoginPartial" />
-            </div>
-        </div>
-    </nav>
+        </nav>
+   
     <partial name="_CookieConsentPartial" />
-    <div class="container body-content" style="margin-top:5%">
+    <div class="container div-content" style="margin-top:5%">
         @RenderBody()
         <footer class="footer">
             &copy;2018 Quinta do Mião - Centro Intermunicipal de Recolha de Animais Errantes Barreiro/Moita&nbsp;&nbsp; Telefone: 212068625

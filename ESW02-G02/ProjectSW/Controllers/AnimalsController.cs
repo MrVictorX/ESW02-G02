@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectSW.Controllers
 {
+    [Authorize]
     public class AnimalsController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -5,60 +5,60 @@
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<h2>Detalhes</h2>
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Detalhes</b></h2>
+    <div>
+        <h4 class="title-link">Funcionário</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.PhoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.DateOfBirth)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.DateOfBirth)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.Address)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.Address)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AditionalInformation)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AditionalInformation)
+            </dd>
 
-<div>
-    <h4 class="title-link">Funcionário</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Account.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Account.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Account.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.DateOfBirth)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Account.DateOfBirth)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Account.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AditionalInformation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AditionalInformation)
-        </dd>
-
-
-    </dl>
-</div>
-<div>
-    <hr />
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link">Editar</a> |
-    <a asp-action="Index" class="return-link" >Voltar</a>
+        </dl>
+    </div>
+    <div>
+        <hr />
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link"><button class="button-format">Editar</button></a> |
+        <a asp-action="Index" class="return-link"><button class="button-format">Voltar</button></a>
+    </div>
 </div>

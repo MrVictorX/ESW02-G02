@@ -10,8 +10,8 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190112131558_animals")]
-    partial class animals
+    [Migration("20190112213235_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -198,6 +198,8 @@ namespace ProjectSW.Migrations
 
                     b.Property<byte[]>("Attachment");
 
+                    b.Property<string>("BreedId");
+
                     b.Property<DateTime>("EntryDate");
 
                     b.Property<string>("FileName");
@@ -208,13 +210,25 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Race");
-
                     b.Property<string>("Size");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BreedId");
+
                     b.ToTable("Animal");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Breed", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Breed");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Employee", b =>
@@ -319,6 +333,13 @@ namespace ProjectSW.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Animal", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Breed", "Breed")
+                        .WithMany()
+                        .HasForeignKey("BreedId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Employee", b =>

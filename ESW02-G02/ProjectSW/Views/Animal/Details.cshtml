@@ -2,20 +2,6 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
-
-    string imgBase64 = null;
-    string imgSrc = null;
-    string fileSrc = null;
-    if (Model.Foto != null)
-    {
-        imgBase64 = Convert.ToBase64String(Model.Foto);
-        imgSrc = String.Format("data:image/gif;base64,{0}", imgBase64);
-    }
-    if(Model.Attachment != null)
-    {
-        fileSrc = String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(Model.Attachment));
-    }
 }
 
 <h2>Details</h2>
@@ -43,10 +29,10 @@
             @Html.DisplayFor(model => model.Gender)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Race)
+            @Html.DisplayNameFor(model => model.Breed)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Race)
+            @Html.DisplayFor(model => model.Breed.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.EntryDate)
@@ -58,13 +44,19 @@
             @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd>
-            <img src="@imgSrc" height="200px" width="200px" alt="Sem foto disponivel" />
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Attachment)
         </dt>
         <dd>
-            <button value="Download"><a href="@fileSrc" download>Download Anexo</a></button>
+            @Html.DisplayFor(model => model.Attachment)
         </dd>
     </dl>
 </div>

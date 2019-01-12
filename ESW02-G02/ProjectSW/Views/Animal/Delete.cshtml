@@ -2,15 +2,6 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
-
-    string imgBase64 = null;
-    string imgSrc = null;
-    if (Model.Foto != null)
-    {
-        imgBase64 = Convert.ToBase64String(Model.Foto);
-        imgSrc = String.Format("data:image/gif;base64,{0}", imgBase64);
-    }
 }
 
 <h2>Delete</h2>
@@ -39,10 +30,10 @@
             @Html.DisplayFor(model => model.Gender)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Race)
+            @Html.DisplayNameFor(model => model.Breed)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Race)
+            @Html.DisplayFor(model => model.Breed.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.EntryDate)
@@ -54,27 +45,25 @@
             @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd>
-            <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Attachment)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FileName)
+            @Html.DisplayFor(model => model.Attachment)
         </dd>
     </dl>
-
+    
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
-
-
-<script>
-    var loadFile = function (event) {
-        var output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>

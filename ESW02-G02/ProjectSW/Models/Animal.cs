@@ -19,8 +19,10 @@ namespace ProjectSW.Models
         [Display(Name = "Genero")]
         public string Gender { get; set; }
 
+        public string BreedId { get; set; }
+
         [Display(Name = "Raça")]
-        public string Race { get; set; }
+        public Breed Breed { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Data de entrada")]

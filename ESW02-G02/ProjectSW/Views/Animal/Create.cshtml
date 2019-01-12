@@ -1,26 +1,17 @@
 ﻿@model ProjectSW.Models.Animal
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
-
-    string fotoSrc = null;
-
-    if (Model.Foto != null)
-    {
-        fotoSrc = String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(Model.Foto));
-    }
+    ViewData["Title"] = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
 <h4>Animal</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -37,9 +28,8 @@
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Race" class="control-label"></label>
-                <input asp-for="Race" class="form-control" />
-                <span asp-validation-for="Race" class="text-danger"></span>
+                <label asp-for="BreedId" class="control-label"></label>
+                <select asp-for="BreedId" class ="form-control" asp-items="ViewBag.BreedId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="EntryDate" class="control-label"></label>
@@ -48,34 +38,29 @@
             </div>
             <div class="form-group">
                 <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" type="file" name="foto" id="foto" onchange="loadFile(event)" value="fileSrc = String.Format('data:application/pdf;base64,{0}', Convert.ToBase64String(Model.Attachment));" />
+                <input asp-for="Foto" class="form-control" />
                 <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="FileName" class="control-label"></label>
+                <input asp-for="FileName" class="form-control" />
+                <span asp-validation-for="FileName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Attachment" class="control-label"></label>
-                <input asp-for="Attachment" class="form-control" type="file" name="attachment" id="attachment" onchange="loadFile(event)" />
+                <input asp-for="Attachment" class="form-control" />
                 <span asp-validation-for="Attachment" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
-    <hr />
-    <img id="output" width="200px" height="200px" />
-    <hr />
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-<script>
-    var loadFile = function (event) {
-        var output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

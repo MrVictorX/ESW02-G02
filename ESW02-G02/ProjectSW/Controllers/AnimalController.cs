@@ -1,35 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectSW.Data;
 using ProjectSW.Models;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectSW.Controllers
 {
-    [Authorize]
-    public class AnimalsController : Controller
+    public class AnimalController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AnimalsController(ApplicationDbContext context)
+        public AnimalController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Animals
+        // GET: Animal
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Animal.ToListAsync());
+            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Animals/Details/5
+        // GET: Animal/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -38,6 +35,7 @@ namespace ProjectSW.Controllers
             }
 
             var animal = await _context.Animal
+                .Include(a => a.Breed)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (animal == null)
             {
@@ -47,58 +45,31 @@ namespace ProjectSW.Controllers
             return View(animal);
         }
 
-        // GET: Animals/Create
+        // GET: Animal/Create
         public IActionResult Create()
         {
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id");
             return View();
         }
 
-        // POST: Animals/Create
+        // POST: Animal/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto, IFormFile attachment)
+        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto,FileName,Attachment")] Animal animal)
         {
             if (ModelState.IsValid)
             {
-                var filePath = Path.GetTempFileName();
-
-                if (foto.Length > 0)
-                {
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await foto.CopyToAsync(stream);
-                    }
-                }
-                using (var memoryStream = new MemoryStream())
-                {
-                    await foto.CopyToAsync(memoryStream);
-                    animal.Foto = memoryStream.ToArray();
-                }
-
-                if (attachment.Length > 0)
-                {
-                    animal.FileName = (attachment.FileName != null) ? attachment.FileName : "Sem Anexo";
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await attachment.CopyToAsync(stream);
-                    }
-                }
-                using (var memoryStream = new MemoryStream())
-                {
-                    await attachment.CopyToAsync(memoryStream);
-                    animal.Attachment = memoryStream.ToArray();
-                }
-
                 _context.Add(animal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-         }
+            }
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
             return View(animal);
         }
 
-        // GET: Animals/Edit/5
+        // GET: Animal/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -111,15 +82,16 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
             return View(animal);
         }
 
-        // POST: Animals/Edit/5
+        // POST: Animal/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,Race,EntryDate,Foto,Attachment")] Animal animal, IFormFile foto, IFormFile attachment)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto,FileName,Attachment")] Animal animal)
         {
             if (id != animal.Id)
             {
@@ -130,38 +102,6 @@ namespace ProjectSW.Controllers
             {
                 try
                 {
-                    var filePath = Path.GetTempFileName();
-
-                    if(foto != null)
-                    {
-                        if (foto.Length > 0)
-                        {
-                            using (var stream = new FileStream(filePath, FileMode.Create))
-                            {
-                                await foto.CopyToAsync(stream);
-                            }
-                        }
-
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await foto.CopyToAsync(memoryStream);
-                            animal.Foto = memoryStream.ToArray();
-                        }
-                    }
-                    if (attachment.Length > 0)
-                    {
-                        animal.FileName = (attachment.FileName != null) ? attachment.FileName : "Sem Anexo";
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await attachment.CopyToAsync(stream);
-                        }
-                    }
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await attachment.CopyToAsync(memoryStream);
-                        animal.Attachment = memoryStream.ToArray();
-                    }
-
                     _context.Update(animal);
                     await _context.SaveChangesAsync();
                 }
@@ -178,10 +118,11 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
             return View(animal);
         }
 
-        // GET: Animals/Delete/5
+        // GET: Animal/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -190,6 +131,7 @@ namespace ProjectSW.Controllers
             }
 
             var animal = await _context.Animal
+                .Include(a => a.Breed)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (animal == null)
             {
@@ -199,7 +141,7 @@ namespace ProjectSW.Controllers
             return View(animal);
         }
 
-        // POST: Animals/Delete/5
+        // POST: Animal/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

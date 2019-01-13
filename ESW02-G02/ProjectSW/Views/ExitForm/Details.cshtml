@@ -1,0 +1,57 @@
+﻿@model ProjectSW.Models.ExitForm
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Detalhes</b></h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ReportId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ReportId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AdopterName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AdopterName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Motive)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Motive)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Animal)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Animal.Name)
+            </dd>
+        </dl>
+    </div>
+    <div>
+         <a asp-area="" asp-controller="AnimalMonitoringReport" asp-action="Index"><button class="button-format">Relatórios</button></a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link"><button class="button-format">Editar</button></a>
+        <a asp-action="Index" class="return-link"><button class="button-format">Voltar</button></a>
+    </div>
+</div>

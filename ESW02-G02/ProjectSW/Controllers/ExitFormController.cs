@@ -10,23 +10,23 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
-    public class AnimalController : Controller
+    public class ExitFormController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AnimalController(ApplicationDbContext context)
+        public ExitFormController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Animal
+        // GET: ExitForm
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            var applicationDbContext = _context.ExitForm.Include(e => e.Animal);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Animal/Details/5
+        // GET: ExitForm/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -34,42 +34,43 @@ namespace ProjectSW.Controllers
                 return NotFound();
             }
 
-            var animal = await _context.Animal
-                .Include(a => a.Breed)
+            var exitForm = await _context.ExitForm
+                .Include(e => e.Animal)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (animal == null)
+            if (exitForm == null)
             {
                 return NotFound();
             }
 
-            return View(animal);
+            return View(exitForm);
         }
 
-        // GET: Animal/Create
+        // GET: ExitForm/Create
         public IActionResult Create()
         {
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name");
+            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name");
             return View();
         }
 
-        // POST: Animal/Create
+        // POST: ExitForm/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto,FileName,Attachment")] Animal animal)
+        public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,Description,Date,Motive")] ExitForm exitForm)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(animal);
+                _context.Add(exitForm);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
-            return View(animal);
+            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Id", exitForm.AnimalId);
+            ViewData["ReportId"] = new SelectList(_context.AnimalMonitoringReport, "Id", "Id", exitForm.ReportId);
+            return View(exitForm);
         }
 
-        // GET: Animal/Edit/5
+        // GET: ExitForm/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -77,23 +78,23 @@ namespace ProjectSW.Controllers
                 return NotFound();
             }
 
-            var animal = await _context.Animal.FindAsync(id);
-            if (animal == null)
+            var exitForm = await _context.ExitForm.FindAsync(id);
+            if (exitForm == null)
             {
                 return NotFound();
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
-            return View(animal);
+            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Id", exitForm.AnimalId);
+            return View(exitForm);
         }
 
-        // POST: Animal/Edit/5
+        // POST: ExitForm/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto,FileName,Attachment")] Animal animal)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,Description,Date,Motive")] ExitForm exitForm)
         {
-            if (id != animal.Id)
+            if (id != exitForm.Id)
             {
                 return NotFound();
             }
@@ -102,12 +103,12 @@ namespace ProjectSW.Controllers
             {
                 try
                 {
-                    _context.Update(animal);
+                    _context.Update(exitForm);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnimalExists(animal.Id))
+                    if (!ExitFormExists(exitForm.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +119,11 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
-            return View(animal);
+            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Id", exitForm.AnimalId);
+            return View(exitForm);
         }
 
-        // GET: Animal/Delete/5
+        // GET: ExitForm/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -130,31 +131,31 @@ namespace ProjectSW.Controllers
                 return NotFound();
             }
 
-            var animal = await _context.Animal
-                .Include(a => a.Breed)
+            var exitForm = await _context.ExitForm
+                .Include(e => e.Animal)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (animal == null)
+            if (exitForm == null)
             {
                 return NotFound();
             }
 
-            return View(animal);
+            return View(exitForm);
         }
 
-        // POST: Animal/Delete/5
+        // POST: ExitForm/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var animal = await _context.Animal.FindAsync(id);
-            _context.Animal.Remove(animal);
+            var exitForm = await _context.ExitForm.FindAsync(id);
+            _context.ExitForm.Remove(exitForm);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AnimalExists(string id)
+        private bool ExitFormExists(string id)
         {
-            return _context.Animal.Any(e => e.Id == id);
+            return _context.ExitForm.Any(e => e.Id == id);
         }
     }
 }

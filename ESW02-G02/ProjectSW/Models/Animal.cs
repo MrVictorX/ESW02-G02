@@ -16,12 +16,11 @@ namespace ProjectSW.Models
         [Display(Name = "Tamanho")]
         public string Size { get; set; }
 
-        [Display(Name = "Genero")]
+        [Display(Name = "Género")]
         public string Gender { get; set; }
 
-        public string BreedId { get; set; }
-
         [Display(Name = "Raça")]
+        public string BreedId { get; set; }
         public Breed Breed { get; set; }
 
         [DataType(DataType.Date)]
@@ -31,9 +30,10 @@ namespace ProjectSW.Models
         [Display(Name = "Foto")]
         public byte[] Foto { get; set; }
 
+        [Display(Name = "Ficheiro")]
         public string FileName { get; set; }
 
-        [Display(Name = "Anexos")]
+        [Display(Name = "Anexo")]
         public byte[] Attachment { get; set; }
     }
 }

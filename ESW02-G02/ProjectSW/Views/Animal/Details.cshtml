@@ -2,65 +2,66 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Animal</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Breed)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Breed.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EntryDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EntryDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FileName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FileName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Attachment)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Attachment)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Detalhes</b></h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Size)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Size)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Breed)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Breed.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EntryDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EntryDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Foto)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Foto)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FileName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FileName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Attachment)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Attachment)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link"><button class="button-format">Editar</button></a> 
+        <a asp-action="Index" class="return-link"><button class="button-format">Voltar</button></a>
+    </div>
+    </div>

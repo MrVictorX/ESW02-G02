@@ -9,6 +9,7 @@ namespace ProjectSW.Models
     public class Job
     {
         public string Id { get; set; }
+        [Display(Name = "Trabalhador")]
         public string EmployeeId { get; set; }
 
         [Display(Name = "Tarefa")]

@@ -1,0 +1,38 @@
+﻿@model ProjectSW.Models.AnimalMonitoringReport
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Detalhes</b></h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EntryDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EntryDate)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link"><button class="button-format">Editar</button></a> |
+        <a asp-action="Index" class="return-link"><button class="button-format">Voltar</button></a>
+    </div>
+    </div>

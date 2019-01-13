@@ -29,47 +29,64 @@
     <div>
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Create">
+                <form asp-action="Create" class="form-create"  enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o nome do animal.">
+                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Size" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o tamanho do animal.">
+                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
                         <input asp-for="Size" class="form-control" />
                         <span asp-validation-for="Size" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Gender" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o género do animal.">
+                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
                         <input asp-for="Gender" class="form-control" />
                         <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="BreedId" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir a raça do animal.">
+                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
                         <select asp-for="BreedId" class="form-control" asp-items="ViewBag.BreedId"></select>
                     </div>
                     <div class="form-group">
                         <label asp-for="EntryDate" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir a data de criação da ficha.">
+                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
                         <input asp-for="EntryDate" class="form-control" />
                         <span asp-validation-for="EntryDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Foto" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir uma foto no animal como anexo.">
+                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
                         <input asp-for="Foto" class="form-control" type="file" name="foto" id="foto" onchange="loadFile(event)" />
                         <span asp-validation-for="Foto" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Criar" class="button-format" />
-                   
+                        <input type="submit" value="Criar" class="button-format" style="margin-left:0%" />
                     </div>
                 </form>
             </div>
         </div>
 
         <div>
-            <a asp-action="Index" class="return-link"><button class="button-format">Voltar</button></a>
+            <a asp-action="Index"><button class="button-format" style="margin-left:31.5%"><span>Voltar</span></button></a>
         </div>
     </div>
 </div>

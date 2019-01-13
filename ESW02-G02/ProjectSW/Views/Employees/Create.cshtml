@@ -49,7 +49,7 @@
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Aditional Information" data-content="Aqui irá inserir alguma informação adicional que seja relevante.">
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <input asp-for="AditionalInformation" class="form-control" />
+                        <textarea asp-for="AditionalInformation" class="form-control"></textarea>
                         <span asp-validation-for="AditionalInformation" class="text-danger"></span>
                     </div>
                     <div class="form-group">

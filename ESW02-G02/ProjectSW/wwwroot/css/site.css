@@ -181,7 +181,7 @@ body {
 }
 
 /*FORM*/
-.form-create {
+.form-create{
     margin-left: 100%;
     margin-top: 5%;
     border-color: #164C48;
@@ -194,9 +194,8 @@ form {
     margin: 9px auto;
     width: 90%;
     padding: 1em;
-    border: 2px solid #CCC;
     border-radius: 4px;
-    background-color: white;
+    background-color: #164C48;
 }
 
     form div + div {
@@ -246,17 +245,17 @@ button {
     .nav-pills > li + li {
         margin-left: 2px;
     }
-
+    
     .nav-pills > li.active > a,
     .nav-pills > li.active > a:hover,
     .nav-pills > li.active > a:focus {
-        color: #fff;
+        
         background-color: #164C48;
     }
 
 /*TABLES*/
 .table {
-    border: 2px solid #CCC;
+    border-radius: 4px;
     text-align: center;
     position: relative;
     background-color: white;
@@ -320,8 +319,8 @@ button {
 
 .div-content-form {
     border: 2px solid #164C48;
-    width: 70%;
-    margin-left: 10%;
+    width:70%;
+    margin-left:10%;
     margin-top: 10%;
     margin-bottom: 10%;
     color: white;
@@ -360,8 +359,8 @@ button {
     text-align: left;
 }
 
-.table td {
-    text-align: left;
+.table td{
+    text-align:left;
 }
 
 .div-return {

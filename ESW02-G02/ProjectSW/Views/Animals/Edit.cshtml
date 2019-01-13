@@ -12,6 +12,22 @@
     }
 }
 
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        })
+    })
+
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+</script>
+
 <div class="div-content-form">
     <h2 style="font-size: 30px; margin-left:32%;"> <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Editar</b></h2>
     <div class="row">
@@ -51,6 +67,9 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Attachments" class="control-label"></label>
+                    <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Anexos" data-content="Aqui irá adicionar um pdf como anexo a esta ficha de animal.">
+                        <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                    </button>
                     <input asp-for="Attachments" class="form-control" type="file" name="attachment" id="attachment" onchange="loadFile(event)" />
                     <span asp-validation-for="Attachments" class="text-danger"></span>
                 </div>

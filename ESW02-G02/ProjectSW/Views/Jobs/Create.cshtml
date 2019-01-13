@@ -5,6 +5,22 @@
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        })
+    })
+
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+</script>
+
 <div class="div-content">
     <h2 style="font-size: 30px;"><b>Criar nova Tarefa</b></h2>
     <hr />
@@ -15,7 +31,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Job" data-content="Aqui irá inserir o nome da tarefa.">
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome da tarefa" data-content="Aqui irá inserir o nome da tarefa.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <input asp-for="Name" class="form-control" />
@@ -23,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Day" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Date" data-content="Aqui irá inserir o dia">
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Dia" data-content="Aqui irá inserir o dia quando a tarefa irá ser executada.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <input asp-for="Day" class="form-control" />
@@ -31,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Hour" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Hour" data-content="Aqui irá inserir a hora de inicio">
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Hora" data-content="Aqui irá inserir a hora de inicio da tarefa por ser executada.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <input asp-for="Hour" class="form-control" />
@@ -39,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Description" data-content="Aqui irá inserir alguma informação adicional que seja relevante.">
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Descrição" data-content="Aqui irá inserir a descrição da tarefa.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <textarea asp-for="Description" class="form-control"></textarea>
@@ -47,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Employee" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Worker" data-content="Aqui irá inserir o email do trabalhador">
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Trabalhador" data-content="Aqui irá inserir o email do trabalhador">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>

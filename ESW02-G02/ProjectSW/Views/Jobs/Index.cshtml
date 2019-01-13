@@ -13,7 +13,9 @@
     <table class="table">
         <thead>
             <tr>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Day)
                 </th>
@@ -21,13 +23,11 @@
                     @Html.DisplayNameFor(model => model.Hour)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-              
-                <th>
                     @Html.DisplayNameFor(model => model.Employee)
                 </th>
-                
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee.Account.Email)
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -43,9 +43,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Hour)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Employee.Account.Name)

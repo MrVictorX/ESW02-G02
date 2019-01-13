@@ -181,6 +181,15 @@ body {
 }
 
 /*FORM*/
+.form-create {
+    margin-left: 100%;
+    margin-top: 5%;
+    border-color: #164C48;
+    background-color: #164C48;
+    color: white;
+    border-width: 4px;
+}
+
 form {
     margin: 9px auto;
     width: 90%;
@@ -231,6 +240,7 @@ button {
 
     .nav-pills > li > a {
         border-radius: 4px;
+        background-color: #164C48;
     }
 
     .nav-pills > li + li {
@@ -245,18 +255,18 @@ button {
     }
 
 /*TABLES*/
-table {
+.table {
     border: 2px solid #CCC;
     text-align: center;
     position: relative;
     background-color: white;
 }
 
-td {
+.td {
     text-align: center;
 }
 
-th {
+.th {
     font-size: 20px;
     text-align: center;
     color: #164C48;
@@ -264,7 +274,7 @@ th {
 
 /*FUNCIONARIOS*/
 .button-format {
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: white;
     border: none;
     color: #164C48;
@@ -308,9 +318,20 @@ th {
     margin-bottom: 10%;
 }
 
+.div-content-form {
+    border: 2px solid #164C48;
+    width: 70%;
+    margin-left: 10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    color: white;
+    background-color: #164C48;
+    border-radius: 4px;
+}
+
 .title-link {
     text-decoration: none;
-    color: #333;
+    color: white;
     font-family: 'Titillium Web', sans-serif;
     font-size: 24px;
 }
@@ -336,6 +357,10 @@ th {
 }
 
 .dl-horizontal dt {
+    text-align: left;
+}
+
+.table td {
     text-align: left;
 }
 

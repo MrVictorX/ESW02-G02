@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<div class="div-content">
-    <h2 style="font-size: 30px;"><b>Detalhes</b></h2>
-    <div>
-        <h4 class="title-link">Tarefa</h4>
-        <hr />
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%">
+        <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Detalhes</b>
+    </h2>
+    <div style="margin-left: 25%; margin-top: 5%; margin-bottom: 5%;">
+        
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
@@ -43,9 +44,8 @@
             </dd>
         </dl>
     </div>
-    <div>
-        <hr />
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link"><button class="button-format">Editar</button></a> 
-        <a asp-action="Index" class="return-link"><button class="button-format">Voltar</button></a>
+    <div style="margin-left:25%">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link"><button class="button-format"><span>Editar</span></button></a> 
+        <a asp-action="Index" class="return-link"><button class="button-format"><span>Voltar</span></button></a>
     </div>
     </div>

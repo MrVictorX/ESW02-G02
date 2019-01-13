@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<div class="div-content">
-    <h2 style="font-size: 30px;"><b>Eliminar</b></h2>
-    <h3>Tem a certeza que pretende eliminar esta tarefa?</h3>
-    <div>
-        <hr />
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%;"> <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Eliminar</b></h2>
+    
+    <div style="margin-left: 22%; margin-top: 5%; margin-bottom: 5%;">
+        <h3>Tem a certeza que pretende eliminar esta tarefa?</h3>
+        
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
@@ -43,10 +44,10 @@
             </dd>
         </dl>
 
-        <form asp-action="Delete" class="form-delete">
+        <form asp-action="Delete" style="margin-left:1%;">
             <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Eliminar" class="button-format" /> |
-            <a asp-action="Index" class="return-link"><button class="button-format">Voltar</button></a>
+            <input type="submit" value="Eliminar" class="button-format" /> 
+            <a asp-action="Index" class="return-link"><button class="button-format"><span>Voltar</span></button></a>
         </form>
     </div>
 </div>

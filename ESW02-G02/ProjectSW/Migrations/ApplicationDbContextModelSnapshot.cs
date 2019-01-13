@@ -194,13 +194,9 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("Attachment");
-
                     b.Property<string>("BreedId");
 
                     b.Property<DateTime>("EntryDate");
-
-                    b.Property<string>("FileName");
 
                     b.Property<byte[]>("Foto");
 
@@ -215,6 +211,24 @@ namespace ProjectSW.Migrations
                     b.HasIndex("BreedId");
 
                     b.ToTable("Animal");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AnimalId");
+
+                    b.Property<byte[]>("File");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("Attachment");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Breed", b =>
@@ -338,6 +352,13 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Breed", "Breed")
                         .WithMany()
                         .HasForeignKey("BreedId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Animal")
+                        .WithMany("Attachments")
+                        .HasForeignKey("AnimalId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Employee", b =>

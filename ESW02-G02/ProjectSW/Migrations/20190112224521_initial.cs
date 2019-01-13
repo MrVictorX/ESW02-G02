@@ -54,6 +54,18 @@ namespace ProjectSW.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Breed",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Breed", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -180,6 +192,29 @@ namespace ProjectSW.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Animal",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Size = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    BreedId = table.Column<string>(nullable: true),
+                    EntryDate = table.Column<DateTime>(nullable: false),
+                    Foto = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Animal", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Animal_Breed_BreedId",
+                        column: x => x.BreedId,
+                        principalTable: "Breed",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Job",
                 columns: table => new
                 {
@@ -200,6 +235,31 @@ namespace ProjectSW.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Attachment",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    File = table.Column<byte[]>(nullable: true),
+                    AnimalId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attachment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Attachment_Animal_AnimalId",
+                        column: x => x.AnimalId,
+                        principalTable: "Animal",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Animal_BreedId",
+                table: "Animal",
+                column: "BreedId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -241,6 +301,11 @@ namespace ProjectSW.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Attachment_AnimalId",
+                table: "Attachment",
+                column: "AnimalId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employee_AccountId",
                 table: "Employee",
                 column: "AccountId");
@@ -269,13 +334,22 @@ namespace ProjectSW.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Attachment");
+
+            migrationBuilder.DropTable(
                 name: "Job");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Animal");
+
+            migrationBuilder.DropTable(
                 name: "Employee");
+
+            migrationBuilder.DropTable(
+                name: "Breed");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

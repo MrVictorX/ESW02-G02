@@ -1,0 +1,85 @@
+﻿@model ProjectSW.Models.Animal
+
+@{
+    ViewData["Title"] = "Details";
+
+    string imgBase64 = null;
+    string imgSrc = null;
+    //string fileSrc = null;
+    if (Model.Foto != null)
+    {
+        imgBase64 = Convert.ToBase64String(Model.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", imgBase64);
+    }
+    //if (Model.Attachments != null)
+    //{
+    //    fileSrc = String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(Model.Attachments));
+    //}
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Animal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Breed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Breed.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd>
+            <img src="@imgSrc" height="200px" width="200px" alt="Sem foto disponivel" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Attachments)
+        </dt>
+        <dd>
+            @if (Model.Attachments == null)
+            {
+                <p>Sem anexos</p>
+            }
+            else
+            {
+                @foreach (var file in Model.Attachments)
+                {
+                    <button value="Download"><a href="@String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(file.File))" download>Download @file.Name</a></button><br />
+                }
+                @Html.DisplayFor(model => model.Foto)
+            }
+
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

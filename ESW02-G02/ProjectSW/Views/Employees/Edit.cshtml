@@ -13,7 +13,7 @@
                 <form asp-action="Edit" style="margin-left: 100%; margin-top: 10%; width:130%">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
-                    <div class="form-group" style="display:inline!important;">
+                    <div class="form-group">
                         <label asp-for="AccountId" class="control-label" value="Email"></label>
                         <select asp-for="AccountId" class="form-control" asp-items="ViewBag.AccountId"></select>
                         <span asp-validation-for="AccountId" class="text-danger"></span>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div>
-            <a asp-action="Index" class="return-link"><button class="button-format" style="margin-left: 37%;"><span>Voltar</span></button></a>
+            <a asp-action="Index"><button class="button-format" style="margin-left: 37%;"><span>Voltar</span></button></a>
         </div>
     </div>
 </div>

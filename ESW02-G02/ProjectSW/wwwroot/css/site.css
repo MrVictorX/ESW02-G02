@@ -272,10 +272,9 @@ button {
 }
 
 /*FUNCIONARIOS*/
-.button-format {
+.button-format, .delete-btn {
     border-radius: 5px;
     background-color: white;
-    border: none;
     color: #164C48;
     text-align: center;
     font-size: 15px;
@@ -286,6 +285,20 @@ button {
     margin: 5px;
     border: 2px solid #164C48;
 }
+.return-link {
+    display:inline-block;
+    border-radius: 5px;
+    background-color: white;;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    border: 2px solid #164C48;
+}
+
 
     .button-format span {
         cursor: pointer;
@@ -315,6 +328,7 @@ button {
 .div-content {
     margin-top: 10%;
     margin-bottom: 10%;
+    
 }
 
 .div-content-form {
@@ -336,17 +350,17 @@ button {
 }
 
 
-    .title-link:hover {
-        color: #333;
+    .title-link:hover, .return-link:hover {
         text-decoration: underline;
     }
 
-.return-link, .edit-link, .delete-link, .details-link {
+.edit-link, .delete-link, .details-link {
     text-decoration: none;
     color: #333;
+
 }
 
-    .return-link:hover, .edit-link:hover, .delete-link:hover, .details-link:hover {
+     .edit-link:hover, .delete-link:hover, .details-link:hover {
         color: black;
     }
 
@@ -370,7 +384,7 @@ button {
 /*Autenticar e Registar*/
 .form-login {
     margin-left: 100%;
-    margin-top: 50%;
+    margin-top: 20%;
     border-color: #164C48;
     background-color: #164C48;
     color: white;
@@ -378,12 +392,13 @@ button {
 }
 
 .form-register {
-    margin-left: 25%;
-    margin-top: 30%;
+    margin-left: 20%;
+    margin-top: 10%;
     border-color: #164C48;
     background-color: #164C48;
     color: white;
     border-width: 4px;
+    width: 110%;
 }
 /* -----------------------RESPONSIVE----------------------- */
 @media screen and (max-width: 500px) {

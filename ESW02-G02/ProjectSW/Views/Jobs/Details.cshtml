@@ -45,7 +45,9 @@
         </dl>
     </div>
     <div style="margin-left:25%">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link"><button class="button-format"><span>Editar</span></button></a> 
-        <a asp-action="Index" class="return-link"><button class="button-format"><span>Voltar</span></button></a>
-    </div>
+        <div class="return-link">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link">Editar</a>
+        </div>
+            <div class="return-link"><a asp-action="Index" style="color:#164C48; text-decoration:none;">Voltar</a></div>
+        </div>
     </div>

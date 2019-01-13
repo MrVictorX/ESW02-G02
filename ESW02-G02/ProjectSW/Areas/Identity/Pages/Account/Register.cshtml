@@ -20,11 +20,11 @@
     })
 </script>
 
-
+<div class="div-content">
     <div class="row">
         <div class="col-md-4" style="left:25%;">
             <form class="form-register" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h2>@ViewData["Title"]</h2>
+                <h2 style="font-size: 30px;"><b>@ViewData["Title"]</b></h2>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Input.Name">Nome Completo*</label>
@@ -81,7 +81,7 @@
             </form>
         </div>
     </div>
-
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

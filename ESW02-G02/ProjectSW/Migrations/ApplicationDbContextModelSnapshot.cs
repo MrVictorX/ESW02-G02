@@ -213,6 +213,24 @@ namespace ProjectSW.Migrations
                     b.ToTable("Animal");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("EmployeeId");
+
+                    b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AnimalMonitoringReport");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
                 {
                     b.Property<string>("Id")
@@ -259,6 +277,32 @@ namespace ProjectSW.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Employee");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.ExitForm", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdopterName");
+
+                    b.Property<string>("AnimalId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Motive");
+
+                    b.Property<string>("ReportId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("ReportId");
+
+                    b.ToTable("ExitForm");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>
@@ -366,6 +410,17 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Data.ProjectSWUser", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.ExitForm", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId");
+
+                    b.HasOne("ProjectSW.Models.AnimalMonitoringReport", "Report")
+                        .WithMany()
+                        .HasForeignKey("ReportId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>

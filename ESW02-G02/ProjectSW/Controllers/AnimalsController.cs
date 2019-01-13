@@ -50,7 +50,7 @@ namespace ProjectSW.Controllers
         // GET: Animals/Create
         public IActionResult Create()
         {
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name");
+            ViewData["BreedId"] = new SelectList(_context.Breed, "Id", "Name");
             return View();
         }
 
@@ -94,7 +94,7 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
+            ViewData["BreedId"] = new SelectList(_context.Breed, "Id", "Id", animal.BreedId);
             return View(animal);
         }
 
@@ -111,7 +111,7 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
+            ViewData["BreedId"] = new SelectList(_context.Breed, "Id", "Id", animal.BreedId);
             return View(animal);
         }
 
@@ -185,7 +185,7 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
+            ViewData["BreedId"] = new SelectList(_context.Breed, "Id", "Id", animal.BreedId);
             return View(animal);
         }
 

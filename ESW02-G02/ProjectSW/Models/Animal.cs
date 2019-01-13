@@ -19,9 +19,8 @@ namespace ProjectSW.Models
         [Display(Name = "Genero")]
         public string Gender { get; set; }
 
-        public string BreedId { get; set; }
-
         [Display(Name = "Raça")]
+        public string BreedId { get; set; }
         public Breed Breed { get; set; }
 
         [DataType(DataType.Date)]
@@ -34,4 +33,6 @@ namespace ProjectSW.Models
         [Display(Name = "Anexos")]
         public  List<Attachment> Attachments { get; set; }
     }
+
+
 }

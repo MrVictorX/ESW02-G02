@@ -25,5 +25,7 @@ namespace ProjectSW.Data
         public DbSet<ProjectSW.Models.ExitForm> ExitForm { get; set; }
 
         public DbSet<ProjectSW.Models.AnimalMonitoringReport> AnimalMonitoringReport { get; set; }
+
+        public DbSet<ProjectSW.Models.Breed> Breed { get; set; }
     }
 }

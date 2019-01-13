@@ -1,6 +1,5 @@
 ﻿@model ProjectSW.Models.Animal
 
-
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
@@ -38,17 +37,130 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Size" class="control-label"></label>
-                        <input asp-for="Size" class="form-control" />
-                        <span asp-validation-for="Size" class="text-danger"></span>
+                        <select asp-for="Size" class="form-control">
+                            <option selected>Indefinido</option>
+                            <option value="Mini">Mini (menos de 5Kg)</option>
+                            <option value="Pequeno">Pequeno (5-10Kg)</option>
+                            <option value="Pequeno/Médio">Pequeno/Médio (11-15Kg)</option>
+                            <option value="Médio">Médio (16-20Kg)</option>
+                            <option value="Médio/Grande">Médio/Grande (21-22Kg)</option>
+                            <option value="Grande">Grande (26-45Kg)</option>
+                            <option value="Muito Grande">Muito Grande (mais de 45Kg)</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Gender" class="control-label"></label>
-                        <input asp-for="Gender" class="form-control" />
-                        <span asp-validation-for="Gender" class="text-danger"></span>
+                        <select asp-for="Gender" class="form-control">
+                            <option selected>Indefinido</option>
+                            <option value="Macho">Macho</option>
+                            <option value="Fêmea">Fêmea</option>
+                        </select>
+
                     </div>
                     <div class="form-group">
                         <label asp-for="BreedId" class="control-label"></label>
-                        <select asp-for="BreedId" class="form-control" asp-items="ViewBag.BreedId"></select>
+                        <select asp-for="BreedId" class="form-control">
+                            <option selected>Indefinido</option>
+                            <option value="1">Abissínio </option>
+                            <option value="2">Affenpinscher  - &quot;Pinscher-macaco&quot;</option>
+                            <option value="3">Afghan Hound - &quot;Galgo afegão&quot;</option>
+                            <option value="4">Airedale Terrier</option>
+                            <option value="5">Akita Americano</option>
+                            <option value="6">Akita Inu</option>
+                            <option value="7">Basenji</option>
+                            <option value="8">Basset Hound</option>
+                            <option value="9">Bassê</option>
+                            <option value="10">Beagle</option>
+                            <option value="11">Bearded Collie</option>
+                            <option value="12">Beauceron</option>
+                            <option value="13">Bichon Maltês</option>
+                            <option value="14">Boerboel</option>
+                            <option value="15">Border Collie</option>
+                            <option value="16">Borzoi</option>
+                            <option value="17">Boston Terrier</option>
+                            <option value="18">Bouvier des Flandres</option>
+                            <option value="19">Boxer</option>
+                            <option value="20">Braco Alemão</option>
+                            <option value="21">Braco de Weimar</option>
+                            <option value="22">Briard</option>
+                            <option value="23">Bull Terrier</option>
+                            <option value="24">Bulldog Americano</option>
+                            <option value="25">Bulldog Francês</option>
+                            <option value="26">Bulldog Inglês</option>
+                            <option value="27">Bullmastiff</option>
+                            <option value="28">Cairn Terrier</option>
+                            <option value="29">Cane Corso</option>
+                            <option value="30">Caniche</option>
+                            <option value="31">Castro Laboreiro</option>
+                            <option value="32">Cavalier King Charles Spaniel</option>
+                            <option value="33">Chihuahua</option>
+                            <option value="34">Chow Chow</option>
+                            <option value="35">Cocker</option>
+                            <option value="36">Collie</option>
+                            <option value="37">Corgi</option>
+                            <option value="38">Coton de Tulear</option>
+                            <option value="39">Cão da Serra de Aires</option>
+                            <option value="40">Cão de Agua Português</option>
+                            <option value="41">Cão de Água Espanhol</option>
+                            <option value="42">Doberman</option>
+                            <option value="43">Dogo Argentino</option>
+                            <option value="44">Dogo Canario</option>
+                            <option value="45">Dálmata</option>
+                            <option value="46">Epagneul</option>
+                            <option value="47">Fila Brasileiro</option>
+                            <option value="48">Fila de São Miguel</option>
+                            <option value="49">Fox Terrier</option>
+                            <option value="50">Foxhound</option>
+                            <option value="51">Galgo</option>
+                            <option value="52">Golden Retriever</option>
+                            <option value="53">Great Dane</option>
+                            <option value="54">Husky</option>
+                            <option value="55">Jack Russel Terrier</option>
+                            <option value="56">Labrador Retriever</option>
+                            <option value="57">Leonberger</option>
+                            <option value="58">Lhasa Apso</option>
+                            <option value="59">Malamute do Alasca</option>
+                            <option value="60">Mastiff</option>
+                            <option value="61">Papillon</option>
+                            <option value="62">Pastor Alemão</option>
+                            <option value="63">Pastor Australiano</option>
+                            <option value="63">Pastor Belga</option>
+                            <option value="65">Pastor Branco Suiço</option>
+                            <option value="66">Pastor Polonês</option>
+                            <option value="67">Pequinês</option>
+                            <option value="68">Perdigueiro</option>
+                            <option value="69">Persa</option>
+                            <option value="70">Pinscher</option>
+                            <option value="71">Pit Bull</option>
+                            <option value="72">Podengo</option>
+                            <option value="73">Pomeranian</option>
+                            <option value="74">Pug</option>
+                            <option value="75">Rafeiro Alentejano</option>
+                            <option value="76">Retriever de pelo liso</option>
+                            <option value="77">Rhodesian Ridgeback</option>
+                            <option value="78">Rottweiller</option>
+                            <option value="79">Samoiedo</option>
+                            <option value="80">Schipperke</option>
+                            <option value="81">Schnauzer</option>
+                            <option value="82">Sem Raça Definida</option>
+                            <option value="83">Serra da estrela</option>
+                            <option value="84">Setter</option>
+                            <option value="85">Shar-Pei</option>
+                            <option value="86">Shetland</option>
+                            <option value="87">Shiba Inu</option>
+                            <option value="88">Shih Tzu</option>
+                            <option value="89">Siamês</option>
+                            <option value="90">Snowshoe</option>
+                            <option value="91">Spitz</option>
+                            <option value="92">Staffordshire Bull Terrier</option>
+                            <option value="93">São Bernardo</option>
+                            <option value="94">Teckel</option>
+                            <option value="95">Terrier Tibetano</option>
+                            <option value="96">Tosa Inu</option>
+                            <option value="97">West Highland White Terrier</option>
+                            <option value="98">Whippet</option>
+                            <option value="99">Yorkshire</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="EntryDate" class="control-label"></label>
@@ -62,7 +174,7 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Criar" class="button-format" />
-                   
+
                     </div>
                 </form>
             </div>

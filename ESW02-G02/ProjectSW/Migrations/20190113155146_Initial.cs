@@ -4,10 +4,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AnimalMonitoringReport",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    EntryDate = table.Column<DateTime>(nullable: false),
+                    EmployeeId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnimalMonitoringReport", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -241,9 +256,9 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    AnimalId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    File = table.Column<byte[]>(nullable: true),
-                    AnimalId = table.Column<string>(nullable: true)
+                    File = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,6 +267,35 @@ namespace ProjectSW.Migrations
                         name: "FK_Attachment_Animal_AnimalId",
                         column: x => x.AnimalId,
                         principalTable: "Animal",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExitForm",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AnimalId = table.Column<string>(nullable: true),
+                    ReportId = table.Column<string>(nullable: true),
+                    AdopterName = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Motive = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExitForm", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExitForm_Animal_AnimalId",
+                        column: x => x.AnimalId,
+                        principalTable: "Animal",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ExitForm_AnimalMonitoringReport_ReportId",
+                        column: x => x.ReportId,
+                        principalTable: "AnimalMonitoringReport",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -311,6 +355,16 @@ namespace ProjectSW.Migrations
                 column: "AccountId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExitForm_AnimalId",
+                table: "ExitForm",
+                column: "AnimalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExitForm_ReportId",
+                table: "ExitForm",
+                column: "ReportId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Job_EmployeeId",
                 table: "Job",
                 column: "EmployeeId");
@@ -337,6 +391,9 @@ namespace ProjectSW.Migrations
                 name: "Attachment");
 
             migrationBuilder.DropTable(
+                name: "ExitForm");
+
+            migrationBuilder.DropTable(
                 name: "Job");
 
             migrationBuilder.DropTable(
@@ -344,6 +401,9 @@ namespace ProjectSW.Migrations
 
             migrationBuilder.DropTable(
                 name: "Animal");
+
+            migrationBuilder.DropTable(
+                name: "AnimalMonitoringReport");
 
             migrationBuilder.DropTable(
                 name: "Employee");

@@ -11,6 +11,10 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
+        public string AnimalId { get; set; }
+
+        public Animal Animal { get; set; }
+
         public string Name { get; set; }
 
         public byte[] File { get; set; }

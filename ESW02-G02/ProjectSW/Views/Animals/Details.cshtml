@@ -69,9 +69,12 @@
                 {
                     @foreach (var file in Model.Attachments)
                     {
-                        <button value="Download"><a href="@String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(file.File))" download>Download @file.Name</a></button><br />
+                    <form asp-action="Delete-Attachment">
+                        <input type="hidden" asp-for="Id" />
+                        <button value="Download"><a href="@String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(file.File))" download>Download @file.Name</a></button>
+                        <input type="submit" value="Delete" class="btn btn-default" /> <br />
+                    </form>
                     }
-                    @Html.DisplayFor(model => model.Foto)
                 }
 
             </dd>

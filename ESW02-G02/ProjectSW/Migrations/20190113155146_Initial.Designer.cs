@@ -10,8 +10,8 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190112232034_ta")]
-    partial class ta
+    [Migration("20190113155146_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,13 +196,9 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("Attachment");
-
                     b.Property<string>("BreedId");
 
                     b.Property<DateTime>("EntryDate");
-
-                    b.Property<string>("FileName");
 
                     b.Property<byte[]>("Foto");
 
@@ -226,6 +222,8 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("EmployeeId");
+
                     b.Property<DateTime>("EntryDate");
 
                     b.Property<string>("UserName");
@@ -233,6 +231,24 @@ namespace ProjectSW.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AnimalMonitoringReport");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AnimalId");
+
+                    b.Property<byte[]>("File");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("Attachment");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Breed", b =>
@@ -285,6 +301,8 @@ namespace ProjectSW.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
+
+                    b.HasIndex("ReportId");
 
                     b.ToTable("ExitForm");
                 });
@@ -382,6 +400,13 @@ namespace ProjectSW.Migrations
                         .HasForeignKey("BreedId");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Animal", "Animal")
+                        .WithMany("Attachments")
+                        .HasForeignKey("AnimalId");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Employee", b =>
                 {
                     b.HasOne("ProjectSW.Data.ProjectSWUser", "Account")
@@ -394,6 +419,10 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Animal", "Animal")
                         .WithMany()
                         .HasForeignKey("AnimalId");
+
+                    b.HasOne("ProjectSW.Models.AnimalMonitoringReport", "Report")
+                        .WithMany()
+                        .HasForeignKey("ReportId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>

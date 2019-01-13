@@ -39,6 +39,7 @@ namespace ProjectSW.Controllers
             var animal = await _context.Animal
                 .Include(a => a.Breed)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            animal.Attachments = _context.Attachment.Where(att => att.AnimalId == animal.Id).ToList();
             if (animal == null)
             {
                 return NotFound();
@@ -77,19 +78,7 @@ namespace ProjectSW.Controllers
                     await foto.CopyToAsync(memoryStream);
                     animal.Foto = memoryStream.ToArray();
                 }
-
-                //if (attachment.Length > 0)
-                //{
-                //    using (var stream = new FileStream(filePath, FileMode.Create))
-                //    {
-                //        await attachment.CopyToAsync(stream);
-                //    }
-                //}
-                //using (var memoryStream = new MemoryStream())
-                //{
-                //    await attachment.CopyToAsync(memoryStream);
-                //    animal.Attachments.Add(new Attachment { Name = attachment.FileName,  File = memoryStream.ToArray()});
-                //}
+                
                 _context.Add(animal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -138,17 +127,23 @@ namespace ProjectSW.Controllers
                 {
                     var filePath = Path.GetTempFileName();
 
-                    if (foto.Length > 0)
-                    {
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                    if(foto != null) { 
+                        if (foto.Length > 0)
                         {
-                            await foto.CopyToAsync(stream);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await foto.CopyToAsync(stream);
+                            }
+                        }
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await foto.CopyToAsync(memoryStream);
+                            animal.Foto = memoryStream.ToArray();
                         }
                     }
-                    using (var memoryStream = new MemoryStream())
+                    else
                     {
-                        await foto.CopyToAsync(memoryStream);
-                        animal.Foto = memoryStream.ToArray();
+                        animal.Foto = _context.Animal.Select(a => a.Foto).ToList().First();
                     }
                     var att = new Attachment { Name = attachment.FileName };
                     if (attachment.Length > 0)
@@ -167,6 +162,7 @@ namespace ProjectSW.Controllers
                         {
                             att
                         };
+                        _context.Add(att);
                         animal.Attachments = list;
                     }
                     _context.Update(animal);
@@ -214,6 +210,12 @@ namespace ProjectSW.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var animal = await _context.Animal.FindAsync(id);
+            var attachment = _context.Attachment.Select(att => att).Where(att => att.AnimalId == id).ToList();
+            if (attachment != null)
+                foreach (var att in attachment)
+                {
+                    _context.Attachment.Remove(att);
+                }
             _context.Animal.Remove(animal);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -222,6 +224,18 @@ namespace ProjectSW.Controllers
         private bool AnimalExists(string id)
         {
             return _context.Animal.Any(e => e.Id == id);
+        }
+
+        // eliminar attachment
+        [HttpPost, ActionName("Delete-Attachment")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteAttachment(string id)
+        {
+            var attachment = _context.Attachment.Select(att => att).Where(att => att.AnimalId == id).First();
+            if(attachment != null)
+            _context.Attachment.Remove(attachment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

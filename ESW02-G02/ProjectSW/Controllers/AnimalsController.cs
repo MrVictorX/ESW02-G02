@@ -50,7 +50,7 @@ namespace ProjectSW.Controllers
         // GET: Animals/Create
         public IActionResult Create()
         {
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id");
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name");
             return View();
         }
 

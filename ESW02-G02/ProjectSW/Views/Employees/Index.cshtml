@@ -8,23 +8,21 @@
 <div class="div-content">
     <h2 style="font-size: 30px;"><b>Lista de Funcionários</b></h2>
     <p>
-        <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar nova Ficha </span></button></a>
+        <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Nova Ficha </span></button></a>
     </p>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Type)
+                    @Html.DisplayNameFor(model => model.Account.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.AditionalInformation)
-                </th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>           
                 <th>
                     @Html.DisplayNameFor(model => model.Account.Email)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Account.Name)
-                </th>
+
                 <th></th>
             </tr>
         </thead>

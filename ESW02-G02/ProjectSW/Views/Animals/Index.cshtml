@@ -7,20 +7,48 @@
 
 <div class="div-content">
     <h2 style="font-size: 30px;"><b>Lista de Animais</b></h2>
-    <p>
-        <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Nova Ficha </span></button></a>
-    </p>
+    <button class="accordion button-format" style="height:50%"><span>Filtrar Lista</span></button>
+        <form asp-controller="Animals" asp-action="Listar" method="post" style="width:40%; padding-left:2%; margin-left:0%">
+            <label style="color:white">Nome:</label> <input type="text" name="filtroNome" class="form-control" style="width:80%;">
+            <label style="color:white">Raça:</label> <input type="text" name="filtroRaca" class="form-control" style="width:80%;">
+            <label style="color:white">Genero:</label> <input type="text" name="filtroGenero" class="form-control" style="width:80%;" >
+            <label style="color:white">Tamanho:</label> <input type="text" name="filtroTamanho" class="form-control" style="width:80%;">
+            <input type="submit" value="Filtrar" class="button-format" />
+        </form>
+        <hr>
+        <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Nova Ficha</span></button></a>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.EntryDate)
+                    <a asp-action="OrderByData">
+                        @Html.DisplayNameFor(model => model.EntryDate)
+                    </a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    <a asp-action="OrderByNome">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Foto)
+                    <a asp-action="OrderByRaca">
+                        @Html.DisplayNameFor(model => model.Breed)
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="OrderByGenero">
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="OrderByTamanho">
+                        @Html.DisplayNameFor(model => model.Size)
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index">
+                        @Html.DisplayNameFor(model => model.Foto)
+                    </a>
                 </th>
             </tr>
         </thead>
@@ -42,6 +70,15 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
+                        @Html.DisplayFor(model => item.Breed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Size)
+                    </td>
+                    <td>
                         <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
                     </td>
                     <td>
@@ -54,3 +91,24 @@
         </tbody>
     </table>
 </div>
+<script>
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+   });
+  } 
+    </script>

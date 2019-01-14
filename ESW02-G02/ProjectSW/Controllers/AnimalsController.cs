@@ -66,18 +66,23 @@ namespace ProjectSW.Controllers
             {
                 var filePath = Path.GetTempFileName();
 
-                if (foto.Length > 0)
+                if (foto != null && foto.Length > 0)
                 {
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await foto.CopyToAsync(stream);
                     }
                 }
-                using (var memoryStream = new MemoryStream())
+
+                if (foto != null)
                 {
-                    await foto.CopyToAsync(memoryStream);
-                    animal.Foto = memoryStream.ToArray();
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await foto.CopyToAsync(memoryStream);
+                        animal.Foto = memoryStream.ToArray();
+                    }
                 }
+
                 
                 _context.Add(animal);
                 await _context.SaveChangesAsync();
@@ -236,6 +241,61 @@ namespace ProjectSW.Controllers
             _context.Attachment.Remove(attachment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> OrderByData()
+        {
+            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            var listaDeCarros = await applicationDbContext.OrderBy(c => c.EntryDate).ToListAsync();
+            return View("Index", listaDeCarros);
+        }
+
+        public async Task<IActionResult> OrderByNome()
+        {
+            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            return View("Index", await applicationDbContext.OrderBy(c => c.Name).ToListAsync());
+        }
+
+        public async Task<IActionResult> OrderByRaca()
+        {
+            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            return View("Index", await applicationDbContext.OrderBy(c => c.Breed.Name).ToListAsync());
+        }
+
+        public async Task<IActionResult> OrderByGenero()
+        {
+            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            return View("Index", await applicationDbContext.OrderBy(c => c.Gender).ToListAsync());
+        }
+
+        public async Task<IActionResult> OrderByTamanho()
+        {
+            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            return View("Index", await applicationDbContext.OrderBy(c => c.Size).ToListAsync());
+        }
+
+        [HttpPost]
+        public IActionResult Listar(string filtroNome, string filtroRaca, string filtroGenero, string filtroTamanho)
+        {
+            var filtrados = _context.Animal.Include(a => a.Breed);
+
+            if (!String.IsNullOrEmpty(filtroNome))
+            {
+                filtrados = filtrados.Where(a => a.Name.Contains(filtroNome)).Include(a => a.Breed);
+            }
+            if (!String.IsNullOrEmpty(filtroRaca))
+            {
+                filtrados = filtrados.Where(a => a.Breed.Name.Contains(filtroRaca)).Include(a => a.Breed);
+            }
+            if (!String.IsNullOrEmpty(filtroGenero))
+            {
+                filtrados = filtrados.Where(a => a.Gender.Contains(filtroGenero)).Include(a => a.Breed);
+            }
+            if (!String.IsNullOrEmpty(filtroTamanho))
+            {
+                filtrados = filtrados.Where(a => a.Size.Contains(filtroTamanho)).Include(a => a.Breed);
+            }
+            return View("Index", filtrados.ToList());
         }
     }
 }

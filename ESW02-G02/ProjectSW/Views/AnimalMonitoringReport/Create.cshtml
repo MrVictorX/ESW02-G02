@@ -1,0 +1,74 @@
+﻿@model ProjectSW.Models.AnimalMonitoringReport
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        })
+    })
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+</script>
+
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Criar Relatório</b></h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" class="form-create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome" data-content="Aqui irá inserir o nome do animal.">
+                        <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                    </button>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Informação da visita" data-content="Aqui irá inserir informações sobre a visita.">
+                        <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                    </button>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EntryDate" class="control-label"></label>
+                    <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data" data-content="Aqui irá inserir a data de criação.">
+                        <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                    </button>
+                    <input asp-for="EntryDate" class="form-control" />
+                    <span asp-validation-for="EntryDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Trabalhador" data-content="Aqui irá inserir o email do trabalhador que efetuou a visita.">
+                        <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                    </button>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Criar" class="button-format" style="margin-left:0%" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index"><button class="button-format" style="margin-left:31.5%"><span>Voltar</span></button></a>
+    </div>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

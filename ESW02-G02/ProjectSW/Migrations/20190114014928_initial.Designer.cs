@@ -10,7 +10,7 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190104175853_initial")]
+    [Migration("20190114014928_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,6 +191,80 @@ namespace ProjectSW.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.Animal", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BreedId");
+
+                    b.Property<DateTime>("EntryDate");
+
+                    b.Property<byte[]>("Foto");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Size");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BreedId");
+
+                    b.ToTable("Animal");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("EmployeeId");
+
+                    b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("AnimalMonitoringReport");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AnimalId");
+
+                    b.Property<byte[]>("File");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("Attachment");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Breed", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Breed");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Employee", b =>
                 {
                     b.Property<string>("Id")
@@ -207,6 +281,32 @@ namespace ProjectSW.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Employee");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.ExitForm", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdopterName");
+
+                    b.Property<string>("AnimalId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Motive");
+
+                    b.Property<string>("ReportId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("ReportId");
+
+                    b.ToTable("ExitForm");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>
@@ -295,11 +395,43 @@ namespace ProjectSW.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.Animal", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Breed", "Breed")
+                        .WithMany()
+                        .HasForeignKey("BreedId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Animal", "Animal")
+                        .WithMany("Attachments")
+                        .HasForeignKey("AnimalId");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Employee", b =>
                 {
                     b.HasOne("ProjectSW.Data.ProjectSWUser", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.ExitForm", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId");
+
+                    b.HasOne("ProjectSW.Models.AnimalMonitoringReport", "Report")
+                        .WithMany()
+                        .HasForeignKey("ReportId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>

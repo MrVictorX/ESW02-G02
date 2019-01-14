@@ -5,44 +5,40 @@
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<h2>Editar</h2>
-
-<h4 class="title-link">Funcionário</h4>
-<hr />
-<div>
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label asp-for="AccountId" class="control-label"></label>
-                    <select asp-for="AccountId" class="form-control" asp-items="ViewBag.AccountId"></select>
-                    <span asp-validation-for="AccountId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Type" class="control-label"></label>
-                    <input asp-for="Type" class="form-control" />
-                    <span asp-validation-for="Type" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="AditionalInformation" class="control-label"></label>
-                    <input asp-for="AditionalInformation" class="form-control" />
-                    <span asp-validation-for="AditionalInformation" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Guardar" class="btn btn-default" />
-                </div>
-            </form>
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%;"> <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Editar</b></h2>
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit" style="margin-left: 100%; margin-top: 10%; width:130%">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="AccountId" class="control-label" value="Email"></label>
+                        <select asp-for="AccountId" class="form-control" asp-items="ViewBag.AccountId"></select>
+                        <span asp-validation-for="AccountId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <input asp-for="Type" class="form-control" />
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AditionalInformation" class="control-label"></label>
+                        <textarea asp-for="AditionalInformation" class="form-control"></textarea>
+                        <span asp-validation-for="AditionalInformation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <a asp-action="Index"><button class="button-format" style="margin-left: 37%;"><span>Voltar</span></button></a>
         </div>
     </div>
-
-    <div>
-        <a asp-action="Index" class="return-link">Voltar</a>
-    </div>
-
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

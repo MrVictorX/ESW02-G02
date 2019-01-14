@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
+    [Authorize]
     public class JobsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -167,7 +169,7 @@ namespace ProjectSW.Controllers
             }
 
             var job = await _context.Job
-                .Include(j => j.Employee)
+                .Include(j => j.Employee.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {

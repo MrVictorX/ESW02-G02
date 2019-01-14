@@ -5,49 +5,80 @@
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
 }
 
-<h2>Criar nova tarefa</h2>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 
-<hr />
-<div>
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Day" class="control-label"></label>
-                    <input asp-for="Day" class="form-control" />
-                    <span asp-validation-for="Day" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Hour" class="control-label"></label>
-                    <input asp-for="Hour" class="form-control" />
-                    <span asp-validation-for="Hour" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Employee" class="control-label"></label>
-                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Criar" class="btn btn-default" />
-                </div>
-            </form>
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        })
+    })
+
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+</script>
+
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Criar nova Tarefa</b></h2>
+    <hr />
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create" class="form-create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome da tarefa" data-content="Aqui irá inserir o nome da tarefa.">
+                            <img style="width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Day" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Dia" data-content="Aqui irá inserir o dia quando a tarefa irá ser executada.">
+                            <img style="width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <input asp-for="Day" class="form-control" />
+                        <span asp-validation-for="Day" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Hour" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Hora" data-content="Aqui irá inserir a hora de inicio da tarefa por ser executada.">
+                            <img style="width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <input asp-for="Hour" class="form-control" />
+                        <span asp-validation-for="Hour" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Descrição" data-content="Aqui irá inserir a descrição da tarefa.">
+                            <img style="width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Employee" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Trabalhador" data-content="Aqui irá inserir o email do trabalhador">
+                            <img style="width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Criar" class="button-format" style="margin-left:0%"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="div-return">
+            <a asp-action="Index"><button class="button-format" style="margin-left:31.5%"><span>Voltar</span></button></a>
         </div>
     </div>
-
-    <div class="div-return">
-        <a asp-action="Index" class="return-link">Voltar</a>
     </div>
-</div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

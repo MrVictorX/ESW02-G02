@@ -61,6 +61,39 @@ namespace UnitTestProject1
             NUnit.Framework.Assert.LessOrEqual(time, 3);
         }
 
+        private long LoginTime(string mail)
+        {
+            driver.Navigate().GoToUrl("https://quinta-miao-02.azurewebsites.net/Identity/Account/Login");
+
+            // Find the email form field
+            IWebElement email = driver.FindElement(By.Id("Login-Email"));
+            email.SendKeys(mail);
+            IWebElement password = driver.FindElement(By.Id("Login-Password"));
+            password.SendKeys("Boasbro12?");
+
+            IWebElement submit = driver.FindElement(By.Id("Login-Submit"));
+            Stopwatch s = Stopwatch.StartNew();
+            submit.Submit();
+            s.Stop();
+            return s.ElapsedMilliseconds / 100;
+        }
+
+        [Test]
+        public void Login10TimeTest()
+        {
+            long time = 0;
+            string mail = "";
+
+            for (int i = 0; i < 10; i++)
+            {
+                mail = "manuel" + i + "@hotmail.com";
+                time += LoginTime(mail);
+            }
+            time = time / 10;
+            NUnit.Framework.TestContext.WriteLine("Média do tempo decorrido: " + time);
+            NUnit.Framework.Assert.LessOrEqual(time, 5);
+        }
+
         [TearDown]
         public void CloseBrowser()
         {

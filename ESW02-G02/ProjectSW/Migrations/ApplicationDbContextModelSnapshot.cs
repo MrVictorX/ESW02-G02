@@ -228,6 +228,8 @@ namespace ProjectSW.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.ToTable("AnimalMonitoringReport");
                 });
 
@@ -396,6 +398,13 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Breed", "Breed")
                         .WithMany()
                         .HasForeignKey("BreedId");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>
+                {
+                    b.HasOne("ProjectSW.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Attachment", b =>

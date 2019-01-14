@@ -19,6 +19,7 @@ namespace ProjectSW.Models
         [Display(Name = "Genero")]
         public string Gender { get; set; }
 
+        [Display(Name = "Raça")]
         public string BreedId { get; set; }
 
         [Display(Name = "Raça")]

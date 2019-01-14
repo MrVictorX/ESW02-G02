@@ -1,6 +1,5 @@
 ﻿@model ProjectSW.Models.AnimalMonitoringReport
 
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
@@ -29,6 +28,12 @@
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.EntryDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Employee)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Employee.AccountId)
             </dd>
         </dl>
     </div>

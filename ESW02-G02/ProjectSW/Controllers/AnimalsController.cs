@@ -107,7 +107,7 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name", animal.BreedId);
             return View(animal);
         }
 

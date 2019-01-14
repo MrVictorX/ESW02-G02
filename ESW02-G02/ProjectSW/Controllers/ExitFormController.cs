@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using ProjectSW.Models;
 
 namespace ProjectSW.Controllers
 {
+    [Authorize]
     public class ExitFormController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -65,7 +67,7 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Id", exitForm.AnimalId);
+            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name", exitForm.AnimalId);
             ViewData["ReportId"] = new SelectList(_context.AnimalMonitoringReport, "Id", "Id", exitForm.ReportId);
             return View(exitForm);
         }
@@ -83,7 +85,7 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
-            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Id", exitForm.AnimalId);
+            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name", exitForm.AnimalId);
             return View(exitForm);
         }
 
@@ -119,7 +121,7 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Id", exitForm.AnimalId);
+            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name", exitForm.AnimalId);
             return View(exitForm);
         }
 

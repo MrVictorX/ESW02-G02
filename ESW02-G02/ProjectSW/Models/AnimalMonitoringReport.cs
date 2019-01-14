@@ -10,10 +10,10 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
-        [Display(Name = "Nome do Utilizador")]
+        [Display(Name = "Nome do animal")]
         public string UserName { get; set; }
 
-        [Display(Name = "Descrição")]
+        [Display(Name = "Informação da visita")]
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
@@ -22,6 +22,8 @@ namespace ProjectSW.Models
 
         [Display(Name = "Trabalhador")]
         public string EmployeeId { get; set; }
+
+        public Employee Employee { get; set; }
 
     }
 }

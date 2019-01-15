@@ -44,6 +44,11 @@ namespace ProjectSW
             }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
+                options.AddPolicy("RequireFuncionarioRole", policy => policy.RequireRole("Administrator, Funcionarios"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,7 +86,6 @@ namespace ProjectSW
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ProjectSWUser>>();
             string[] roleNames = { "Administrador", "Voluntario", "Funcionario" };
-            IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
             {
@@ -89,8 +93,12 @@ namespace ProjectSW
                 // ensure that the role does not exist
                 if (!roleExist)
                 {
-                    //create the roles and seed them to the database: 
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                    //create the roles and seed them to the database:
+                    var role = new IdentityRole
+                    {
+                        Name = roleName
+                    };
+                    await RoleManager.CreateAsync(role);
                 }
             }
 

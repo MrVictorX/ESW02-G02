@@ -48,7 +48,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Create
-        
+        [Authorize(Roles = "Funcionario")]
         public IActionResult Create()
         {
             ViewData["AccountId"] = new SelectList(_context.User, "Id", "Email");

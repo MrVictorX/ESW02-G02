@@ -96,6 +96,9 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    //here we tie the new user to the role
+                    await _userManager.AddToRoleAsync(user, Input.UserType);
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",

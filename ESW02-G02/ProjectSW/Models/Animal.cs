@@ -10,6 +10,9 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
+        [Display(Name = "Raça")]
+        public string BreedId { get; set; }
+
         [Display(Name = "Nome")]
         public string Name { get; set; }
 
@@ -19,8 +22,9 @@ namespace ProjectSW.Models
         [Display(Name = "Genero")]
         public string Gender { get; set; }
 
-        [Display(Name = "Raça")]
-        public string BreedId { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Data de nascimento")]
+        public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Raça")]
         public Breed Breed { get; set; }
@@ -29,6 +33,9 @@ namespace ProjectSW.Models
         [Display(Name = "Data de entrada")]
         public DateTime EntryDate { get; set; }
 
+        [Display(Name = "Disponivel para adoção")]
+        public bool Available { get; set; }
+        
         [Display(Name = "Foto")]
         public byte[] Foto { get; set; }
         

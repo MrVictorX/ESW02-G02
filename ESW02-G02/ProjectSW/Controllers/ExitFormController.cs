@@ -48,9 +48,21 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Create
-        public IActionResult Create()
+        [AllowAnonymous]
+        public async Task<IActionResult> Create(string AnimalId)
         {
-            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name");
+            if (AnimalId == null)
+            {
+                return NotFound();
+            }
+            var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id == AnimalId);
+            if (animal == null)
+            {
+                return NotFound();
+            }
+            ViewData["Animal"] = animal;
+            ViewData["BreedName"] = animal.Breed.Name;
+
             return View();
         }
 
@@ -59,13 +71,14 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,Description,Date,Motive")] ExitForm exitForm)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(exitForm);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("ExitFormSubmited", "Home");
             }
             ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name", exitForm.AnimalId);
             ViewData["ReportId"] = new SelectList(_context.AnimalMonitoringReport, "Id", "Id", exitForm.ReportId);

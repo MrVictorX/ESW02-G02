@@ -24,7 +24,7 @@ namespace ProjectSW.Controllers
         // GET: AnimalMonitoringReport
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.AnimalMonitoringReport.Include(a => a.Employee);
+            var applicationDbContext = _context.AnimalMonitoringReport.Include(a => a.Employee).Include(a => a.Employee.Account);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -50,7 +50,7 @@ namespace ProjectSW.Controllers
         // GET: AnimalMonitoringReport/Create
         public IActionResult Create()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email");
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(a => a.Account), "Id", "Account.Email");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
+        public async Task<IActionResult> Create([Bind("Id,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
         {
             if (id != animalMonitoringReport.Id)
             {

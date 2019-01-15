@@ -10,9 +10,6 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
-        [Display(Name = "Nome do animal")]
-        public string UserName { get; set; }
-
         [Display(Name = "Informação da visita")]
         public string Description { get; set; }
 

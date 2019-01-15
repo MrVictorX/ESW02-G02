@@ -15,7 +15,7 @@ namespace ProjectSW.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -189,12 +189,40 @@ namespace ProjectSW.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.AdoptionsHist", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdopterAddress");
+
+                    b.Property<string>("AdopterEmail");
+
+                    b.Property<string>("AnimalBreed");
+
+                    b.Property<DateTime>("AnimalDateOfBirth");
+
+                    b.Property<string>("AnimalGender");
+
+                    b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("Result");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdoptionsHist");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Animal", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Available");
+
                     b.Property<string>("BreedId");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<DateTime>("EntryDate");
 
@@ -286,6 +314,8 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdopterEmail");
+
                     b.Property<string>("AdopterName");
 
                     b.Property<string>("AnimalId");
@@ -293,6 +323,8 @@ namespace ProjectSW.Migrations
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Estado");
 
                     b.Property<string>("Motive");
 

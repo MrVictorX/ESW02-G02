@@ -18,6 +18,10 @@ namespace ProjectSW.Models
         [Display(Name = "Nome do Adotante")]
         public string AdopterName { get; set; }
 
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
+        public string AdopterEmail { get; set; }
+
         [Display(Name = "Descrição")]
         public string Description { get; set; }
 
@@ -28,6 +32,7 @@ namespace ProjectSW.Models
         [Display(Name = "Motivo")]
         public string Motive { get; set; }
 
+        public string Estado { get; set; }
 
         public Animal Animal { get; set; }
 

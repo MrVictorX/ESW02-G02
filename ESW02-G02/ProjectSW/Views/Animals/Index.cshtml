@@ -21,11 +21,6 @@
         <thead>
             <tr>
                 <th>
-                    <a asp-action="OrderByData">
-                        @Html.DisplayNameFor(model => model.EntryDate)
-                    </a>
-                </th>
-                <th>
                     <a asp-action="OrderByNome">
                         @Html.DisplayNameFor(model => model.Name)
                     </a>
@@ -64,13 +59,10 @@
                 }
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EntryDate)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => item.Breed)
+                        @Html.DisplayFor(model => item.Breed.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(model => item.Gender)

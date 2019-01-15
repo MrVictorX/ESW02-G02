@@ -78,7 +78,7 @@ namespace ProjectSW.Controllers
             {
                 _context.Add(exitForm);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), "Home");
+                return RedirectToAction("ExitFormSubmited", "Home");
             }
             ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name", exitForm.AnimalId);
             ViewData["ReportId"] = new SelectList(_context.AnimalMonitoringReport, "Id", "Id", exitForm.ReportId);

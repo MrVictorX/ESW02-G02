@@ -27,5 +27,9 @@ namespace ProjectSW.Data
         public DbSet<ProjectSW.Models.AnimalMonitoringReport> AnimalMonitoringReport { get; set; }
 
         public DbSet<ProjectSW.Models.Attachment> Attachment { get; set; }
+
+        public DbSet<ProjectSW.Models.AdoptionsHist> AdoptionsHist { get; set; }
+
+        public DbSet<ProjectSW.Models.Adopter> Adopter { get; set; }
     }
 }

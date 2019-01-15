@@ -8,9 +8,6 @@
 
 <div class="div-content">
     <h2 style="font-size: 30px;"><b>Lista de Adoções</b></h2>
-    <p>
-        <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Nova Ficha </span></button></a>
-    </p>
     <table class="table">
         <thead>
             <tr>
@@ -30,9 +27,6 @@
             @foreach (var item in Model)
             {
             <tr>
-
-
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>

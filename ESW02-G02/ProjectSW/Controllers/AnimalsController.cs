@@ -62,7 +62,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto")] Animal animal, IFormFile foto)
+        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto,Available")] Animal animal, IFormFile foto)
         {
             if (ModelState.IsValid)
             {

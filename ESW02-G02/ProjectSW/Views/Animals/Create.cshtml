@@ -44,7 +44,11 @@
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Tamanho" data-content="Aqui irá inserir o tamanho do animal.">
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <input asp-for="Size" class="form-control" />
+                        <select asp-for="Size" class="form-control custom-select" id="Registar-user-type">
+                            <option value="Pequeno">Pequeno</option>
+                            <option value="Medio">Medio</option>
+                            <option value="Grande">Grande</option>
+                        </select>
                         <span asp-validation-for="Size" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -52,7 +56,10 @@
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Género" data-content="Aqui irá inserir o género do animal.">
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <input asp-for="Gender" class="form-control" />
+                        <select asp-for="Gender" class="form-control custom-select" id="Registar-user-type">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                        </select>
                         <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                     <div class="form-group">

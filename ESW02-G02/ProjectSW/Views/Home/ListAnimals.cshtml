@@ -28,17 +28,20 @@
                     base64 = Convert.ToBase64String(item.Foto);
                     imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                 }
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EntryDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
+                </td>
+                <td>
+                    <a asp-controller="ExitForm" asp-action="Create" asp-route-AnimalId="@item.Id" class="edit-link">Adotar</a> |
+                </td>
+            </tr>
             }
         </tbody>
     </table>

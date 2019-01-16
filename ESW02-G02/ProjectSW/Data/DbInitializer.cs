@@ -44,7 +44,7 @@ namespace ProjectSW.Data
 
             var Users = new ProjectSWUser[]
             {
-            new ProjectSWUser{Name="Teste1", Address="Morada 1", DateOfBirth=DateTime.Parse("1995-09-01"), UserType="Administrador", Email="teste1@hotmail.com", EmailConfirmed=true,},
+            new ProjectSWUser{Name="Teste1", Address="Morada 1", DateOfBirth=DateTime.Parse("1995-09-01"), UserType="Administrador", Email="teste1@hotmail.com", EmailConfirmed=true},
             new ProjectSWUser{Name="Teste2", Address="Morada 2", DateOfBirth=DateTime.Parse("1993-11-11"), UserType="Voluntario", Email="teste2@hotmail.com", EmailConfirmed=true},
             new ProjectSWUser{Name="Teste3", Address="Morada 3", DateOfBirth=DateTime.Parse("1990-01-01"), UserType="Voluntario", Email="teste3@hotmail.com", EmailConfirmed=true},
             new ProjectSWUser{Name="Teste4", Address="Morada 4", DateOfBirth=DateTime.Parse("2000-09-07"), UserType="Voluntario", Email="teste4@hotmail.com", EmailConfirmed=true},

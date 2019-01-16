@@ -60,7 +60,8 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     protocol: Request.Scheme);
 
                 var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-                var client = new SendGridClient("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");
+                //Remover Key quando push
+                var client = new SendGridClient("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");
                 var msg = new SendGridMessage()
                 {
                     From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),

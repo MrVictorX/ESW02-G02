@@ -14,13 +14,17 @@ namespace ProjectSW.Models
 
         public string AdopterAddress { get; set; }
 
+        public string Motive { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime AnimalDateOfBirth { get; set; }
 
-        public string AnimalBreed { get; set; }
+        public string AnimalBreedName { get; set; }
 
         public string AnimalGender { get; set; }
 
+        public string AditionalInformation { get; set; }
+               
         public string Result { get; set; }
 
         [DataType(DataType.Date)]

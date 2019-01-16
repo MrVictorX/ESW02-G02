@@ -152,25 +152,28 @@ namespace ProjectSW.Controllers
                     {
                         animal.Foto = _context.Animal.Select(a => a.Foto).ToList().First();
                     }
-                    var att = new Attachment { Name = attachment.FileName };
-                    if (attachment.Length > 0)
+                    if (attachment != null)
                     {
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var att = new Attachment { Name = attachment.FileName };
+                        if (attachment.Length > 0)
                         {
-                            await attachment.CopyToAsync(stream);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await attachment.CopyToAsync(stream);
+                            }
                         }
-                    }
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await attachment.CopyToAsync(memoryStream);
-                        att.File = memoryStream.ToArray();
-                        //verificar possibilidade de juntar varios pdfs num só e guardar só esse
-                        var list = new List<Attachment>
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await attachment.CopyToAsync(memoryStream);
+                            att.File = memoryStream.ToArray();
+                            //verificar possibilidade de juntar varios pdfs num só e guardar só esse
+                            var list = new List<Attachment>
                         {
                             att
                         };
-                        _context.Add(att);
-                        animal.Attachments = list;
+                            _context.Add(att);
+                            animal.Attachments = list;
+                        }
                     }
                     _context.Update(animal);
                     await _context.SaveChangesAsync();

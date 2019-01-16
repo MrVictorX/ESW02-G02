@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class inital : Migration
+    public partial class iniial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +28,11 @@ namespace ProjectSW.Migrations
                     Id = table.Column<string>(nullable: false),
                     AdopterEmail = table.Column<string>(nullable: true),
                     AdopterAddress = table.Column<string>(nullable: true),
+                    Motive = table.Column<string>(nullable: true),
                     AnimalDateOfBirth = table.Column<DateTime>(nullable: false),
-                    AnimalBreed = table.Column<string>(nullable: true),
+                    AnimalBreedName = table.Column<string>(nullable: true),
                     AnimalGender = table.Column<string>(nullable: true),
+                    AditionalInformation = table.Column<string>(nullable: true),
                     Result = table.Column<string>(nullable: true),
                     EntryDate = table.Column<DateTime>(nullable: false)
                 },
@@ -88,7 +90,8 @@ namespace ProjectSW.Migrations
                 name: "Breed",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -227,7 +230,7 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    BreedId = table.Column<string>(nullable: true),
+                    BreedId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Size = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
@@ -244,7 +247,7 @@ namespace ProjectSW.Migrations
                         column: x => x.BreedId,
                         principalTable: "Breed",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -317,11 +320,12 @@ namespace ProjectSW.Migrations
                     AnimalId = table.Column<string>(nullable: true),
                     ReportId = table.Column<string>(nullable: true),
                     AdopterName = table.Column<string>(nullable: true),
+                    AdopterAddress = table.Column<string>(nullable: true),
                     AdopterEmail = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Motive = table.Column<string>(nullable: true),
-                    Estado = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

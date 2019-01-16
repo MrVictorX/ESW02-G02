@@ -10,8 +10,8 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190116005556_inital")]
-    partial class inital
+    [Migration("20190116035921_iniial")]
+    partial class iniial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -210,17 +210,21 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AditionalInformation");
+
                     b.Property<string>("AdopterAddress");
 
                     b.Property<string>("AdopterEmail");
 
-                    b.Property<string>("AnimalBreed");
+                    b.Property<string>("AnimalBreedName");
 
                     b.Property<DateTime>("AnimalDateOfBirth");
 
                     b.Property<string>("AnimalGender");
 
                     b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("Motive");
 
                     b.Property<string>("Result");
 
@@ -236,7 +240,7 @@ namespace ProjectSW.Migrations
 
                     b.Property<bool>("Available");
 
-                    b.Property<string>("BreedId");
+                    b.Property<int>("BreedId");
 
                     b.Property<DateTime>("DateOfBirth");
 
@@ -295,8 +299,9 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("ProjectSW.Models.Breed", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
@@ -328,6 +333,8 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdopterAddress");
+
                     b.Property<string>("AdopterEmail");
 
                     b.Property<string>("AdopterName");
@@ -338,11 +345,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Estado");
-
                     b.Property<string>("Motive");
 
                     b.Property<string>("ReportId");
+
+                    b.Property<string>("State");
 
                     b.HasKey("Id");
 
@@ -443,7 +450,8 @@ namespace ProjectSW.Migrations
                 {
                     b.HasOne("ProjectSW.Models.Breed", "Breed")
                         .WithMany()
-                        .HasForeignKey("BreedId");
+                        .HasForeignKey("BreedId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>

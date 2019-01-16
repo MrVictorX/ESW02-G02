@@ -9,6 +9,19 @@ namespace ProjectSW.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Adopter",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Address = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Adopter", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AdoptionsHist",
                 columns: table => new
                 {
@@ -75,7 +88,8 @@ namespace ProjectSW.Migrations
                 name: "Breed",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -214,7 +228,7 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    BreedId = table.Column<string>(nullable: true),
+                    BreedId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Size = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
@@ -231,7 +245,7 @@ namespace ProjectSW.Migrations
                         column: x => x.BreedId,
                         principalTable: "Breed",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,7 +253,6 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     EntryDate = table.Column<DateTime>(nullable: false),
                     EmployeeId = table.Column<string>(nullable: true)
@@ -405,6 +418,9 @@ namespace ProjectSW.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Adopter");
+
             migrationBuilder.DropTable(
                 name: "AdoptionsHist");
 

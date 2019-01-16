@@ -189,6 +189,20 @@ namespace ProjectSW.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.Adopter", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Address");
+
+                    b.Property<string>("Email");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Adopter");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.AdoptionsHist", b =>
                 {
                     b.Property<string>("Id")
@@ -220,7 +234,7 @@ namespace ProjectSW.Migrations
 
                     b.Property<bool>("Available");
 
-                    b.Property<string>("BreedId");
+                    b.Property<int>("BreedId");
 
                     b.Property<DateTime>("DateOfBirth");
 
@@ -252,8 +266,6 @@ namespace ProjectSW.Migrations
 
                     b.Property<DateTime>("EntryDate");
 
-                    b.Property<string>("UserName");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
@@ -281,8 +293,9 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("ProjectSW.Models.Breed", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
@@ -429,7 +442,8 @@ namespace ProjectSW.Migrations
                 {
                     b.HasOne("ProjectSW.Models.Breed", "Breed")
                         .WithMany()
-                        .HasForeignKey("BreedId");
+                        .HasForeignKey("BreedId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>

@@ -31,5 +31,7 @@ namespace ProjectSW.Data
         public DbSet<ProjectSW.Models.AdoptionsHist> AdoptionsHist { get; set; }
 
         public DbSet<ProjectSW.Models.Adopter> Adopter { get; set; }
+
+        public DbSet<ProjectSW.Models.Breed> Breed { get; set; }
     }
 }

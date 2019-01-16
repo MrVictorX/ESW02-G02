@@ -10,7 +10,7 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190116011246_Initial")]
+    [Migration("20190116021717_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -210,17 +210,21 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AditionalInformation");
+
                     b.Property<string>("AdopterAddress");
 
                     b.Property<string>("AdopterEmail");
 
-                    b.Property<string>("AnimalBreed");
+                    b.Property<string>("AnimalBreedName");
 
                     b.Property<DateTime>("AnimalDateOfBirth");
 
                     b.Property<string>("AnimalGender");
 
                     b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("Motive");
 
                     b.Property<string>("Result");
 
@@ -329,6 +333,8 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdopterAddress");
+
                     b.Property<string>("AdopterEmail");
 
                     b.Property<string>("AdopterName");
@@ -339,11 +345,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Estado");
-
                     b.Property<string>("Motive");
 
                     b.Property<string>("ReportId");
+
+                    b.Property<string>("State");
 
                     b.HasKey("Id");
 

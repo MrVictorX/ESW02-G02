@@ -72,10 +72,11 @@ namespace ProjectSW.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,Description,Date,Motive")] ExitForm exitForm)
+        public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (ModelState.IsValid)
             {
+                exitForm.State = "Pendente";
                 _context.Add(exitForm);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("ExitFormSubmited", "Home");
@@ -93,12 +94,14 @@ namespace ProjectSW.Controllers
                 return NotFound();
             }
 
-            var exitForm = await _context.ExitForm.FindAsync(id);
+
+            var exitForm = await _context.ExitForm
+                .Include(e => e.Animal)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (exitForm == null)
             {
                 return NotFound();
             }
-            ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name", exitForm.AnimalId);
             return View(exitForm);
         }
 
@@ -107,7 +110,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,Description,Date,Motive")] ExitForm exitForm)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (id != exitForm.Id)
             {
@@ -118,7 +121,37 @@ namespace ProjectSW.Controllers
             {
                 try
                 {
+                    if (exitForm.AnimalId == null)
+                    {
+                        return NotFound();
+                    }
+                    var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id == exitForm.AnimalId);
+                    if (animal == null)
+                    {
+                        return NotFound();
+                    }
+
+                    if(exitForm.State == "Granted" || exitForm.State == "Denied")
+                    {
+                        _context.AdoptionsHist.Add(new AdoptionsHist
+                        {
+                            AdopterEmail = exitForm.AdopterEmail,
+                            AdopterAddress = exitForm.Description,
+                            Motive = exitForm.Motive,
+                            AnimalBreedName = animal.Breed.Name,
+                            AnimalDateOfBirth = animal.DateOfBirth,
+                            AnimalGender = animal.Gender,
+                            EntryDate = animal.EntryDate,
+                            Result = exitForm.State
+                        });
+                    }
+                    if (exitForm.State == "Granted")
+                    {
+                        animal.Available = false;
+                    }
+                    _context.Update(animal);
                     _context.Update(exitForm);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

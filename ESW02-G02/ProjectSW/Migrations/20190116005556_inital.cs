@@ -4,10 +4,41 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class initial : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Adopter",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Address = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Adopter", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdoptionsHist",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AdopterEmail = table.Column<string>(nullable: true),
+                    AdopterAddress = table.Column<string>(nullable: true),
+                    AnimalDateOfBirth = table.Column<DateTime>(nullable: false),
+                    AnimalBreed = table.Column<string>(nullable: true),
+                    AnimalGender = table.Column<string>(nullable: true),
+                    Result = table.Column<string>(nullable: true),
+                    EntryDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdoptionsHist", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -196,11 +227,13 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    BreedId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Size = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
-                    BreedId = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
                     EntryDate = table.Column<DateTime>(nullable: false),
+                    Available = table.Column<bool>(nullable: false),
                     Foto = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
@@ -219,7 +252,6 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     EntryDate = table.Column<DateTime>(nullable: false),
                     EmployeeId = table.Column<string>(nullable: true)
@@ -285,9 +317,11 @@ namespace ProjectSW.Migrations
                     AnimalId = table.Column<string>(nullable: true),
                     ReportId = table.Column<string>(nullable: true),
                     AdopterName = table.Column<string>(nullable: true),
+                    AdopterEmail = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    Motive = table.Column<string>(nullable: true)
+                    Motive = table.Column<string>(nullable: true),
+                    Estado = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -383,6 +417,12 @@ namespace ProjectSW.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Adopter");
+
+            migrationBuilder.DropTable(
+                name: "AdoptionsHist");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

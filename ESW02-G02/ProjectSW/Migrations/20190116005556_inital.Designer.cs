@@ -10,8 +10,8 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190115160738_initial")]
-    partial class initial
+    [Migration("20190116005556_inital")]
+    partial class inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,12 +191,54 @@ namespace ProjectSW.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.Adopter", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Address");
+
+                    b.Property<string>("Email");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Adopter");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.AdoptionsHist", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdopterAddress");
+
+                    b.Property<string>("AdopterEmail");
+
+                    b.Property<string>("AnimalBreed");
+
+                    b.Property<DateTime>("AnimalDateOfBirth");
+
+                    b.Property<string>("AnimalGender");
+
+                    b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("Result");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdoptionsHist");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Animal", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Available");
+
                     b.Property<string>("BreedId");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<DateTime>("EntryDate");
 
@@ -225,8 +267,6 @@ namespace ProjectSW.Migrations
                     b.Property<string>("EmployeeId");
 
                     b.Property<DateTime>("EntryDate");
-
-                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
@@ -288,6 +328,8 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdopterEmail");
+
                     b.Property<string>("AdopterName");
 
                     b.Property<string>("AnimalId");
@@ -295,6 +337,8 @@ namespace ProjectSW.Migrations
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Estado");
 
                     b.Property<string>("Motive");
 

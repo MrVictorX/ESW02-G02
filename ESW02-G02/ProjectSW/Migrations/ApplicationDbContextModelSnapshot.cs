@@ -15,7 +15,7 @@ namespace ProjectSW.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -189,6 +189,20 @@ namespace ProjectSW.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectSW.Models.Adopter", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Address");
+
+                    b.Property<string>("Email");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Adopter");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.AdoptionsHist", b =>
                 {
                     b.Property<string>("Id")
@@ -251,8 +265,6 @@ namespace ProjectSW.Migrations
                     b.Property<string>("EmployeeId");
 
                     b.Property<DateTime>("EntryDate");
-
-                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 

@@ -44,7 +44,7 @@ namespace ProjectSW.Controllers
 
         public async Task<IActionResult> ListAnimals()
         {
-            var applicationDbContext = _context.Animal.Include(a => a.Breed);
+            var applicationDbContext = _context.Animal.Include(a => a.Breed).Where(a => a.Available);
             return View(await applicationDbContext.ToListAsync());
         }
 

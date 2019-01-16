@@ -234,7 +234,7 @@ namespace ProjectSW.Migrations
 
                     b.Property<bool>("Available");
 
-                    b.Property<string>("BreedId");
+                    b.Property<int>("BreedId");
 
                     b.Property<DateTime>("DateOfBirth");
 
@@ -293,8 +293,9 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("ProjectSW.Models.Breed", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
@@ -441,7 +442,8 @@ namespace ProjectSW.Migrations
                 {
                     b.HasOne("ProjectSW.Models.Breed", "Breed")
                         .WithMany()
-                        .HasForeignKey("BreedId");
+                        .HasForeignKey("BreedId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>

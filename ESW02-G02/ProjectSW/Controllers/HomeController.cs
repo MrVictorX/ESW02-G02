@@ -42,6 +42,25 @@ namespace ProjectSW.Controllers
             return View();
         }
 
+        
+        public async Task<IActionResult> DetailsAnimal(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var animal = await _context.Animal
+                .Include(a => a.Breed)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            animal.Attachments = _context.Attachment.Where(att => att.AnimalId == animal.Id).ToList();
+            if (animal == null)
+            {
+                return NotFound();
+            }
+
+            return View(animal);
+        }
         public async Task<IActionResult> ListAnimals()
         {
             var applicationDbContext = _context.Animal.Include(a => a.Breed).Where(a => a.Available);

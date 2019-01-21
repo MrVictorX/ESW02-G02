@@ -49,13 +49,13 @@ namespace ProjectSW.Controllers
 
         // GET: ExitForm/Create
         [AllowAnonymous]
-        public async Task<IActionResult> Create(string AnimalId)
+        public async Task<IActionResult> Create(string id)
         {
-            if (AnimalId == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id == AnimalId);
+            var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id == id);
             if (animal == null)
             {
                 return NotFound();

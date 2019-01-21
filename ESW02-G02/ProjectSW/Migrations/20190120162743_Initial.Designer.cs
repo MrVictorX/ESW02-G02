@@ -10,8 +10,8 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190119214104_init")]
-    partial class init
+    [Migration("20190120162743_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

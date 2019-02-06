@@ -48,6 +48,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport/Create
+        [Authorize(Roles = "Administrador, Funcionario")]
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(a => a.Account), "Id", "Account.Email");
@@ -72,6 +73,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport/Edit/5
+        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -125,6 +127,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

@@ -27,6 +27,7 @@ namespace ProjectSW.Controllers
             return View(_context.User.ToList());
         }
 
+        [Authorize(Roles = "Administrador")]
         public IActionResult DeleteUser(string id)
         {
             if (id == null)

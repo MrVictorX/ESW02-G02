@@ -48,6 +48,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "Administrador")]
         public IActionResult Create()
         {
             ViewData["AccountId"] = new SelectList(_context.User, "Id", "Email");
@@ -72,6 +73,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -125,6 +127,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

@@ -48,9 +48,9 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Jobs/Create
+        [Authorize(Roles = "Administrador, Funcionario")]
         public IActionResult Create()
         {
-
             //ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(j => j.Account), "Account.Email", "Account.Email");
             ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
                    _context.User,
@@ -92,6 +92,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Jobs/Edit/5
+        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)

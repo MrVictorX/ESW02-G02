@@ -87,6 +87,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Edit/5
+        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -172,6 +173,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Delete/5
+        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

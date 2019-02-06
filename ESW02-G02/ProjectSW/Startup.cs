@@ -38,17 +38,20 @@ namespace ProjectSW
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ProjectSWUser>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = true;
-            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            
+            services.AddIdentity<ProjectSWUser, IdentityRole>()
+                    .AddRoleManager<RoleManager<IdentityRole>>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAuthorization(options => {
-                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
-                options.AddPolicy("RequireFuncionarioRole", policy => policy.RequireRole("Administrator, Funcionarios"));
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrador"));
+                options.AddPolicy("RequireFuncionarioRole", policy => policy.RequireRole("Administrador, Funcionarios"));
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,5 +131,6 @@ namespace ProjectSW
                 }
             }
         }
+
     }
 }

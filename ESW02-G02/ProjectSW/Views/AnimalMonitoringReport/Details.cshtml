@@ -17,9 +17,6 @@
             <dd>
                 @Html.DisplayFor(model => model.Description)
             </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.EntryDate)
-            </dt>
             <dd>
                 @Html.DisplayFor(model => model.EntryDate)
             </dd>
@@ -27,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.Employee)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Employee.AccountId)
+                @Html.DisplayFor(model => model.Employee.Account.Email)
             </dd>
         </dl>
     </div>

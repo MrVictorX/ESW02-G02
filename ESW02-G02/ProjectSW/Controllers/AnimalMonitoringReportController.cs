@@ -67,7 +67,7 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email", animalMonitoringReport.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Account.Email", animalMonitoringReport.EmployeeId);
             return View(animalMonitoringReport);
         }
 
@@ -84,7 +84,7 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email", animalMonitoringReport.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(a => a.Account), "Id", "Account.Email");
             return View(animalMonitoringReport);
         }
 
@@ -120,7 +120,7 @@ namespace ProjectSW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Email", animalMonitoringReport.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Account.Email", animalMonitoringReport.EmployeeId);
             return View(animalMonitoringReport);
         }
 

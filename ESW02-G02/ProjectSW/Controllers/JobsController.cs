@@ -83,7 +83,7 @@ namespace ProjectSW.Controllers
                 _context.Add(job);
                 await _context.SaveChangesAsync();
 
-                var employee = _context.Employee.Where(e => e.Id.Equals(job.EmployeeId)).FirstOrDefault();
+                var employee = await _userManager.FindByIdAsync(_context.Employee.Where(e => e.Id.Equals(job.EmployeeId)).FirstOrDefault().AccountId);
 
                 var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
                 //Antes de fazer push remover chave
@@ -93,10 +93,10 @@ namespace ProjectSW.Controllers
                     From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
                     PlainTextContent = "Nova tarefa",
                     Subject = "Nova tarefa",
-                    HtmlContent = "Olá.\n\nFoi-lhe atribuido uma nova tarefa a completar, por favor verifique a lista de tarefas.\n\n" +
-                    "Cumprimentos,\nQuinta do Mião."
+                    HtmlContent = $"Olá.<br><br>Foi-lhe atribuido uma nova tarefa a completar, por favor verifique a lista de tarefas.<br><br>" +
+                    "Cumprimentos,<br>Quinta do Mião."
                 };
-                msg.AddTo(new EmailAddress(employee.Account.Email, employee.Account.Name));
+                msg.AddTo(new EmailAddress(employee.Email, employee.Name));
                 var response = await client.SendEmailAsync(msg);
          
                 return RedirectToAction(nameof(Index));

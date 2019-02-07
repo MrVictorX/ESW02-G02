@@ -85,9 +85,9 @@ namespace ProjectSW.Controllers
 
                 var employee = await _userManager.FindByIdAsync(_context.Employee.Where(e => e.Id.Equals(job.EmployeeId)).FirstOrDefault().AccountId);
 
-                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
                 //Antes de fazer push remover chave
-                var client = new SendGridClient("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");
+                var client = new SendGridClient(apiKey);
                 var msg = new SendGridMessage()
                 {
                     From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),

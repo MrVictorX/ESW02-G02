@@ -83,9 +83,9 @@ namespace ProjectSW.Controllers
 
                 var admins = _context.User.Where(u => u.UserType.Equals("Administrador"));
 
-                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
                 //Antes de fazer push remover chave
-                var client = new SendGridClient("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");
+                var client = new SendGridClient(apiKey);
                 var msg1 = new SendGridMessage()
                 {
                     From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
@@ -164,9 +164,9 @@ namespace ProjectSW.Controllers
                         return NotFound();
                     }
 
-                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
                     //Antes de fazer push remover chave
-                    var client = new SendGridClient("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");
+                    var client = new SendGridClient(apiKey);
 
                     var msg = new SendGridMessage()
                     {

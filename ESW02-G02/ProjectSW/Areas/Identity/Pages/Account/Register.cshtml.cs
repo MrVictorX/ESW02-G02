@@ -110,9 +110,9 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
                     //Antes de fazer push remover chave
-                    var client = new SendGridClient("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");
+                    var client = new SendGridClient(apiKey);
                     var msg = new SendGridMessage()
                     {
                         From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),

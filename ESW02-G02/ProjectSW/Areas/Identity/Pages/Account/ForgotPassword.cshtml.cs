@@ -61,7 +61,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
 
                 var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
                 //Remover Key quando push
-                var client = new SendGridClient("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");
+                var client = new SendGridClient(apiKey);
                 var msg = new SendGridMessage()
                 {
                     From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),

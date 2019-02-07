@@ -59,15 +59,15 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     values: new { code },
                     protocol: Request.Scheme);
 
-                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
                 //Remover Key quando push
-                var client = new SendGridClient("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");
+                var client = new SendGridClient("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");
                 var msg = new SendGridMessage()
                 {
                     From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
                     PlainTextContent = "Porfavor resete a sua password",
                     Subject = "Resetar password",
-                    HtmlContent = $"Porfavor resete a sua password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicando aqui</a>."
+                    HtmlContent = $"Porfavor atualize a sua password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicando aqui</a>."
                 };
                 msg.AddTo(new EmailAddress(user.Email, user.Name));
                 var response = await client.SendEmailAsync(msg);

@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectSW.Data;
 using ProjectSW.Models;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace ProjectSW.Controllers
 {
@@ -15,10 +19,12 @@ namespace ProjectSW.Controllers
     public class JobsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ProjectSWUser> _userManager;
 
-        public JobsController(ApplicationDbContext context)
+        public JobsController(ApplicationDbContext context, UserManager<ProjectSWUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Jobs
@@ -76,20 +82,39 @@ namespace ProjectSW.Controllers
             {
                 _context.Add(job);
                 await _context.SaveChangesAsync();
+
+                var employee = _context.Employee.Where(e => e.Id.Equals(job.EmployeeId)).FirstOrDefault();
+
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+                //Antes de fazer push remover chave
+                var client = new SendGridClient("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");
+                var msg = new SendGridMessage()
+                {
+                    From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
+                    PlainTextContent = "Nova tarefa",
+                    Subject = "Nova tarefa",
+                    HtmlContent = "Olá.\n\nFoi-lhe atribuido uma nova tarefa a completar, por favor verifique a lista de tarefas.\n\n" +
+                    "Cumprimentos,\nQuinta do Mião."
+                };
+                msg.AddTo(new EmailAddress(employee.Account.Email, employee.Account.Name));
+                var response = await client.SendEmailAsync(msg);
+         
                 return RedirectToAction(nameof(Index));
             }
 
             ViewData["EmployeeId"] = new SelectList(_context.Employee.Join(
-                   _context.User,
-                   employee => employee.AccountId,
-                   account => account.Id,
-                      (employee, account) => new  // result selector
-                      {
-                          employeeId = employee.Id,
-                          accountMail = account.Email
-                      }), "employeeId", "accountMail");
+                _context.User,
+                employee => employee.AccountId,
+                account => account.Id,
+                (employee, account) => new  // result selector
+                {
+                    employeeId = employee.Id,
+                    accountMail = account.Email
+                }), "employeeId", "accountMail");
+
             return View(job);
         }
+
 
         // GET: Jobs/Edit/5
         [Authorize(Roles = "Administrador, Funcionario")]

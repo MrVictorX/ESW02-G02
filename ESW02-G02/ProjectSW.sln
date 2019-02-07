@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectSW", "ProjectSW\Proj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{A2198988-304A-4F0A-A7C8-52E72CACFC18}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{326B72A8-2CB7-417C-8745-2BA857F11905}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{594FAEF9-26D1-465F-B832-F9ACF23F1FC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{A2198988-304A-4F0A-A7C8-52E72CACFC18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2198988-304A-4F0A-A7C8-52E72CACFC18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2198988-304A-4F0A-A7C8-52E72CACFC18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{594FAEF9-26D1-465F-B832-F9ACF23F1FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{594FAEF9-26D1-465F-B832-F9ACF23F1FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{594FAEF9-26D1-465F-B832-F9ACF23F1FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{594FAEF9-26D1-465F-B832-F9ACF23F1FC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{594FAEF9-26D1-465F-B832-F9ACF23F1FC6} = {326B72A8-2CB7-417C-8745-2BA857F11905}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1210BDE0-5DCF-415E-B86E-842425F69EAD}

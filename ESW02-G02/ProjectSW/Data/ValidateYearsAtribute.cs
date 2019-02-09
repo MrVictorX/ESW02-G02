@@ -14,17 +14,20 @@ namespace ProjectSW.Data
 
         /// <summary> Metodo de validação da data inserida, verifica se a data inserida representa uma data com no minimo de 16 anos</summary>
         /// <param name="value">Objeto passado pelo input da Data de nascimento.</param>
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(
+        object value, ValidationContext validationContext)
         {
             DateTime val = (DateTime)value;
-            return val >= _minValue && val <= _maxValue;
+            if (val.Year >= _minValue.Year && val.Year <= _maxValue.Year) {
+                return ValidationResult.Success;
+            }
+            return new ValidationResult(GetErrorMessage());
         }
 
         /// <summary> Metodo que mostra uma mensagem de erro</summary>
-        /// <param name="name">Mensagem de erro passada caso necessário.</param>
-        public override string FormatErrorMessage(string name)
+        private string GetErrorMessage()
         {
-            return string.Format("O valor da sua data é invalida", _minValue, _maxValue);
+            return $"O utilizador precisa de ter mais que 16 anos.";
         }
     }
 }

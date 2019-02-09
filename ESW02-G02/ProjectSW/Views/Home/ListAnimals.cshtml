@@ -16,10 +16,17 @@
         string imgSrc = null;
         string nome = item.Name;
 
-        var year = @DateTime.Now.Year - @item.DateOfBirth.Date.Year;
-        var month = DateTime.Now.Month - @item.DateOfBirth.Date.Month;
+        int age = 0;
+        if (DateTime.Now.Year == item.DateOfBirth.Year)
+        {
+            age = DateTime.Now.Month - item.DateOfBirth.Date.Month;
+        }
+        else
+        {
+            age = DateTime.Now.Year - item.DateOfBirth.Year;
+        }
 
-        
+
 
         if (item.Foto != null)
         {
@@ -47,7 +54,7 @@
                     <p class="info-animal"><b>@item.Name</b></p>
                 </div>
                 <div class="modal-body" style="font-size:20px;">
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@year ano(s)</b></p><br /><br />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@age ano(s)</b></p><br /><br />
                     <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Breed.Name</b></p><br /><br />
                     <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Size</b></p><br /><br />
                     <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Gender</b></p><br /><br />

@@ -38,19 +38,14 @@ namespace ProjectSW
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
-            services.AddIdentity<ProjectSWUser, IdentityRole>()
+
+            services.AddIdentity<ProjectSWUser, IdentityRole>(config => { config.SignIn.RequireConfirmedEmail = true; })
                     .AddRoleManager<RoleManager<IdentityRole>>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddAuthorization(options => {
-                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrador"));
-                options.AddPolicy("RequireFuncionarioRole", policy => policy.RequireRole("Administrador, Funcionarios"));
-            });
 
         }
 

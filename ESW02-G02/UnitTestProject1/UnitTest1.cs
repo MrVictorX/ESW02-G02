@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Diagnostics;
+using OpenQA.Selenium.Support.UI;
 
 namespace UnitTestProject1
 {
@@ -65,17 +66,21 @@ namespace UnitTestProject1
         {
             driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Identity/Account/Login");
 
-            // Find the email form field
+            Stopwatch s = Stopwatch.StartNew();
+            Login(mail, "Boasbro12?");
+            s.Stop();
+            return s.ElapsedMilliseconds / 100;
+        }
+
+        private void Login(string mail, string pass)
+        {
             IWebElement email = driver.FindElement(By.Id("Login-Email"));
             email.SendKeys(mail);
             IWebElement password = driver.FindElement(By.Id("Login-Password"));
-            password.SendKeys("Boasbro12?");
+            password.SendKeys(pass);
 
             IWebElement submit = driver.FindElement(By.Id("Login-Submit"));
-            Stopwatch s = Stopwatch.StartNew();
             submit.Submit();
-            s.Stop();
-            return s.ElapsedMilliseconds / 100;
         }
 
         [Test]
@@ -92,6 +97,42 @@ namespace UnitTestProject1
             time = time / 10;
             NUnit.Framework.TestContext.WriteLine("Média do tempo decorrido: " + time);
             NUnit.Framework.Assert.LessOrEqual(time, 5);
+        }
+
+        [Test]
+        public void Create10EmpTest()
+        {
+            string mail = "";
+
+            driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Employees/Create");
+            Login("admin@hotmail.com", "Qwe123!");
+
+            for (int i = 0; i < 10; i++)
+            {
+                mail = "manuel" + i + "@hotmail.com";
+                CreateEmpAux(mail);
+            }
+
+            NUnit.Framework.Assert.Pass();
+
+        }
+
+        private void CreateEmpAux(string mail)
+        {
+            driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Employees/Create");
+
+            IWebElement user = driver.FindElement(By.Id("AccountID-Sel"));
+            var selectElem = new SelectElement(user);
+            selectElem.SelectByText(mail);
+
+            IWebElement type = driver.FindElement(By.Id("user-type"));
+            type.SendKeys("Funcionario");
+
+            IWebElement info = driver.FindElement(By.Id("aditional-info"));
+            info.SendKeys("info");
+
+            IWebElement btn = driver.FindElement(By.Id("Create-submit"));
+            btn.Submit();
         }
 
         [TearDown]

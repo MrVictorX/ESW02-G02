@@ -8,6 +8,10 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Views\Statistics\**" />
     <Content Remove="Views\Statistics\**" />
@@ -17,6 +21,10 @@
 
   <ItemGroup>
     <PackageReference Include="Chart.js" Version="2.7.3" />
+    <PackageReference Include="docfx.console" Version="2.40.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="2.1.2" />

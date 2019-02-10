@@ -24,6 +24,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Animals
+        /// <summary>Ação que resulta na lista de animais</summary>
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Animal.Include(a => a.Breed);
@@ -31,6 +32,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Animals/Details/5
+        /// <summary>Ação que resulta numa pagina com os detalhes de um animais</summary>
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -52,6 +54,7 @@ namespace ProjectSW.Controllers
 
         // GET: Animals/Create
         [Authorize(Roles = "Administrador")]
+        /// <summary>Ação que resulta numa pagina com o formulario da criação de um animais</summary>
         public IActionResult Create()
         {
             ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name");
@@ -63,6 +66,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta na criação de um animal</summary>
         public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto,Available")] Animal animal, IFormFile foto)
         {
             if (ModelState.IsValid)
@@ -97,6 +101,7 @@ namespace ProjectSW.Controllers
 
         // GET: Animals/Edit/5
         [Authorize(Roles = "Administrador, Funcionario")]
+        /// <summary>Ação que resulta numa pagina com os detalhes de uma tarefa de forma a poderem ser editados</summary>
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -118,6 +123,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta numa pagina com a edição de uma tarefa</summary>
         public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto")] Animal animal, IFormFile foto, IFormFile attachment)
         {
             if (id != animal.Id)
@@ -199,6 +205,7 @@ namespace ProjectSW.Controllers
 
         // GET: Animals/Delete/5
         [Authorize(Roles = "Administrador")]
+        /// <summary>Ação que resulta num prompt para apagar uma tarefa</summary>
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -220,6 +227,7 @@ namespace ProjectSW.Controllers
         // POST: Animals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta numa tarefa apagada</summary>
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var animal = await _context.Animal.FindAsync(id);

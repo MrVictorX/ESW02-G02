@@ -27,6 +27,7 @@ namespace ProjectSW.Controllers
             return View(_context.User.ToList());
         }
 
+        /// <summary>Ação que resulta no prompt para aceitar apagar o utilizador</summary>
         [Authorize(Roles = "Administrador")]
         public IActionResult DeleteUser(string id)
         {
@@ -46,6 +47,7 @@ namespace ProjectSW.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta no apagar o utilizador</summary>
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var user = await _context.Users.FindAsync(id);

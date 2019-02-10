@@ -27,34 +27,26 @@ namespace ProjectSW.Controllers
             _context = context;
         }
 
+        /// <summary>Ação que resulta na pagina principal do site</summary>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>Ação que resulta numa submissão de um exitForm para adotar um animal</summary>
         public IActionResult ExitFormSubmited()
         {
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [Authorize]
+        /// <summary>Ação que resulta na pagina com as estatisticas de adoção</summary>
         public IActionResult Statistics()
         {
             return View();
         }
 
+        /// <summary>Ação que resulta numa pagina com os detalhes de um animal</summary>
         public async Task<IActionResult> DetailsAnimal(string id)
         {
             if (id == null)
@@ -73,6 +65,8 @@ namespace ProjectSW.Controllers
 
             return View(animal);
         }
+
+        /// <summary>Ação que resulta numa pagina com uma lista de animais</summary>
         public async Task<IActionResult> ListAnimals()
         {
             var applicationDbContext = _context.Animal.Include(a => a.Breed).Where(a => a.Available);

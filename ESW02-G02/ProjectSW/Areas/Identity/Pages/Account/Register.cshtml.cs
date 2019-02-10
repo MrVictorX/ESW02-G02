@@ -96,6 +96,9 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    //here we tie the new user to the role
+                    await _userManager.AddToRoleAsync(user, Input.UserType);
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -107,13 +110,14 @@ namespace ProjectSW.Areas.Identity.Pages.Account
                     //  $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-                    var client = new SendGridClient("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");
+                    //Antes de fazer push remover chave
+                    var client = new SendGridClient("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");
                     var msg = new SendGridMessage()
                     {
                         From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
                         PlainTextContent = "Porfavor confirme o seu Email",
                         Subject = "Confirmar conta",
-                        HtmlContent = $"Porfavor confirme o seu Email < a href = '{HtmlEncoder.Default.Encode(callbackUrl)}' > clicando aqui</ a >."
+                        HtmlContent = $"Porfavor confirme o seu Email <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicando aqui</a>."
                     };
                     msg.AddTo(new EmailAddress(user.Email, user.Name));
                     var response = await client.SendEmailAsync(msg);

@@ -1,0 +1,53 @@
+﻿@model ProjectSW.Models.Job
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%">
+        <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Detalhes</b>
+    </h2>
+    <div style="margin-left: 25%; margin-top: 5%; margin-bottom: 5%;">
+        
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Day)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Day)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Hour)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Hour)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Employee)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Employee.Account.Name)
+            </dd>
+        </dl>
+    </div>
+    <div style="margin-left:25%">
+        <div class="return-link">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link">Editar</a>
+        </div>
+            <div class="return-link"><a asp-action="Index" style="color:#164C48; text-decoration:none;">Voltar</a></div>
+        </div>
+    </div>

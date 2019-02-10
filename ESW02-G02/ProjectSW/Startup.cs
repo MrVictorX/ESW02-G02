@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjectSW.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 
 namespace ProjectSW
 {
@@ -37,14 +38,24 @@ namespace ProjectSW
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ProjectSWUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            
+            services.AddIdentity<ProjectSWUser, IdentityRole>()
+                    .AddRoleManager<RoleManager<IdentityRole>>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrador"));
+                options.AddPolicy("RequireFuncionarioRole", policy => policy.RequireRole("Administrador, Funcionarios"));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +80,57 @@ namespace ProjectSW
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            CreateRoles(services).Wait();
         }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            //initializing custom roles 
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ProjectSWUser>>();
+            string[] roleNames = { "Administrador", "Voluntario", "Funcionario" };
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                // ensure that the role does not exist
+                if (!roleExist)
+                {
+                    //create the roles and seed them to the database:
+                    var role = new IdentityRole
+                    {
+                        Name = roleName
+                    };
+                    await RoleManager.CreateAsync(role);
+                }
+            }
+
+            // find the user with the admin email 
+            var _user = await UserManager.FindByEmailAsync("admin@hotmail.com");
+
+            // check if the user exists
+            if (_user == null)
+            {
+                //Here you could create the super admin who will maintain the web app
+                var poweruser = new ProjectSWUser
+                {
+                    Name = "Admin",
+                    UserType = "Administrador",
+                    UserName = "admin@hotmail.com",
+                    Email = "admin@hotmail.com",
+                    EmailConfirmed = true
+                };
+                string adminPassword = "Qwe123!";
+
+                var createPowerUser = await UserManager.CreateAsync(poweruser, adminPassword);
+                if (createPowerUser.Succeeded)
+                {
+                    //here we tie the new user to the role
+                    await UserManager.AddToRoleAsync(poweruser, "Administrador");
+
+                }
+            }
+        }
+
     }
 }

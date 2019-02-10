@@ -1,0 +1,524 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+
+
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20em;
+    line-height: 1.4;
+}
+
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.col-center {
+    margin: 0 auto;
+}
+
+
+/* CSS adicionado */
+h2 {
+    width: 30%;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 22px;
+    text-align: center;
+}
+
+/* BODY */
+body {
+    color: black;
+    background-color: white;
+    font-family: 'Titillium Web', sans-serif;
+    background-image: url('../images/top-german-shepherd-dog-s.jpg');
+    background-size: cover;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 5%;
+}
+
+
+/* HEADER */
+.navbar-inverse {
+    background-color: white;
+    border-color: #164C48;
+    border-width: 4px;
+}
+
+.link-homepage {
+    padding-right: 20%;
+}
+
+.nav a {
+    color: black;
+    font-size: 20px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #164C48;
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover {
+        text-decoration: underline;
+        color: #164C48
+    }
+
+
+
+
+/* FOOTER */
+.icon {
+    text-align: left;
+    margin-top: 10%;
+}
+
+.social {
+    float: right;
+    padding-right: 1%;
+}
+
+.footer {
+    background-color: #164C48;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4%;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+    border: 1px solid black;
+}
+/*HOMEPAGE*/
+.body-content {
+    margin-top: 1%;
+}
+
+.slideshow-container {
+    margin-top: 3%;
+    position: relative;
+}
+
+/* Slides */
+.mySlides {
+    display: none;
+    padding: 80px;
+    text-align: center;
+    padding: 5%;
+}
+
+.prev {
+    margin-left: -2%;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -30px;
+    padding: 16px;
+    color: #888;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+        color: white;
+    }
+
+
+/* QUEM SOMOS */
+.div-about, .div-home, .slideshow-container {
+    margin-top: 10%;
+    width: 90%;
+    text-align: justify;
+    background-color: #164C48;
+    color: white;
+    padding: 2%;
+    border-radius: 4px;
+}
+
+.div-about, .div-home {
+    margin-top: 20%;
+}
+
+/*FORM*/
+.form-create{
+    margin-left: 100%;
+    margin-top: 5%;
+    border-color: #164C48;
+    background-color: #164C48;
+    color: white;
+    border-width: 4px;
+}
+
+form {
+    margin: 9px auto;
+    width: 90%;
+    padding: 1em;
+    border-radius: 4px;
+    background-color: #164C48;
+}
+
+    form div + div {
+        margin-top: 1em;
+    }
+
+label {
+    display: inline-block;
+    width: 150px;
+    text-align: left;
+}
+
+input {
+    font: 1em sans-serif;
+    width: 60%;
+    border: 1px solid #999;
+}
+
+    input:focus {
+        border-color: #000;
+    }
+
+.button {
+    padding-left: 20%;
+}
+
+button {
+    margin-left: .5em;
+}
+
+/* PERFIL */
+
+.div-perfil {
+    width: 50%;
+    display: inline-block;
+}
+
+.nav-pills > li {
+    float: left;
+}
+
+    .nav-pills > li > a {
+        border-radius: 4px;
+        background-color: #164C48;
+    }
+
+    .nav-pills > li + li {
+        margin-left: 2px;
+    }
+    
+    .nav-pills > li.active > a,
+    .nav-pills > li.active > a:hover,
+    .nav-pills > li.active > a:focus {
+        
+        background-color: #164C48;
+    }
+
+/*TABLES*/
+.table {
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    background-color: white;
+}
+
+.td {
+    text-align: center;
+}
+
+.th {
+    font-size: 20px;
+    text-align: center;
+    color: #164C48;
+}
+
+/*FUNCIONARIOS*/
+.button-format, .delete-btn {
+    border-radius: 5px;
+    background-color: white;
+    color: #164C48;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    border: 2px solid #164C48;
+}
+.return-link {
+    display:inline-block;
+    border-radius: 5px;
+    background-color: white;;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    border: 2px solid #164C48;
+}
+
+
+    .button-format span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .button-format span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .button-format:hover span {
+        padding-right: 25px;
+    }
+
+        .button-format:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+.div-content {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    
+}
+
+.div-content-form {
+    border: 2px solid #164C48;
+    width:70%;
+    margin-left:10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    color: white;
+    background-color: #164C48;
+    border-radius: 4px;
+}
+
+.title-link {
+    text-decoration: none;
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 24px;
+}
+
+
+    .title-link:hover, .return-link:hover {
+        text-decoration: underline;
+    }
+
+.edit-link, .delete-link, .details-link {
+    text-decoration: none;
+    color: #333;
+
+}
+
+     .edit-link:hover, .delete-link:hover, .details-link:hover {
+        color: black;
+    }
+
+.form-delete {
+    width: 44%;
+    margin-left: 10%;
+}
+
+.dl-horizontal dt {
+    text-align: left;
+}
+
+.table td{
+    text-align:left;
+}
+
+.div-return {
+    margin-bottom: 10%;
+}
+
+/*Autenticar e Registar*/
+.form-login {
+    margin-left: 100%;
+    margin-top: 20%;
+    border-color: #164C48;
+    background-color: #164C48;
+    color: white;
+    border-width: 4px;
+}
+
+.form-register {
+    margin-left: 20%;
+    margin-top: 10%;
+    border-color: #164C48;
+    background-color: #164C48;
+    color: white;
+    border-width: 4px;
+    width: 110%;
+}
+/* -----------------------RESPONSIVE----------------------- */
+@media screen and (max-width: 500px) {
+    /* BODY */
+    body {
+        background-position: top;
+    }
+
+    .body-content {
+        margin-top: 10%;
+    }
+
+    .row {
+        text-align: center;
+    }
+
+    h2 {
+        margin-left: 15%;
+    }
+
+    /* QUEM SOMOS */
+    .div-about {
+        margin-top: 15%;
+        margin-left: 7%;
+    }
+
+    /*FOOTER*/
+    footer {
+        display: none;
+    }
+
+    /* PERFIL */
+    col-md-6 {
+        width: 100%;
+    }
+}
+/* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+    /* The actual popup (appears on top) */
+    .popup .popuptext {
+        visibility: hidden;
+        width: 160px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -80px;
+    }
+
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+    /* Toggle this class when clicking on the popup container (hide and show the popup) */
+    .popup .show {
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s
+    }
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 20%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+    /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+    .active, .accordion:hover {
+        background-color: #ccc;
+    }
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}

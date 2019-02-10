@@ -1,0 +1,46 @@
+﻿@model ProjectSW.Models.AnimalMonitoringReport
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%;"> <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Editar</b></h2>
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit" style="margin-left: 100%; margin-top: 10%; width:130%">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ExitFormId" />
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EntryDate" class="control-label"></label>
+                        <input asp-for="EntryDate" class="form-control" />
+                        <span asp-validation-for="EntryDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EmployeeId" class="control-label"></label>
+                        <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index"><button class="button-format" style="margin-left: 37%;"><span>Voltar</span></button></a>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

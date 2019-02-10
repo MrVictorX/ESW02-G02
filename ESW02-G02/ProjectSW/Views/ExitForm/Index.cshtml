@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ProjectSW.Models.ExitForm>
+
+
+@{
+    ViewData["Title"] = "Adoções";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Lista de Adoções</b></h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Animal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AdopterName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                string base64 = null;
+                string imgSrc = null;
+                if (item.Animal.Foto != null)
+                {
+                    base64 = Convert.ToBase64String(item.Animal.Foto);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+
+            <tr>
+                <td>
+                    <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdopterName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="edit-link">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="details-link">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="delete-link">Eliminar</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    </div>

@@ -3,13 +3,60 @@
 }
 
 <div class="container body-content">
-    <div id="div-home" style="background-color:white; border-radius:2em; text-align:justify;width:40%;">
+    <div class="slideshow-container">
 
-        <h2>Próximos Eventos</h2>
-        <p>
+        <div class="mySlides">
+             <img style="width: 60%; filter: drop-shadow(0px 0px 3px #000000);" src="~/images/quinta.jpg" />
+        </div>
 
-        </p>
+        <div class="mySlides">
+            <img style="width: 60%; filter: drop-shadow(0px 0px 3px #000000);" src="~/images/inauguracao.jpg" />
+        </div>
+
+        <div class="mySlides">
+            <h3 style="text-align: left">
+                <img src="~/images/pawprint-white.png" /> Quinta do Mião
+            </h3>
+            <br />
+            <p style="text-align: justify;">
+                Situada na Quinta das Rebelas, no concelho do Barreiro (junto ao Mercado Abastecedor), a Quinta do Mião – Centro de Recolha de Animais Errantes do Barreiro e da Moita é uma obra assumida pelos municípios da Moita e Barreiro que colaboraram, assim, na criação de instalações mais modernas e adequadas do que as existentes até agora nos dois concelhos, repartindo as despesas de construção do novo equipamento e partilhando recursos.
+
+                A “Quinta do Mião” tem 33 boxes para cães, celas de quarentena, um gatil, um espaço administrativo, gabinete de veterinário, sala de tosquias e tratamentos e, neste seu primeiro dia de abertura, contou já com a visita de duas turmas do Ensino Pré- Escolar (uma de cada concelho).
+            </p>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
 
     </div>
+
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
 </div>
 

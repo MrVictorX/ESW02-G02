@@ -1,0 +1,41 @@
+﻿@model ProjectSW.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%;"> <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Eliminar</b></h2>
+
+    <div style="margin-left: 22%; margin-top: 5%; margin-bottom: 5%;">
+        <h3>Tem a certeza que pretende eliminar esta ficha?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AditionalInformation)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AditionalInformation)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.Email)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" style="margin-left:1%;">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Eliminar" class="delete-btn" />
+            <div class="return-link" ><a asp-action="Index" style="color:#164C48; text-decoration:none;">Voltar</a></div>
+        </form>
+    </div>
+
+</div>

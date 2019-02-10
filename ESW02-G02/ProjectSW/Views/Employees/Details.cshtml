@@ -1,0 +1,65 @@
+﻿@model ProjectSW.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+}
+
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%">
+        <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Detalhes</b>
+    </h2>
+    <div style="margin-left: 25%; margin-top: 5%; margin-bottom: 5%;">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.PhoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.DateOfBirth)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.DateOfBirth)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.Address)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.Address)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AditionalInformation)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AditionalInformation)
+            </dd>
+
+        </dl>
+    </div>
+    <div style="margin-left:25%">
+        <div class="return-link">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link">Editar</a>
+        </div>
+        <div class="return-link"><a asp-action="Index" style="color:#164C48; text-decoration:none;">Voltar</a></div>
+    </div>
+</div>

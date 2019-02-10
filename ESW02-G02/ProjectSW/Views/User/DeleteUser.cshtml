@@ -1,37 +1,38 @@
-﻿@model ProjectSW.Data.ProjectSWUser
+﻿
+@model ProjectSW.Data.ProjectSWUser
 @{
     ViewData["Title"] = "DeleteUser";
 }
 
-<h2>Eliminar Conta</h2>
-
-<h3>Tem a certeza que pretende eliminar esta conta?</h3>
-<div>
-    <h4>Conta</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UserType)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserType)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="UserList">Voltar a Lista</a>
-    </form>
+<div class="div-content">
+    <h2 style="font-size: 30px;"><b>Eliminar</b></h2>
+    <h3>Tem a certeza que pretende eliminar esta conta?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserType)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserType)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+        <form asp-action="Delete" class="form-delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Eliminar" class="button-format" /> |
+            <a asp-action="UserList" class="button-format">Voltar</a>
+        </form>
+    </div>
 </div>

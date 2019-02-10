@@ -26,10 +26,10 @@ namespace ProjectSW.Models
         public async Task<IViewComponentResult> InvokeAsync()
         {
             List<Location> locations = new List<Location>();
-            var applicationDbContext = _context.Adopter;
 
-            foreach (Adopter a in await applicationDbContext.ToListAsync())
+            foreach (Adopter a in await _context.Adopter.ToListAsync())
             {
+
                 locations.Add(GetLocationRequest(a.PostalCode));
             }
 

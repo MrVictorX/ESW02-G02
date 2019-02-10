@@ -20,6 +20,7 @@ namespace ProjectSW.Views.Home.Components.MostAdopted
             _context = context;
         }
 
+        /// <summary>Ação que resulta numa viewComponent com um grafico com a idade dos animais mais adotados</summary>
         public async Task<IViewComponentResult> InvokeAsync()
         {
             List<Animal> animals = new List<Animal>();

@@ -28,6 +28,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Jobs
+        /// <summary>Ação que resulta na lista de Tarefas</summary>
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Job.Include(j => j.Employee).Include(j => j.Employee.Account);
@@ -35,6 +36,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Jobs/Details/5
+        /// <summary>Ação que resulta numa pagina com os detalhes de uma tarefa</summary>
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -55,6 +57,7 @@ namespace ProjectSW.Controllers
 
         // GET: Jobs/Create
         [Authorize(Roles = "Administrador, Funcionario")]
+        /// <summary>Ação que resulta numa pagina com o formulario da criação de uma tarefa</summary>
         public IActionResult Create()
         {
             //ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(j => j.Account), "Account.Email", "Account.Email");
@@ -76,6 +79,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta na criação de uma tarefa</summary>
         public async Task<IActionResult> Create([Bind("Id,EmployeeId,Name,Day,Hour,Description")] Job job)
         {
             if (ModelState.IsValid)
@@ -118,6 +122,7 @@ namespace ProjectSW.Controllers
 
         // GET: Jobs/Edit/5
         [Authorize(Roles = "Administrador, Funcionario")]
+        /// <summary>Ação que resulta numa pagina com os detalhes de uma tarefa de forma a poderem ser editados</summary>
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -147,6 +152,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta numa pagina com a edição de uma tarefa</summary>
         public async Task<IActionResult> Edit(string id, [Bind("Id,EmployeeId,Name,Day,Hour,Description")] Job job)
         {
             if (id != job.Id)
@@ -188,6 +194,7 @@ namespace ProjectSW.Controllers
 
         // GET: Jobs/Delete/5
         [Authorize(Roles = "Administrador")]
+        /// <summary>Ação que resulta num prompt para apagar uma tarefa</summary>
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -209,6 +216,7 @@ namespace ProjectSW.Controllers
         // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta numa tarefa apagada</summary>
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var job = await _context.Job.FindAsync(id);

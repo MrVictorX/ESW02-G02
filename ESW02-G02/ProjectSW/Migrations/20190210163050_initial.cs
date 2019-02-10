@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,8 +30,6 @@ namespace ProjectSW.Migrations
                     Id = table.Column<string>(nullable: false),
                     AdopterEmail = table.Column<string>(nullable: true),
                     AdopterAddress = table.Column<string>(nullable: true),
-                    AdopterCitizenCard = table.Column<string>(nullable: true),
-                    AdopterPostalCode = table.Column<string>(nullable: true),
                     Motive = table.Column<string>(nullable: true),
                     AnimalDateOfBirth = table.Column<DateTime>(nullable: false),
                     AnimalBreedName = table.Column<string>(nullable: true),
@@ -259,7 +257,7 @@ namespace ProjectSW.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     EmployeeId = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     Day = table.Column<DateTime>(nullable: false),
                     Hour = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true)
@@ -327,10 +325,10 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    ExitFormId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     EntryDate = table.Column<DateTime>(nullable: false),
-                    EmployeeId = table.Column<string>(nullable: true)
+                    EmployeeId = table.Column<string>(nullable: true),
+                    ExitFormId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

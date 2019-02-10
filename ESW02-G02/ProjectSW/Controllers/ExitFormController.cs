@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectSW.Data;
 using ProjectSW.Models;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace ProjectSW.Controllers
 {
@@ -79,10 +81,40 @@ namespace ProjectSW.Controllers
                 exitForm.State = "Pendente";
                 _context.Add(exitForm);
                 await _context.SaveChangesAsync();
+
+                var admins = _context.User.Where(u => u.UserType.Equals("Administrador"));
+
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+                //Antes de fazer push remover chave
+                var client = new SendGridClient(apiKey);
+                var msg1 = new SendGridMessage()
+                {
+                    From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
+                    PlainTextContent = "Novo pedido de adoção",
+                    Subject = "Novo pedido de adoção",
+                    HtmlContent = $"Olá.<br><br>Um pedido de adoção foi efetuado, por favor verifique a lista de pedidos e dê uma resposta.<br><br>" +
+                    "Cumprimentos,<br>Quinta do Mião."
+                };
+                foreach (ProjectSWUser admin in admins)
+                {
+                    msg1.AddTo(new EmailAddress(admin.Email, admin.Name));
+                }
+                var response1 = await client.SendEmailAsync(msg1);
+
+                var msg2 = new SendGridMessage()
+                {
+                    From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
+                    PlainTextContent = "Pedido de adoção",
+                    Subject = "Pedido de adoção",
+                    HtmlContent = $"Olá {exitForm.AdopterName}.<br>O seu pedido de adoção foi efetuado, dentro de uma semana irá receber um e-mail acerca do estado do seu pedido.<br><br>" +
+                    "Cumprimentos,<br>Quinta do Mião."
+                };
+                msg2.AddTo(new EmailAddress(exitForm.AdopterEmail, exitForm.AdopterName));
+                var response2 = await client.SendEmailAsync(msg2);
+
                 return RedirectToAction("ExitFormSubmited", "Home");
             }
             ViewData["AnimalId"] = new SelectList(_context.Animal, "Id", "Name", exitForm.AnimalId);
-            ViewData["ReportId"] = new SelectList(_context.AnimalMonitoringReport, "Id", "Id", exitForm.ReportId);
             return View(exitForm);
         }
 

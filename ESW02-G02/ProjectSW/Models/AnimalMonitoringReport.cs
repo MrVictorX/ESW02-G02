@@ -22,5 +22,6 @@ namespace ProjectSW.Models
 
         public Employee Employee { get; set; }
 
+        public ExitForm ExitForm { get; set; }
     }
 }

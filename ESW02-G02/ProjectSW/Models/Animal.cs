@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectSW.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,9 @@ namespace ProjectSW.Models
 {
     public class Animal
     {
+        private readonly DateTime _minValue = DateTime.UtcNow.AddYears(-20);
+        private readonly DateTime _maxValue = DateTime.UtcNow.AddYears(0);
+
         public string Id { get; set; }
 
         [Display(Name = "Raça")]
@@ -23,6 +27,7 @@ namespace ProjectSW.Models
         public string Gender { get; set; }
 
         [DataType(DataType.Date)]
+        [ValidateYearsAnimal]
         [Display(Name = "Data de nascimento")]
         public DateTime DateOfBirth { get; set; }
 
@@ -32,7 +37,7 @@ namespace ProjectSW.Models
 
         [Display(Name = "Disponivel para adoção")]
         public bool Available { get; set; }
-        
+
         [Display(Name = "Foto")]
         public byte[] Foto { get; set; }
 
@@ -40,6 +45,6 @@ namespace ProjectSW.Models
         public Breed Breed { get; set; }
 
         [Display(Name = "Anexos")]
-        public  List<Attachment> Attachments { get; set; }
+        public List<Attachment> Attachments { get; set; }
     }
 }

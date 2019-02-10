@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Diagnostics;
 using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 
 namespace UnitTestProject1
 {
@@ -122,8 +123,7 @@ namespace UnitTestProject1
             driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Employees/Create");
 
             IWebElement user = driver.FindElement(By.Id("AccountID-Sel"));
-            var selectElem = new SelectElement(user);
-            selectElem.SelectByText(mail);
+            user.SendKeys(mail);
 
             IWebElement type = driver.FindElement(By.Id("user-type"));
             type.SendKeys("Funcionario");
@@ -131,7 +131,39 @@ namespace UnitTestProject1
             IWebElement info = driver.FindElement(By.Id("aditional-info"));
             info.SendKeys("info");
 
-            IWebElement btn = driver.FindElement(By.Id("Create-submit"));
+            IWebElement btn = driver.FindElement(By.Id("Employee-Create-submit"));
+            btn.Submit();
+        }
+
+        [Test]
+        public void Edit5EmpTest()
+        {
+            string mail = "";
+
+            driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Employees");
+            Login("admin@hotmail.com", "Qwe123!");
+
+            for (int i = 1; i < 6; i++)
+            {
+                mail = "teste" + i + "@hotmail.com";
+                EditEmpAux(mail);
+            }
+
+            NUnit.Framework.Assert.Pass();
+        }
+
+        private void EditEmpAux(string mail)
+        {
+            driver.Navigate().GoToUrl("https://projeto-esw.azurewebsites.net/Employees");
+
+            IWebElement link = driver.FindElement(By.Id(mail + " edit"));
+            link.Click();
+
+            IWebElement info = driver.FindElement(By.Id("edit-info"));
+            info.Clear();
+            info.SendKeys("updated");
+
+            IWebElement btn = driver.FindElement(By.Id("edit-submit"));
             btn.Submit();
         }
 

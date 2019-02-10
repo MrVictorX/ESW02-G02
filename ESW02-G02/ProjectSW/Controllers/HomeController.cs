@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ProjectSW.Data;
 using ProjectSW.Models;
+using static System.Net.WebRequestMethods;
 
 namespace ProjectSW.Controllers
 {
@@ -18,6 +25,7 @@ namespace ProjectSW.Controllers
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -40,14 +48,27 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        
+
 
         public IActionResult Privacy()
         {
             return View();
         }
 
-        
+        public async Task<IActionResult> ShowHeatMap()
+        {
+            List<Location> locations = new List<Location>();
+            var applicationDbContext = _context.Adopter;
+    
+            foreach(Adopter a in await applicationDbContext.ToListAsync())
+            {
+                locations.Add(GetLocationRequest(a.PostalCode));
+            }
+
+
+            return View(locations);
+        }
+
         public async Task<IActionResult> DetailsAnimal(string id)
         {
             if (id == null)
@@ -76,6 +97,35 @@ namespace ProjectSW.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private Location GetLocationRequest(string postalcode)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.geonames.org/postalCodeLookupJSON?postalcode="+ postalcode + "&country=PT&username=tesing_software");
+            request.Method = Http.Get;
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            {
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    throw new ApplicationException("Error: Response status " + response.StatusCode);
+                }
+
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    if (responseStream != null)
+                    {
+                        using (StreamReader reader = new StreamReader(responseStream))
+                        {
+                            var locations = JsonConvert.DeserializeObject<dynamic>(reader.ReadToEnd());
+                            Location location = new Location { Lat = locations.postalcodes[0].lat, Lng = locations.postalcodes[0].lng };
+                            return location;
+                        }
+                    }//end of reader
+                }//End of stream
+            }//End of response
+
+            return null;
         }
     }
 }

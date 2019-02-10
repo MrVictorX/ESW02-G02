@@ -13,6 +13,10 @@ namespace ProjectSW.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public bool Address { get; set; }
+        public string Address { get; set; }
+
+        public string CitizenCard { get; set; }
+
+        public string PostalCode { get; set; }
     }
 }

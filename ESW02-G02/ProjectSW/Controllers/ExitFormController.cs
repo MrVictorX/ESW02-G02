@@ -73,7 +73,7 @@ namespace ProjectSW.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
+        public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,AdopterCitizenCard,AdopterPostalCode,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,AdopterCitizenCard,AdopterPostalCode,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (id != exitForm.Id)
             {
@@ -189,6 +189,19 @@ namespace ProjectSW.Controllers
                             EntryDate = animal.EntryDate,
                             Result = exitForm.State
                         });
+
+                        Adopter adopter = await _context.Adopter.FirstOrDefaultAsync(m => m.CitizenCard == exitForm.AdopterCitizenCard);
+
+                        if (adopter == null)
+                        {
+                            _context.Adopter.Add(new Adopter
+                            {
+                                Email = exitForm.AdopterEmail,
+                                Address = exitForm.AdopterAddress,
+                                CitizenCard = exitForm.AdopterCitizenCard,
+                                PostalCode = exitForm.AdopterPostalCode
+                            });
+                        }
                     }
                     if (exitForm.State == "Granted")
                     {

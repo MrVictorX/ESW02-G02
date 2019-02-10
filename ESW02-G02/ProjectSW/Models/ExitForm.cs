@@ -40,9 +40,10 @@ namespace ProjectSW.Models
 
         public Animal Animal { get; set; }
 
+        public List<AnimalMonitoringReport> Report { get; set; }
 
-        public AnimalMonitoringReport Report { get; set; }
-       
+        public string AdopterCitizenCard { get; set; }
+        public string AdopterPostalCode { get; set; }
     }
 
    }

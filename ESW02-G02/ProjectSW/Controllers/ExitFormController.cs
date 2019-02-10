@@ -56,7 +56,7 @@ namespace ProjectSW.Controllers
             {
                 return NotFound();
             }
-            var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id == animalId);
+            var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id.Equals(animalId));
             if (animal == null)
             {
                 return NotFound();

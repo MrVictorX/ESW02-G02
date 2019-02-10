@@ -362,6 +362,8 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Motive");
 
+                    b.Property<string>("ReportId");
+
                     b.Property<string>("State");
 
                     b.HasKey("Id");
@@ -454,7 +456,7 @@ namespace ProjectSW.Migrations
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("ProjectSW.Models.ExitForm", "ExitForm")
-                        .WithMany()
+                        .WithMany("Report")
                         .HasForeignKey("ExitFormId");
                 });
 

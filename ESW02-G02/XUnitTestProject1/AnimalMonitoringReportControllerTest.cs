@@ -71,8 +71,9 @@ namespace UnitTestProject1
         public async Task Index_CanLoadFromContext()
         {
             var controller = new AnimalMonitoringReportController(_context);
+            var exitForm = _context.ExitForm.FirstOrDefault();
 
-            var result = await controller.Index();
+            var result = await controller.Index(exitForm.Id);
 
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<IEnumerable<AnimalMonitoringReport>>(
@@ -83,8 +84,9 @@ namespace UnitTestProject1
         public async Task CreateGet_ReturnsViewresult()
         {
             var controller = new AnimalMonitoringReportController(_context);
+            var exitForm = _context.ExitForm.FirstOrDefault();
 
-            var result = controller.Create();
+            var result = controller.Create(exitForm.Id);
 
             var viewResult = Assert.IsType<ViewResult>(result);
         }
@@ -93,8 +95,9 @@ namespace UnitTestProject1
         public void CreateGet_SetEmployeeIdInViewData()
         {
             var controller = new AnimalMonitoringReportController(_context);
+            var exitForm = _context.ExitForm.FirstOrDefault();
 
-            var result = controller.Create();
+            var result = controller.Create(exitForm.Id);
 
             var viewdata = controller.ViewData["EmployeeId"];
             Assert.NotNull(viewdata);

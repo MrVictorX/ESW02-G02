@@ -66,17 +66,19 @@ namespace UnitTestProject1
     {
         private ApplicationDbContext _context;
         private readonly ITestOutputHelper output;
+        private readonly UserManager<ProjectSWUser> _userManager;
 
-        public JobsControllerTest(ApplicationDbContextFixture6 contextFixture, ITestOutputHelper output)
+        public JobsControllerTest(ApplicationDbContextFixture6 contextFixture, ITestOutputHelper output, UserManager<ProjectSWUser> userManager)
         {
             _context = contextFixture.DbContext;
             this.output = output;
+            _userManager = userManager;
         }
 
         [Fact]
         public async Task Index_CanLoadFromContext()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = await controller.Index();
 
@@ -88,7 +90,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task CreateGet_ReturnsViewresult()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = controller.Create();
 
@@ -98,7 +100,7 @@ namespace UnitTestProject1
         [Fact]
         public void CreateGet_SetsEmployeeIdInViewData()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = controller.Create();
 
@@ -111,7 +113,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task CreatePost_ReturnsViewResult_WhenModelStateIsInvalid()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
             controller.ModelState.AddModelError("Erro", "Erro adicionado para teste");
             Job job = new Job { EmployeeId = (_context.Employee.First(m => m.Type.Contains("Funcionario"))).Id, Name = "Tarefa1", Day = new DateTime(1999, 08, 08), Hour = new DateTime(1999, 08, 08), Description = "12" };
             var result = await controller.Create(job);
@@ -123,7 +125,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task CreatePost_SetsAccountIdInViewData_WhenModelStateInValid()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
             controller.ModelState.AddModelError("Erro", "Erro adicionado para teste");
             Job job = new Job { EmployeeId = (_context.Employee.First(m => m.Type.Contains("Funcionario"))).Id, Name = "Tarefa1", Day = new DateTime(1999, 08, 08), Hour = new DateTime(1999, 08, 08), Description = "12" };
             var result = await controller.Create(job);
@@ -136,7 +138,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task Delete_ReturnsNotFoundResult_WhenIdIsNull()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = await controller.Delete(null);
 
@@ -146,7 +148,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task Delete_ReturnsNotFoundResult_WhenAnimalDoesntExist()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = await controller.Delete("0");
 
@@ -156,7 +158,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task Delete_ReturnsViewResult_WhenAnimalExist()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var job = await _context.Job.FirstOrDefaultAsync(a => a.Name == "Tarefa2");
             var result = await controller.Delete(job.Id);
@@ -172,7 +174,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task DeleteConfirmed_ReturnsRedirectToActionResult()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
             var job = await _context.Job.FirstOrDefaultAsync(a => a.Name == "Tarefa1");
             var result = await controller.DeleteConfirmed(job.Id);
             output.WriteLine("{0}", job.Id);
@@ -183,7 +185,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditGet_ReturnsNotFoundResult_WhenIdIsNull()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = await controller.Edit(null);
 
@@ -193,7 +195,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditGet_ReturnsNotFoundResult_WhenJobDoesnsExist()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = await controller.Edit("0");
 
@@ -203,7 +205,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditGet_ReturnsViewResult_WhenJobExists()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var job = await _context.Job.FirstOrDefaultAsync(a => a.Name == "Tarefa4");
 
@@ -224,7 +226,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditPost_ReturnsNotFoundResult_WhenIdDoesntMatchEmployeeId()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
             Job job = _context.Job.FirstOrDefault(a => a.Name == "Tarefa5");
 
             var result = await controller.Edit("1", job);
@@ -235,7 +237,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditPost_ReturnsNotFoundResult_WhenJobDoesntExist()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = await controller.Edit("5", new Job { Id = "5" });
 
@@ -245,7 +247,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditPost_ReturnsViewResult_WhenModelStateIsInValid()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var job = await _context.Job.FirstOrDefaultAsync(a => a.Name == "Tarefa4");
 
@@ -265,7 +267,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditPost_ReturnsRedirectToActionResult_WhenJobIsUpdated()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
             var job = await _context.Job.FirstOrDefaultAsync(a => a.Name == "Tarefa6");
             job.Description = "No";
 
@@ -280,7 +282,7 @@ namespace UnitTestProject1
         [Fact]
         public async Task Details_ReturnsNotFoundResult_WhenIdIsNull()
         {
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var result = await controller.Details(null);
 
@@ -291,7 +293,7 @@ namespace UnitTestProject1
         public async Task Details_RetunrsViewResult_WhenEmployeeExists()
         {
 
-            var controller = new JobsController(_context);
+            var controller = new JobsController(_context, _userManager);
 
             var job = await _context.Job.FirstOrDefaultAsync(a => a.Name == "Tarefa3");
             var result = await controller.Details(job.Id);

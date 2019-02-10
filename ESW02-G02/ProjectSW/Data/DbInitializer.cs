@@ -101,29 +101,29 @@ namespace ProjectSW.Data
             }
             context.SaveChanges();
 
-            if (context.ExitForm.Any())
-            {
-                return;   // DB has been seeded
-            }
+            //if (context.ExitForm.Any())
+            //{
+            //    return;   // DB has been seeded
+            //}
 
-            var ExitForms = new ExitForm[]
-            {
-            new ExitForm{AdopterName="Hugo Modesto", AdopterAddress="rua Dulce Maria Cardoso", AdopterEmail="hugomodesto.2@gmail.com", Motive=""},
-            new ExitForm{AdopterName="Patricia Guerreiro", AdopterAddress="rua Marques de Pombal", AdopterEmail="patriciaGG@gmail.com", Description="Casa grande com quintal" , Motive="Tenho um cão em casa e seria bom que houvesse mais um cão para fazerem companhia enquanto ninguem está."},
-            new ExitForm{AdopterName="Patricia Paquete", AdopterAddress="rua Luis Camões", AdopterEmail="pPaquetep@hotmail.com", Motive="Sempre quis ter um animal."},
-            new ExitForm{AdopterName="Paulo David", AdopterAddress="rua Vasco da Gama", AdopterEmail="pdX123@outlook.com", Motive=""},
-            new ExitForm{AdopterName="Ines Xavier", AdopterAddress="rua Fernando Pessoa", AdopterEmail="ImnXavier@hotmail.com", Description="Passei a minha vida com cães e gatos",  Motive="Mudei-me para a minha casa e senti falta de ter um cão para cuidar."},
-            new ExitForm{AdopterName="Catarina Martins", AdopterAddress="rua José Saramago", AdopterEmail="catarina23.M@sapo.pt", Motive="Sinto-me sozinha"},
-            new ExitForm{AdopterName="João Martins", AdopterAddress="rua Antero de Quental", AdopterEmail="johnyBgood@gmail.com", Description="Viajo muito em trabalho", Motive="Viajo muito de carrinha e quero ter companhia para viagens"},
-            new ExitForm{AdopterName="Gonçalo Esteves", AdopterAddress="rua Sophia de Mello Breyner Andresen", AdopterEmail="goncEst@hotmail.com", Motive="Não tenho motivo especial"},
-            new ExitForm{AdopterName="Marco Salgado", AdopterAddress="rua Miguel Torga", AdopterEmail="oGrandeSal@gmail.com", Description="Trabalho em casa", Motive="seria bom ter companhia em casa."},
-            };
+            //var ExitForms = new ExitForm[]
+            //{
+            //new ExitForm{AdopterName="Hugo Modesto", AdopterAddress="rua Dulce Maria Cardoso", AdopterEmail="hugomodesto.2@gmail.com", AnimalId=context.Animal., Motive=""},
+            //new ExitForm{AdopterName="Patricia Guerreiro", AdopterAddress="rua Marques de Pombal", AdopterEmail="patriciaGG@gmail.com", Description="Casa grande com quintal" , Motive="Tenho um cão em casa e seria bom que houvesse mais um cão para fazerem companhia enquanto ninguem está."},
+            //new ExitForm{AdopterName="Patricia Paquete", AdopterAddress="rua Luis Camões", AdopterEmail="pPaquetep@hotmail.com", Motive="Sempre quis ter um animal."},
+            //new ExitForm{AdopterName="Paulo David", AdopterAddress="rua Vasco da Gama", AdopterEmail="pdX123@outlook.com", Motive=""},
+            //new ExitForm{AdopterName="Ines Xavier", AdopterAddress="rua Fernando Pessoa", AdopterEmail="ImnXavier@hotmail.com", Description="Passei a minha vida com cães e gatos",  Motive="Mudei-me para a minha casa e senti falta de ter um cão para cuidar."},
+            //new ExitForm{AdopterName="Catarina Martins", AdopterAddress="rua José Saramago", AdopterEmail="catarina23.M@sapo.pt", Motive="Sinto-me sozinha"},
+            //new ExitForm{AdopterName="João Martins", AdopterAddress="rua Antero de Quental", AdopterEmail="johnyBgood@gmail.com", Description="Viajo muito em trabalho", Motive="Viajo muito de carrinha e quero ter companhia para viagens"},
+            //new ExitForm{AdopterName="Gonçalo Esteves", AdopterAddress="rua Sophia de Mello Breyner Andresen", AdopterEmail="goncEst@hotmail.com", Motive="Não tenho motivo especial"},
+            //new ExitForm{AdopterName="Marco Salgado", AdopterAddress="rua Miguel Torga", AdopterEmail="oGrandeSal@gmail.com", Description="Trabalho em casa", Motive="seria bom ter companhia em casa."},
+            //};
 
-            foreach (ExitForm e in ExitForms)
-            {
-                context.ExitForm.Add(e);
-            }
-            context.SaveChanges();
+            //foreach (ExitForm e in ExitForms)
+            //{
+            //    context.ExitForm.Add(e);
+            //}
+            //context.SaveChanges();
 
         }
     }

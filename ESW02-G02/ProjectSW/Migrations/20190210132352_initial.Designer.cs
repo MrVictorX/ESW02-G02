@@ -10,8 +10,8 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190210113115_Initial")]
-    partial class Initial
+    [Migration("20190210132352_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -364,6 +364,8 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Motive");
 
+                    b.Property<string>("ReportId");
+
                     b.Property<string>("State");
 
                     b.HasKey("Id");
@@ -456,7 +458,7 @@ namespace ProjectSW.Migrations
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("ProjectSW.Models.ExitForm", "ExitForm")
-                        .WithMany()
+                        .WithMany("Report")
                         .HasForeignKey("ExitFormId");
                 });
 

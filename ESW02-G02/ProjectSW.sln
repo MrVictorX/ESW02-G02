@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{326B72A8-2CB7-417C-8745-2BA857F11905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{594FAEF9-26D1-465F-B832-F9ACF23F1FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{594FAEF9-26D1-465F-B832-F9ACF23F1FC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +34,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A2198988-304A-4F0A-A7C8-52E72CACFC18} = {326B72A8-2CB7-417C-8745-2BA857F11905}
 		{594FAEF9-26D1-465F-B832-F9ACF23F1FC6} = {326B72A8-2CB7-417C-8745-2BA857F11905}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

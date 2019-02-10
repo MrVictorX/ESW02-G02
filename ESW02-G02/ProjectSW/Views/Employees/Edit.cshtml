@@ -26,10 +26,10 @@
                     <div class="form-group">
                         <label asp-for="AditionalInformation" class="control-label"></label>
                         <textarea asp-for="AditionalInformation" class="form-control"></textarea>
-                        <span asp-validation-for="AditionalInformation" class="text-danger"></span>
+                        <span asp-validation-for="AditionalInformation" class="text-danger" id="edit-info"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;"/>
+                        <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;" id="edit-submit"/>
                     </div>
                 </form>
             </div>

@@ -22,6 +22,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees
+        /// <summary>Ação que resulta na lista de utilizadores</summary>
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Employee.Include(e => e.Account);
@@ -29,6 +30,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Details/5
+        /// <summary>Ação que resulta numa pagina com os detalhes de uma utilizadores</summary>
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -48,6 +50,8 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "Administrador, Funcionario")]
+        /// <summary>Ação que resulta numa pagina com o formulario da criação de uma utilizadores</summary>
         public IActionResult Create()
         {
             ViewData["AccountId"] = new SelectList(_context.User, "Id", "Email");
@@ -59,6 +63,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta na criação de uma utilizadores</summary>
         public async Task<IActionResult> Create([Bind("Id,AccountId,Type,AditionalInformation")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -72,6 +77,8 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Administrador, Funcionario")]
+        /// <summary>Ação que resulta numa pagina com os detalhes de um utilizador de forma a poderem ser editados</summary>
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -93,6 +100,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta numa pagina com a edição de uma utilizador</summary>
         public async Task<IActionResult> Edit(string id, [Bind("Id,AccountId,Type,AditionalInformation")] Employee employee)
         {
             if (id != employee.Id)
@@ -125,6 +133,8 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "Administrador")]
+        /// <summary>Ação que resulta num prompt para apagar uma utilizador</summary>
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -146,6 +156,7 @@ namespace ProjectSW.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta num utilizador apagada</summary>
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var employee = await _context.Employee.FindAsync(id);

@@ -34,14 +34,18 @@
                         <button style= "background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o email do funcionário.">
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <select asp-for="AccountId" class="form-control" asp-items="ViewBag.AccountId"></select>
+                        <select asp-for="AccountId" class="form-control" id="AccountID-Sel" asp-items="ViewBag.AccountId"></select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Type" class="control-label"></label>
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Cargo" data-content="Aqui irá inserir o cargo do funcionário.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <input asp-for="Type" class="form-control" />
+                        <select asp-for="Type" class="form-control custom-select" id="Registar-user-type">
+                            <option value="Funcionario" selected>Funcionario</option>
+                            <option value="Voluntario">Voluntario</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
                         <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -50,10 +54,10 @@
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <textarea asp-for="AditionalInformation" class="form-control"></textarea>
-                        <span asp-validation-for="AditionalInformation" class="text-danger"></span>
+                        <span asp-validation-for="AditionalInformation" class="text-danger" id="aditional-info"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Criar" class="button-format" style="margin-left:0%"/>
+                        <input type="submit" value="Criar" class="button-format"  id="Employee-Create-submit" style="margin-left:0%;"/>
                     </div>
                 </form>
             </div>

@@ -34,7 +34,7 @@
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome da tarefa" data-content="Aqui irá inserir o nome da tarefa.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <input asp-for="Name" class="form-control" />
+                        <input asp-for="Name" class="form-control" maxlength="30"/>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">

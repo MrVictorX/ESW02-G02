@@ -23,19 +23,20 @@ namespace ProjectSW.Models
             _context = context;
         }
 
+        /// <summary>Ação que resulta numa viewComponent com um heatmap com todas as localizações dos adotantes</summary>
         public async Task<IViewComponentResult> InvokeAsync()
         {
             List<Location> locations = new List<Location>();
-            var applicationDbContext = _context.Adopter;
 
-            foreach (Adopter a in await applicationDbContext.ToListAsync())
+            foreach (Adopter a in await _context.Adopter.ToListAsync())
             {
+
                 locations.Add(GetLocationRequest(a.PostalCode));
             }
 
             return View(locations);
         }
-
+        /// <summary>Metodo que efetua um pedido http a uma api para obter a lat e lng dado um codigo postal</summary>
         private Location GetLocationRequest(string postalcode)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.geonames.org/postalCodeLookupJSON?postalcode=" + postalcode + "&country=PT&username=tesing_software");

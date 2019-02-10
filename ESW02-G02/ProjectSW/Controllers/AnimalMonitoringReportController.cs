@@ -22,6 +22,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport
+        /// <summary>Ação que resulta na lista de AnimalReports</summary>
         public async Task<IActionResult> Index(string exitFormId)
         {
             var applicationDbContext = _context.AnimalMonitoringReport.Include(a => a.Employee).Include(a => a.Employee.Account).Where(a => a.ExitFormId == exitFormId);
@@ -30,6 +31,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport/Details/5
+        /// <summary>Ação que resulta numa pagina com os detalhes de uma AnimalReports</summary>
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -50,6 +52,7 @@ namespace ProjectSW.Controllers
 
         // GET: AnimalMonitoringReport/Create
         [Authorize(Roles = "Administrador, Funcionario")]
+        /// <summary>Ação que resulta numa pagina com o formulario da criação de uma AnimalReports</summary>
         public IActionResult Create(string exitFormId)
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(a => a.Account), "Id", "Account.Email");
@@ -62,6 +65,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta na criação de uma AnimalReports</summary>
         public async Task<IActionResult> Create([Bind("Id,ExitFormId,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
         {
             if (ModelState.IsValid)
@@ -77,6 +81,7 @@ namespace ProjectSW.Controllers
 
         // GET: AnimalMonitoringReport/Edit/5
         [Authorize(Roles = "Administrador, Funcionario")]
+        /// <summary>Ação que resulta numa pagina com os detalhes de uma AnimalReports de forma a poderem ser editados</summary>
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -98,6 +103,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta numa pagina com a edição de uma AnimalReports</summary>
         public async Task<IActionResult> Edit(string id, [Bind("Id,ExitFormId,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
         {
             if (id != animalMonitoringReport.Id)
@@ -131,6 +137,7 @@ namespace ProjectSW.Controllers
 
         // GET: AnimalMonitoringReport/Delete/5
         [Authorize(Roles = "Administrador")]
+        /// <summary>Ação que resulta num prompt para apagar uma AnimalReports</summary>
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -152,6 +159,7 @@ namespace ProjectSW.Controllers
         // POST: AnimalMonitoringReport/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>Ação que resulta numa AnimalReports apagada</summary>
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var animalMonitoringReport = await _context.AnimalMonitoringReport.FindAsync(id);

@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\ESW02-G02",
-    "\\ESW02-G02\\ProjectSW"
+    "\\ESW02-G02\\ProjectSW",
+    "\\ESW02-G02\\XUnitTestProject1"
   ],
-  "SelectedNode": "\\ESW02-G02\\ProjectSW.sln",
+  "SelectedNode": "\\ESW02-G02\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

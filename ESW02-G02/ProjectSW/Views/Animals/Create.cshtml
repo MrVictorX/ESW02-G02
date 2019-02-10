@@ -56,7 +56,7 @@
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Data" data-content="Aqui irá inserir a data de criação da ficha.">
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <input asp-for="DateOfBirth" class="form-control" />
+                        <input asp-for="DateOfBirth" class="form-control"/>
                         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -84,13 +84,6 @@
                         </button>
                         <input asp-for="EntryDate" class="form-control" />
                         <span asp-validation-for="EntryDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label>
-                                <input asp-for="Available" /> @Html.DisplayNameFor(model => model.Available)
-                            </label>
-                        </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="Foto" class="control-label"></label>

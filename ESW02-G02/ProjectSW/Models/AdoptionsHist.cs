@@ -14,6 +14,10 @@ namespace ProjectSW.Models
 
         public string AdopterAddress { get; set; }
 
+        public string AdopterCitizenCard { get; set; }
+
+        public string AdopterPostalCode { get; set; }
+
         public string Motive { get; set; }
 
         [DataType(DataType.Date)]

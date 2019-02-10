@@ -51,6 +51,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Animals/Create
+        [Authorize(Roles = "Administrador, Funcionario")]
         public IActionResult Create()
         {
             ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name");
@@ -62,7 +63,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,DateOfBirth,Gender,BreedId,EntryDate,Foto,Available")] Animal animal, IFormFile foto)
+        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,DateOfBirth,EntryDate,Foto,Available")] Animal animal, IFormFile foto)
         {
             if (ModelState.IsValid)
             {
@@ -84,17 +85,18 @@ namespace ProjectSW.Controllers
                         animal.Foto = memoryStream.ToArray();
                     }
                 }
+                animal.Available = true;
 
-                
                 _context.Add(animal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name", animal.BreedId);
             return View(animal);
         }
 
         // GET: Animals/Edit/5
+        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -134,7 +136,8 @@ namespace ProjectSW.Controllers
                 {
                     var filePath = Path.GetTempFileName();
 
-                    if(foto != null) { 
+                    if (foto != null)
+                    {
                         if (foto.Length > 0)
                         {
                             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -196,6 +199,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Animals/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -242,8 +246,8 @@ namespace ProjectSW.Controllers
         public async Task<IActionResult> DeleteAttachment(string id)
         {
             var attachment = _context.Attachment.Select(att => att).Where(att => att.AnimalId == id).First();
-            if(attachment != null)
-            _context.Attachment.Remove(attachment);
+            if (attachment != null)
+                _context.Attachment.Remove(attachment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

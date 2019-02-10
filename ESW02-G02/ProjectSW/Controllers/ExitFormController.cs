@@ -142,7 +142,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (id != exitForm.Id)
             {

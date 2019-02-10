@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProjectSW.Data
 {
     /// <summary> Classe de validação, usada para validar a data inserida no campo "Data de nascimento"</summary>
-    public class ValidateYearsAttribute : ValidationAttribute
+    public class ValidateYearsAtribute : ValidationAttribute
     {
         private readonly DateTime _minValue = DateTime.UtcNow.AddYears(-99);
         private readonly DateTime _maxValue = DateTime.UtcNow.AddYears(-16);
@@ -24,7 +24,7 @@ namespace ProjectSW.Data
         /// <param name="name">Mensagem de erro passada caso necessário.</param>
         public override string FormatErrorMessage(string name)
         {
-            return string.Format("O valor da sua data é invalida", _minValue, _maxValue);
+            return string.Format("O valor da sua data é invalida, tem que estar entre {0} ### {1}", _minValue, _maxValue);
         }
     }
 }

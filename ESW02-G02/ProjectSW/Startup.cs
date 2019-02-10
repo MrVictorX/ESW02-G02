@@ -47,11 +47,6 @@ namespace ProjectSW
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddAuthorization(options => {
-                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrador"));
-                options.AddPolicy("RequireFuncionarioRole", policy => policy.RequireRole("Administrador, Funcionarios"));
-            });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

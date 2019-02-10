@@ -2,8 +2,9 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
+<br /><br />
 <div class="div-content" style="margin-top: 15%;">
-    <ul class="nav nav-pills nav-stacked"">
+    <ul class="nav nav-pills nav-stacked" ">
         <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-page="./Index" style="color:white; background-color: #164C48;" class="button-format"><span>Perfil</span></a></li>
         <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a style="color:white; background-color: #164C48;" class="button-format" asp-page="./ChangePassword"><span>Palavra-Passe</span></a></li>
         @*@if (hasExternalLogins)

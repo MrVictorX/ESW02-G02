@@ -53,7 +53,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [DataType(DataType.Date)]
-            [ValidateYears]
+            [ValidateYearsAtribute]
             [Display(Name = "Data de nascimento")]
             public DateTime DateOfBirth { get; set; }
 

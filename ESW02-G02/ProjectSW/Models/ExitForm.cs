@@ -42,6 +42,7 @@ namespace ProjectSW.Models
 
 
         public AnimalMonitoringReport Report { get; set; }
+       
     }
 
    }

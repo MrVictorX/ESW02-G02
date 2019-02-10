@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace UnitTestProject1
 {
     public class ApplicationDbContextFixture
@@ -34,12 +35,14 @@ namespace UnitTestProject1
                     new Breed { Name = "Husky" }
                     );
             DbContext.SaveChanges();
-
+            
+          
             DbContext.Animal.AddRange(
                 new Animal { BreedId = (DbContext.Breed.First(m => m.Name.Contains("Bulldog"))).Id, Name = "Max", Size = "Pequeno", Gender = "Macho", DateOfBirth = new DateTime(2017, 08, 08) },
                 new Animal { BreedId = (DbContext.Breed.First(m => m.Name.Contains("Beagle"))).Id, Name = "Julio", Size = "Grande", Gender = "Macho", DateOfBirth = new DateTime(2017, 12, 08) },
-                new Animal { BreedId = (DbContext.Breed.First(m => m.Name.Contains("Husky"))).Id, Name = "Bili", Size = "Médio", Gender = "Macho", DateOfBirth = new DateTime(2017, 06, 08)}
-                );
+                new Animal { BreedId = (DbContext.Breed.First(m => m.Name.Contains("Husky"))).Id, Name = "Bili", Size = "Médio", Gender = "Macho", DateOfBirth = new DateTime(2017, 06, 08) },
+                new Animal { BreedId = (DbContext.Breed.First(m => m.Name.Contains("Bulldog"))).Id, Name = "Ju", Size = "Médio", Gender = "Macho", DateOfBirth = new DateTime(2017, 06, 08)},
+                new Animal { BreedId = (DbContext.Breed.First(m => m.Name.Contains("Beagle"))).Id, Name = "Lulu", Size = "Grande", Gender = "Macho", DateOfBirth = new DateTime(2017, 12, 08) });
             DbContext.SaveChanges();
         }
     }
@@ -100,9 +103,9 @@ namespace UnitTestProject1
             Assert.IsType<ViewResult>(result);
         }
 
-
+        
         [Fact]
-        public async Task CreatePost_SetsMarcaIdInViewData_WhenModelStateInValid()
+        public async Task CreatePost_SetsBreedIdInViewData_WhenModelStateInValid()
         {
             var controller = new AnimalsController(_context);
             controller.ModelState.AddModelError("Erro", "Erro adicionado para teste");
@@ -139,21 +142,25 @@ namespace UnitTestProject1
         {
             var controller = new AnimalsController(_context);
 
-            var result = await controller.Delete("3");
+            var animal = await _context.Animal.FirstOrDefaultAsync(a => a.Name == "Max");
+            var result = await controller.Delete(animal.Id);
 
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<Animal>(viewResult.ViewData.Model);
             Assert.NotNull(model);
-            Assert.Equal("3", model.Id);
+            Assert.Equal(animal.Id, model.Id);
+
+            Assert.NotNull(model.Breed);
         }
 
         [Fact]
         public async Task DeleteConfirmed_ReturnsRedirectToActionResult()
         {
             var controller = new AnimalsController(_context);
+            var animal = await _context.Animal.FirstOrDefaultAsync(a => a.Name == "Max");          
 
-            var result = await controller.DeleteConfirmed("2");
-
+            var result = await controller.DeleteConfirmed(animal.Id);
+            
             Assert.IsType<RedirectToActionResult>(result);
         }
 
@@ -182,7 +189,9 @@ namespace UnitTestProject1
         {
             var controller = new AnimalsController(_context);
 
-            var result = await controller.Edit("1");
+            var animal = await _context.Animal.FirstOrDefaultAsync(a => a.Name == "Julio");
+
+            var result = await controller.Edit(animal.Id);
 
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<Animal>(
@@ -200,19 +209,19 @@ namespace UnitTestProject1
         public async Task EditPost_ReturnsNotFoundResult_WhenIdDoesntMatchAnimalId()
         {
             var controller = new AnimalsController(_context);
-            Animal aluguer = _context.Animal.FirstOrDefault(a => a.Id == "1");
+            Animal animal = _context.Animal.FirstOrDefault(a => a.Name == "Max");
 
-            var result = await controller.Edit("2");
+            var result = await controller.Edit("1", animal, null, null);
 
             Assert.IsType<NotFoundResult>(result);
         }
-        /*
+        
         [Fact]
-        public async Task EditPost_ReturnsNotFoundResult_WhenAluguerDoesntExist()
+        public async Task EditPost_ReturnsNotFoundResult_WhenAnimalDoesntExist()
         {
-            var controller = new AlugueresController(_context);
+            var controller = new AnimalsController(_context);
 
-            var result = await controller.Edit(5, new Aluguer { AluguerId = 5 });
+            var result = await controller.Edit("5", new Animal { Id = "5" }, null, null);
 
             Assert.IsType<NotFoundResult>(result);
         }
@@ -220,38 +229,118 @@ namespace UnitTestProject1
         [Fact]
         public async Task EditPost_ReturnsViewResult_WhenModelStateIsInValid()
         {
-            var controller = new AlugueresController(_context);
-            Aluguer aluguer = _context.Aluguer.FirstOrDefault(a => a.AluguerId == 1);
+            var controller = new AnimalsController(_context);
+
+            var animal = await _context.Animal.FirstOrDefaultAsync(a => a.Name == "Max");
+
             controller.ModelState.AddModelError("Erro", "Erro adicionado para teste");
 
-            var result = await controller.Edit(1, aluguer);
+            var result = await controller.Edit(animal.Id, animal, null, null);
 
             Assert.IsType<ViewResult>(result);
+           
 
-            // Estes testes deveriam estar separados em diferentes métodos de teste!
-            var viewdata1 = controller.ViewData["CarroId"];
-            Assert.NotNull(viewdata1);
-            Assert.IsType<SelectList>(viewdata1);
-            Assert.True((viewdata1 as SelectList).Count() > 0);
-
-            var viewdata2 = controller.ViewData["UserId"];
+            var viewdata2 = controller.ViewData["BreedId"];
             Assert.NotNull(viewdata2);
             Assert.IsType<SelectList>(viewdata2);
             Assert.True((viewdata2 as SelectList).Count() > 0);
         }
 
         [Fact]
-        public async Task EditPost_ReturnsRedirectToActionResult_WhenAluguerIsUpdated()
+        public async Task EditPost_ReturnsRedirectToActionResult_WhenAnimalIsUpdated()
         {
-            var controller = new AlugueresController(_context);
-            Aluguer aluguer = _context.Aluguer.FirstOrDefault(a => a.AluguerId == 1);
-            aluguer.LocalDeEntrega += "N";
+            var controller = new AnimalsController(_context);
+            var animal = await _context.Animal.FirstOrDefaultAsync(a => a.Name == "Bili");
+            animal.Size = "N";
 
-            var result = await controller.Edit(1, aluguer);
+            var result = await controller.Edit(animal.Id, animal, null, null);
 
             Assert.IsType<RedirectToActionResult>(result);
-            Aluguer aluguerUpdated = _context.Aluguer.FirstOrDefault(a => a.AluguerId == 1);
-            Assert.Equal(aluguer.LocalDeEntrega, aluguerUpdated.LocalDeEntrega);
-        }*/
+            Animal animalUpdated = _context.Animal.FirstOrDefault(a => a.Name == "Bili");
+            Assert.Equal(animal.Name, animalUpdated.Name);
+        }
+
+        [Fact]
+        public async Task OrderByData_CanLoadFromContext()
+        {
+            var controller = new AnimalsController(_context);
+
+            var result = await controller.OrderByData();
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Animal>>(
+                viewResult.ViewData.Model);
+        }
+
+        [Fact]
+        public async Task OrderByNome_CanLoadFromContext()
+        {
+            var controller = new AnimalsController(_context);
+
+            var result = await controller.OrderByNome();
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Animal>>(
+                viewResult.ViewData.Model);
+        }
+        [Fact]
+        public async Task OrderByRaca_CanLoadFromContext()
+        {
+            var controller = new AnimalsController(_context);
+
+            var result = await controller.OrderByRaca();
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Animal>>(
+                viewResult.ViewData.Model);
+        }
+        [Fact]
+        public async Task OrderByGenero_CanLoadFromContext()
+        {
+            var controller = new AnimalsController(_context);
+
+            var result = await controller.OrderByGenero();
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Animal>>(
+                viewResult.ViewData.Model);
+        }
+        [Fact]
+        public async Task OrderByTamanho_CanLoadFromContext()
+        {
+            var controller = new AnimalsController(_context);
+
+            var result = await controller.OrderByTamanho();
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Animal>>(
+                viewResult.ViewData.Model);
+        }
+
+
+        [Fact]
+        public async Task Details_ReturnsNotFoundResult_WhenIdIsNull()
+        {
+            var controller = new AnimalsController(_context);
+
+            var result = await controller.Details(null);
+
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task Details_RetunrsViewResult_WhenAnimalExists()
+        {
+           
+                var controller = new AnimalsController(_context);
+
+                var animal = await _context.Animal.FirstOrDefaultAsync(a => a.Name == "Lulu");
+                var result = await controller.Details(animal.Id);
+
+                var viewResult = Assert.IsType<ViewResult>(result);
+                var model = Assert.IsAssignableFrom<Animal>(viewResult.ViewData.Model);
+                Assert.Equal(animal.Id, model.Id);
+            
+        }
     }
 }

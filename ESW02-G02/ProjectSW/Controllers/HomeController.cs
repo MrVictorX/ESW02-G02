@@ -28,20 +28,6 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         
         public async Task<IActionResult> DetailsAnimal(string id)
         {
@@ -53,7 +39,7 @@ namespace ProjectSW.Controllers
             var animal = await _context.Animal
                 .Include(a => a.Breed)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            animal.Attachments = _context.Attachment.Where(att => att.AnimalId == animal.Id).ToList();
+            
             if (animal == null)
             {
                 return NotFound();

@@ -10,6 +10,8 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
+        public string ExitFormId { get; set; }
+
         [Display(Name = "Informação da visita")]
         public string Description { get; set; }
 

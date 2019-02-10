@@ -22,9 +22,10 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string exitFormId)
         {
-            var applicationDbContext = _context.AnimalMonitoringReport.Include(a => a.Employee).Include(a => a.Employee.Account);
+            var applicationDbContext = _context.AnimalMonitoringReport.Include(a => a.Employee).Include(a => a.Employee.Account).Where(a => a.ExitFormId == exitFormId);
+            ViewData["ExitFormId"] = exitFormId;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -48,9 +49,11 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport/Create
-        public IActionResult Create()
+        [Authorize(Roles = "Administrador, Funcionario")]
+        public IActionResult Create(string exitFormId)
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employee.Include(a => a.Account), "Id", "Account.Email");
+            ViewData["ExitFormId"] = exitFormId;
             return View();
         }
 
@@ -59,19 +62,21 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
+        public async Task<IActionResult> Create([Bind("Id,ExitFormId,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(animalMonitoringReport);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "AnimalMonitoringReport", new { exitFormId = animalMonitoringReport.ExitFormId });
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Account.Email", animalMonitoringReport.EmployeeId);
+            ViewData["ExitFormId"] = ViewBag.ExitFormId;
             return View(animalMonitoringReport);
         }
 
         // GET: AnimalMonitoringReport/Edit/5
+        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -93,7 +98,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,ExitFormId,Description,EntryDate,EmployeeId")] AnimalMonitoringReport animalMonitoringReport)
         {
             if (id != animalMonitoringReport.Id)
             {
@@ -125,6 +130,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: AnimalMonitoringReport/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

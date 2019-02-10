@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -325,10 +325,10 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    ExitFormId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     EntryDate = table.Column<DateTime>(nullable: false),
-                    EmployeeId = table.Column<string>(nullable: true),
-                    ExitFormId = table.Column<string>(nullable: true)
+                    EmployeeId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

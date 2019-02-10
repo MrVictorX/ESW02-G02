@@ -44,13 +44,19 @@
                 @Html.DisplayNameFor(model => model.Breed)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Breed.Id)
+                @Html.DisplayFor(model => model.Breed.Name)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.EntryDate)
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.EntryDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Foto)
@@ -70,11 +76,11 @@
                 {
                     @foreach (var file in Model.Attachments)
                     {
-                    <form asp-action="Delete-Attachment">
-                        <input type="hidden" asp-for="Id" />
-                        <button value="Download"><a href="@String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(file.File))" download>Download @file.Name</a></button>
-                        <input type="submit" value="Delete" class="btn btn-default" /> <br />
-                    </form>
+                        <form asp-action="Delete-Attachment">
+                            <input type="hidden" asp-for="Id" />
+                            <button value="Download"><a href="@String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(file.File))" download>Download @file.Name</a></button>
+                            <input type="submit" value="Delete" class="btn btn-default" /> <br />
+                        </form>
                     }
                 }
 

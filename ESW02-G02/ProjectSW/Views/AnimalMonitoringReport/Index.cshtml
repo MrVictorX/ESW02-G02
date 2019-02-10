@@ -8,16 +8,13 @@
 <div class="div-content">
     <h2 style="font-size: 30px;"><b>Lista de Relatórios</b></h2>
     <p>
-        <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Novo Relatório </span></button></a>
+        <a asp-action="Create" asp-route-exitFormId=@ViewBag.ExitFormId class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Novo Relatório </span></button></a>
     </p>
     <table class="table">
         <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.EntryDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Employee)
@@ -28,22 +25,19 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EntryDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.AccountId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="edit-link">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="details-link">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="delete-link">Eliminar</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.Account.Email)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="edit-link">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id" class="details-link">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="delete-link">Eliminar</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

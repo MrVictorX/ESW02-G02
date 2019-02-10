@@ -2,7 +2,16 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Animal Animal = ViewBag.Animal;
+
+    string base64 = null;
+    string imgSrc = null;
+    if (Animal.Foto != null)
+    {
+        base64 = Convert.ToBase64String(Animal.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
 }
 
 <script>
@@ -22,64 +31,125 @@
 </script>
 
 <div class="div-content">
-    <h2 style="font-size: 30px;"><b>Criar Ficha de Saída</b></h2>
+    <h2 style="font-size: 30px;"><b>Criar Ficha de Adoção</b></h2>
     <hr />
-    <div>
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-action="Create" class="form-create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="AnimalId" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá escolher o nome do animal.">
-                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
-                        </button>
-                        <select asp-for="AnimalId" class="form-control" asp-items="ViewBag.AnimalId"></select>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="AdopterName" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o nome do adotante.">
-                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
-                        </button>
-                        <input asp-for="AdopterName" class="form-control" />
-                        <span asp-validation-for="AdopterName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir a descrição da ficha de saída.">
-                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
-                        </button>
-                        <textarea asp-for="Description" class="form-control"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Date" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir a data de criação da ficha.">
-                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
-                        </button>
-                        <input asp-for="Date" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Motive" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o motivo da adoção.">
-                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
-                        </button>
-                        <textarea asp-for="Motive" class="form-control"></textarea>
-                        <span asp-validation-for="Motive" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Criar" class="button-format" style="margin-left:0%" />
-                    </div>
-                </form>
+    <div class="div-content-form" style="height:350px">
+        <h2 style="font-size: 30px; margin-left:32%;">
+            <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Detalhes</b>
+        </h2>
+        <div style="margin-right: 20%; margin-left: 3%;">
+            <div>
+                <img src="@imgSrc" style="float:left; border-radius: 100%;" height="200px" width="200px" alt="Sem foto disponivel" />
+            </div>
+            <div style="margin-left: 25%; margin-top: -25%; margin-bottom: 5%; float:right;">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Animal.Name)
+                    </dt>
+                    <dd>
+                        @Animal.Name
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Animal.Size)
+                    </dt>
+                    <dd>
+                        @Animal.Size
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Animal.Gender)
+                    </dt>
+                    <dd>
+                        @Animal.Gender
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Animal.Breed)
+                    </dt>
+                    <dd>
+                        @Animal.Breed.Name
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Animal.DateOfBirth)
+                    </dt>
+                    <dd>
+                        @Animal.DateOfBirth
+                    </dd>
+                </dl>
             </div>
         </div>
-
-        <div>
-            <a asp-action="Index"><button class="button-format" style="margin-left:31.5%"><span>Voltar</span></button></a>
-        </div>
     </div>
+    <form asp-action="Create" class="form-create" style="margin-left:17%; width:50%;">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="AnimalId" class="control-label" type="hidden"></label>
+            <input asp-for="AnimalId" class="form-control" value="@ViewBag.Animal.Id" type="hidden" />
+            <span asp-validation-for="AnimalId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdopterName" class="control-label"></label>
+            <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Name" data-content="Aqui irá inserir o nome do adotante.">
+                <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+            </button>
+            <input asp-for="AdopterName" class="form-control" />
+            <span asp-validation-for="AdopterName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdopterCitizenCard"></label>
+            <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Numero de identificação" data-content="Aqui irá inserir o seu numero de identificação.">
+                <img style="width:100%" src="~/images/info_popup.png" alt="info">
+            </button>
+            <input asp-for="AdopterCitizenCard" class="form-control" placeholder="ex: 653253653" />
+            <span asp-validation-for="AdopterCitizenCard" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdopterAddress" class="control-label"></label>
+            <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Address" data-content="Aqui irá inserir a sua morada atual.">
+                <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+            </button>
+            <input asp-for="AdopterAddress" class="form-control" />
+            <span asp-validation-for="AdopterAddress" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdopterPostalCode"></label>
+            <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Codigo Postal" data-content="Aqui irá inserir o codigo postal da sua morada.">
+                <img style="width:100%" src="~/images/info_popup.png" alt="info">
+            </button>
+            <input asp-for="AdopterPostalCode" class="form-control" placeholder="ex: 2552-214" />
+            <span asp-validation-for="AdopterPostalCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdopterEmail"></label>
+            <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o seu email não institucional.">
+                <img style="width:100%" src="~/images/info_popup.png" alt="info">
+            </button>
+            <input asp-for="AdopterEmail" class="form-control" id="Registar-email" placeholder="ex: victor.miguel@hotmail.com" />
+            <span asp-validation-for="AdopterEmail" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Motive" class="control-label"></label>
+            <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Motive" data-content="Aqui irá inserir o motivo da adoção.">
+                <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+            </button>
+            <textarea asp-for="Motive" class="form-control"></textarea>
+            <span asp-validation-for="Motive" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Description" data-content="Aqui irá inserir a informação adicional.">
+                <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+            </button>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Criar" class="button-format" style="margin-left:0%" />
+        </div>
+    </form>
+
+    <div>
+        <a asp-controller="Home" asp-action="ListAnimals"><button class="button-format" style="margin-left:31.5%"><span>Voltar</span></button></a>
+    </div>
+
 </div>
-        @section Scripts {
-            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-        }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -4,6 +4,14 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+
+    string base64 = null;
+    string imgSrc = null;
+    if (Model.Animal.Foto != null)
+    {
+        base64 = Convert.ToBase64String(Model.Animal.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
 }
 
 <div class="div-content-form">
@@ -16,13 +24,9 @@
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group">
                         <label asp-for="AnimalId" class="control-label"></label>
-                        <select asp-for="AnimalId" class="form-control" asp-items="ViewBag.AnimalId"></select>
+                        <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
+                        <input asp-for="AnimalId" value="@Model.AnimalId" type="hidden" class="form-control" />
                         <span asp-validation-for="AnimalId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ReportId" class="control-label"></label>
-                        <input asp-for="ReportId" class="form-control" />
-                        <span asp-validation-for="ReportId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="AdopterName" class="control-label"></label>
@@ -30,19 +34,28 @@
                         <span asp-validation-for="AdopterName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="AdopterAddress" class="control-label"></label>
+                        <input asp-for="AdopterAddress" class="form-control" />
+                        <span asp-validation-for="AdopterAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Date" class="control-label"></label>
-                        <input asp-for="Date" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
                         <label asp-for="Motive" class="control-label"></label>
                         <input asp-for="Motive" class="form-control" />
                         <span asp-validation-for="Motive" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="State" class="control-label"></label>
+                        <select asp-for="State" class="form-control custom-select" id="Registar-user-type">
+                            <option value="Denied">Recusar</option>
+                            <option value="Evaluating">Pendente</option>
+                            <option value="Granted">Aceitar</option>
+                        </select>
+                        <span asp-validation-for="State" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;" />

@@ -8,15 +8,9 @@
 
 <div class="div-content">
     <h2 style="font-size: 30px;"><b>Lista de Adoções</b></h2>
-    <p>
-        <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Nova Ficha </span></button></a>
-    </p>
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Animal)
                 </th>
@@ -29,15 +23,17 @@
         <tbody>
             @foreach (var item in Model)
             {
+                string base64 = null;
+                string imgSrc = null;
+                if (item.Animal.Foto != null)
+                {
+                    base64 = Convert.ToBase64String(item.Animal.Foto);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+
             <tr>
-
-
-
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Animal.Name)
+                    <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AdopterName)

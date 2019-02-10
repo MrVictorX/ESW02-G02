@@ -7,24 +7,19 @@
 
 <div class="div-content">
     <h2 style="font-size: 30px;"><b>Lista de Animais</b></h2>
-    <button class="accordion button-format" style="height:50%"><span>Filtrar Lista</span></button>
-        <form asp-controller="Animals" asp-action="Listar" method="post" style="width:40%; padding-left:2%; margin-left:0%">
-            <label style="color:white">Nome:</label> <input type="text" name="filtroNome" class="form-control" style="width:80%;">
-            <label style="color:white">Raça:</label> <input type="text" name="filtroRaca" class="form-control" style="width:80%;">
-            <label style="color:white">Genero:</label> <input type="text" name="filtroGenero" class="form-control" style="width:80%;" >
-            <label style="color:white">Tamanho:</label> <input type="text" name="filtroTamanho" class="form-control" style="width:80%;">
-            <input type="submit" value="Filtrar" class="button-format" />
+    <button class="button-format" style="height:50%"><span>Filtrar Lista</span></button>
+        <form asp-controller="Animals" asp-action="Listar" class="form-create" method="post" style="width:100%; padding-left:2%; margin-left:0%">
+            <label style="color:white; display:inline;">Nome:</label> <input type="text" name="filtroNome" class="form-control" style="width:15%; display:inline;">
+            <label style="color:white; display:inline;">Raça:</label> <input type="text" name="filtroRaca" class="form-control" style="width:15%; display:inline;">
+            <label style="color:white; display:inline;">Genero:</label> <input type="text" name="filtroGenero" class="form-control" style="width:15%; display:inline;" >
+            <label style="color:white; display:inline;">Tamanho:</label> <input type="text" name="filtroTamanho" class="form-control" style="width:15%; display:inline;">
+            <input style="float: right; width:15%; display:inline;" type="submit" value="Filtrar" class="button-format" />
         </form>
         <hr>
         <a asp-action="Create" class="title-link" style="font-size: 20px;"><button class="button-format"><span>Criar Nova Ficha</span></button></a>
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    <a asp-action="OrderByData">
-                        @Html.DisplayNameFor(model => model.EntryDate)
-                    </a>
-                </th>
                 <th>
                     <a asp-action="OrderByNome">
                         @Html.DisplayNameFor(model => model.Name)
@@ -64,13 +59,10 @@
                 }
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EntryDate)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => item.Breed)
+                        @Html.DisplayFor(model => item.Breed.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(model => item.Gender)

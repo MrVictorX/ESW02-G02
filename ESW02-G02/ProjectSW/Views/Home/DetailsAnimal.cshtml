@@ -1,0 +1,86 @@
+﻿@model ProjectSW.Models.Animal
+
+@{
+    ViewData["Title"] = "Details";
+
+    string imgBase64 = null;
+    string imgSrc = null;
+    //string fileSrc = null;
+    if (Model.Foto != null)
+    {
+        imgBase64 = Convert.ToBase64String(Model.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", imgBase64);
+    }
+    //if (Model.Attachments != null)
+    //{
+    //    fileSrc = String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(Model.Attachments));
+    //}
+}
+<div class="div-content-form">
+    <h2 style="font-size: 30px; margin-left:32%;">
+        <img src="~/images/pawprint-white.png" style="margin-right: 10%;margin-bottom: 2%;" /><b>Detalhes</b>
+    </h2>
+    <div style="margin-right: 20%; margin-left: 3%;">
+        <div>
+            <img src="@imgSrc" style="float:left; border-radius: 100%;" height="200px" width="200px" alt="Sem foto disponivel" />
+        </div>
+        <div style="margin-left: 25%; margin-top: 5%; margin-bottom: 5%; float:right;">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Size)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Size)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Gender)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Breed)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Breed.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EntryDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.EntryDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Attachments)
+                </dt>
+                <dd>
+                    @if (Model.Attachments == null)
+                    {
+                        <p>Sem anexos</p>
+                    }
+                    else
+                    {
+                        @foreach (var file in Model.Attachments)
+                        {
+                            <form asp-action="Delete-Attachment">
+                                <input type="hidden" asp-for="Id" />
+                                <button value="Download"><a href="@String.Format("data:application/pdf;base64,{0}", Convert.ToBase64String(file.File))" download>Download @file.Name</a></button>
+                                <input type="submit" value="Delete" class="btn btn-default" /> <br />
+                            </form>
+                        }
+                    }
+
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div style="margin-left:25%">
+        <div class="return-link" style="margin-left: 13%; margin-top: 10%;"><a asp-action="ListAnimals" style="color:#164C48; text-decoration:none;">Voltar</a></div>
+    </div>
+</div>

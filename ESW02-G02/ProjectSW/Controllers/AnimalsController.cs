@@ -62,7 +62,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto")] Animal animal, IFormFile foto)
+        public async Task<IActionResult> Create([Bind("Id,Name,Size,DateOfBirth,Gender,BreedId,EntryDate,Foto,Available")] Animal animal, IFormFile foto)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto")] Animal animal, IFormFile foto, IFormFile attachment)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,BreedId,EntryDate,DateOfBirth,Foto")] Animal animal, IFormFile foto, IFormFile attachment)
         {
             if (id != animal.Id)
             {
@@ -152,25 +152,28 @@ namespace ProjectSW.Controllers
                     {
                         animal.Foto = _context.Animal.Select(a => a.Foto).ToList().First();
                     }
-                    var att = new Attachment { Name = attachment.FileName };
-                    if (attachment.Length > 0)
+                    if (attachment != null)
                     {
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var att = new Attachment { Name = attachment.FileName };
+                        if (attachment.Length > 0)
                         {
-                            await attachment.CopyToAsync(stream);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await attachment.CopyToAsync(stream);
+                            }
                         }
-                    }
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await attachment.CopyToAsync(memoryStream);
-                        att.File = memoryStream.ToArray();
-                        //verificar possibilidade de juntar varios pdfs num só e guardar só esse
-                        var list = new List<Attachment>
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await attachment.CopyToAsync(memoryStream);
+                            att.File = memoryStream.ToArray();
+                            //verificar possibilidade de juntar varios pdfs num só e guardar só esse
+                            var list = new List<Attachment>
                         {
                             att
                         };
-                        _context.Add(att);
-                        animal.Attachments = list;
+                            _context.Add(att);
+                            animal.Attachments = list;
+                        }
                     }
                     _context.Update(animal);
                     await _context.SaveChangesAsync();

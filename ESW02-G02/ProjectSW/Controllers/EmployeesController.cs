@@ -48,7 +48,6 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Create
-        
         public IActionResult Create()
         {
             ViewData["AccountId"] = new SelectList(_context.User, "Id", "Email");

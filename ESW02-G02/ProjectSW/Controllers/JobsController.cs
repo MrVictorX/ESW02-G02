@@ -161,6 +161,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Jobs/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

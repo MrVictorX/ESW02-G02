@@ -1,47 +1,88 @@
 ﻿@model IEnumerable<ProjectSW.Models.Animal>
+@{
+    ViewData["Title"] = "Animais";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 
-<div class="div-content">
-    <h2 style="font-size: 30px;"><b>Lista de Animais</b></h2>
+<div class="div-content" style="background-color: white; border-radius: 4px; padding: 5px; width: 90%;">
+    <h2 style="font-size: 30px;  margin-bottom: 50px; color:#164C48;"><b>Lista de Animais</b></h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.EntryDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Foto)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                string base64 = null;
-                string imgSrc = null;
-                if (item.Foto != null)
-                {
-                    base64 = Convert.ToBase64String(item.Foto);
-                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                }
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EntryDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
-                    </td>
-                </tr>
+
+
+    @foreach (var item in Model)
+    {
+        string base64 = null;
+        string imgSrc = null;
+        string nome = item.Name;
+
+        var year = @DateTime.Now.Year - @item.DateOfBirth.Date.Year;
+
+        
+
+        if (item.Foto != null)
+        {
+            base64 = Convert.ToBase64String(item.Foto);
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        }
+
+
+
+        <div class="container-img">
+            <div class="hovereffect">
+                <img class="img-animal" src="@imgSrc" height="200px" width="200px" alt="Sem foto disponivel" />
+                <div class="overlay">
+                    <button onclick="showModal(@item.Name);" style="background: transparent; border: none; margin-right: 15px;  margin-top: 20px; outline:0;">
+                        <p class="info">@nome</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="@item.Name" class="modal">
+            <div class="modal-content" style="text-align:center; font-size:24px;">
+                <div class="modal-header">
+                    <span class="close @item.Id">&times;</span>
+                    <p class="info-animal"><b>@item.Name</b></p>
+                </div>
+                <div class="modal-body" style="font-size:20px;">
+                    <img class="img-animal" src="@imgSrc" style="height:200px; width:200px; float:left;" alt="Sem foto disponivel" />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@year ano(s)</b></p><br /><br />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@item.Breed.Name</b></p><br /><br />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@item.Size</b></p><br /><br />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@item.Gender</b></p><br /><br />
+                </div>
+                <div class="modal-footer">
+                    <p style="text-align: center;"> <a asp-area="" asp-controller="ExitForm" asp-action="Create" asp-route-id="@item.Id" style="color:white;">Fazer Pedido</a></p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <script>
+            var modal = document.getElementById("myModal @item.Id");
+            var span = document.getElementsByClassName("close @item.Id")[0];
+
+            function showModal(id) {
+                modal = id;
+                id.style.display = "block";
             }
-        </tbody>
-    </table>
-</div>
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+           
+        </script>
 
+
+
+    }
+
+
+</div>
 

@@ -10,16 +10,24 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
-        [Display(Name = "Nome Animal")]
+        [Display(Name = "Animal")]
         public string AnimalId { get; set; }
-
-        public string ReportId { get; set; }
 
         [Display(Name = "Nome do Adotante")]
         public string AdopterName { get; set; }
 
-        [Display(Name = "Descrição")]
-        public string Description { get; set; }
+        [Display(Name = "Morada do adotante")]
+        public string AdopterAddress { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
+        public string AdopterEmail { get; set; }
+
+        [Display(Name = "Numero de identificação (CC)")]
+        public string AdopterCitizenCard { get; set; }
+
+        [Display(Name = "Codigo Postal")]
+        public string AdopterPostalCode { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Data")]
@@ -28,12 +36,13 @@ namespace ProjectSW.Models
         [Display(Name = "Motivo")]
         public string Motive { get; set; }
 
+        [Display(Name = "Informação Adicional")]
+        public string Description { get; set; }
+
+        [Display(Name = "Estado")]
+        public string State { get; set; }
 
         public Animal Animal { get; set; }
-
-
-        public AnimalMonitoringReport Report { get; set; }
     }
 
-   }
-
+}

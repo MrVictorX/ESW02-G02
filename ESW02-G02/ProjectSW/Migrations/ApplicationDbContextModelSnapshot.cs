@@ -63,62 +63,6 @@ namespace ProjectSW.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -141,11 +85,9 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -176,11 +118,9 @@ namespace ProjectSW.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -189,12 +129,123 @@ namespace ProjectSW.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectSW.Data.ProjectSWUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<byte[]>("FotoFile");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("UserType");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.Adopter", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("CitizenCard");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("PostalCode");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Adopter");
+                });
+
+            modelBuilder.Entity("ProjectSW.Models.AdoptionsHist", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AditionalInformation");
+
+                    b.Property<string>("AdopterAddress");
+
+                    b.Property<string>("AdopterEmail");
+
+                    b.Property<string>("AnimalBreedName");
+
+                    b.Property<DateTime>("AnimalDateOfBirth");
+
+                    b.Property<string>("AnimalGender");
+
+                    b.Property<DateTime>("EntryDate");
+
+                    b.Property<string>("Motive");
+
+                    b.Property<string>("Result");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdoptionsHist");
+                });
+
             modelBuilder.Entity("ProjectSW.Models.Animal", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BreedId");
+                    b.Property<bool>("Available");
+
+                    b.Property<int>("BreedId");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<DateTime>("EntryDate");
 
@@ -224,11 +275,13 @@ namespace ProjectSW.Migrations
 
                     b.Property<DateTime>("EntryDate");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("ExitFormId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ExitFormId");
 
                     b.ToTable("AnimalMonitoringReport");
                 });
@@ -253,8 +306,9 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("ProjectSW.Models.Breed", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
@@ -286,7 +340,15 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdopterAddress");
+
+                    b.Property<string>("AdopterCitizenCard");
+
+                    b.Property<string>("AdopterEmail");
+
                     b.Property<string>("AdopterName");
+
+                    b.Property<string>("AdopterPostalCode");
 
                     b.Property<string>("AnimalId");
 
@@ -296,13 +358,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Motive");
 
-                    b.Property<string>("ReportId");
+                    b.Property<string>("State");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
-
-                    b.HasIndex("ReportId");
 
                     b.ToTable("ExitForm");
                 });
@@ -329,25 +389,6 @@ namespace ProjectSW.Migrations
                     b.ToTable("Job");
                 });
 
-            modelBuilder.Entity("ProjectSW.Data.ProjectSWUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address");
-
-                    b.Property<DateTime>("DateOfBirth");
-
-                    b.Property<byte[]>("FotoFile");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("UserType");
-
-                    b.ToTable("ProjectSWUser");
-
-                    b.HasDiscriminator().HasValue("ProjectSWUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -358,7 +399,7 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProjectSW.Data.ProjectSWUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -366,7 +407,7 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProjectSW.Data.ProjectSWUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -379,7 +420,7 @@ namespace ProjectSW.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProjectSW.Data.ProjectSWUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -387,7 +428,7 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProjectSW.Data.ProjectSWUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -397,7 +438,8 @@ namespace ProjectSW.Migrations
                 {
                     b.HasOne("ProjectSW.Models.Breed", "Breed")
                         .WithMany()
-                        .HasForeignKey("BreedId");
+                        .HasForeignKey("BreedId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjectSW.Models.AnimalMonitoringReport", b =>
@@ -405,6 +447,10 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
+
+                    b.HasOne("ProjectSW.Models.ExitForm", "ExitForm")
+                        .WithMany()
+                        .HasForeignKey("ExitFormId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
@@ -426,10 +472,6 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Animal", "Animal")
                         .WithMany()
                         .HasForeignKey("AnimalId");
-
-                    b.HasOne("ProjectSW.Models.AnimalMonitoringReport", "Report")
-                        .WithMany()
-                        .HasForeignKey("ReportId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>

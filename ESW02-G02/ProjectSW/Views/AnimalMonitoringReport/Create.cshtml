@@ -27,12 +27,7 @@
             <form asp-action="Create" class="form-create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="UserName" class="control-label"></label>
-                    <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Nome" data-content="Aqui irá inserir o nome do animal.">
-                        <img style=" width:100%" src="~/images/info_popup.png" alt="info">
-                    </button>
-                    <input asp-for="UserName" class="form-control" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <input asp-for="ExitFormId" value="@ViewBag.ExitFormId" class="form-control" type="hidden" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
@@ -65,10 +60,10 @@
     </div>
 
     <div>
-        <a asp-action="Index"><button class="button-format" style="margin-left:31.5%"><span>Voltar</span></button></a>
+        <a asp-action="Index" asp-route-exitFormId=@ViewBag.ExitFormId><button class="button-format" style="margin-left:31.5%"><span>Voltar</span></button></a>
     </div>
 </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

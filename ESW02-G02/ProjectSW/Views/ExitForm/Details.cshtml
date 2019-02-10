@@ -4,6 +4,14 @@
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+
+    string base64 = null;
+    string imgSrc = null;
+    if (Model.Animal.Foto != null)
+    {
+        base64 = Convert.ToBase64String(Model.Animal.Foto);
+        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
 }
 
 <div class="div-content-form">
@@ -13,10 +21,10 @@
     <div style="margin-left: 25%; margin-top: 5%; margin-bottom: 5%;">
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.ReportId)
+                @Html.DisplayNameFor(model => model.Animal)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.ReportId)
+                <img src="@imgSrc" height="100px" width="100px" alt="Sem foto disponivel" />
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.AdopterName)
@@ -25,16 +33,16 @@
                 @Html.DisplayFor(model => model.AdopterName)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.AdopterAddress)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Description)
+                @Html.DisplayFor(model => model.AdopterAddress)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayNameFor(model => model.AdopterEmail)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Date)
+                @Html.DisplayFor(model => model.AdopterEmail)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Motive)
@@ -43,10 +51,16 @@
                 @Html.DisplayFor(model => model.Motive)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Animal)
+                @Html.DisplayNameFor(model => model.Description)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Animal.Name)
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.State)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.State)
             </dd>
         </dl>
     </div>
@@ -54,7 +68,7 @@
         <div class="return-link">
             <a asp-area="" asp-controller="AnimalMonitoringReport" asp-action="Index" class="edit-link">Relatórios</a>
             </div>
-            <div class="return-link" >
+            <div class="return-link">
                 <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link">Editar</a>
             </div>
             <div class="return-link" style="display:inline;"><a asp-action="Index" lass="edit-link" style="color:#164C48; text-decoration:none;">Voltar</a></div>

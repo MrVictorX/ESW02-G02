@@ -38,12 +38,20 @@ namespace ProjectSW
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ProjectSWUser>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = true;
-            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            
+            services.AddIdentity<ProjectSWUser, IdentityRole>()
+                    .AddRoleManager<RoleManager<IdentityRole>>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrador"));
+                options.AddPolicy("RequireFuncionarioRole", policy => policy.RequireRole("Administrador, Funcionarios"));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,7 +89,6 @@ namespace ProjectSW
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ProjectSWUser>>();
             string[] roleNames = { "Administrador", "Voluntario", "Funcionario" };
-            IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
             {
@@ -89,8 +96,12 @@ namespace ProjectSW
                 // ensure that the role does not exist
                 if (!roleExist)
                 {
-                    //create the roles and seed them to the database: 
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                    //create the roles and seed them to the database:
+                    var role = new IdentityRole
+                    {
+                        Name = roleName
+                    };
+                    await RoleManager.CreateAsync(role);
                 }
             }
 
@@ -120,5 +131,6 @@ namespace ProjectSW
                 }
             }
         }
+
     }
 }

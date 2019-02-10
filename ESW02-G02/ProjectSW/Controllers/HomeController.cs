@@ -31,9 +31,19 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        public IActionResult MostAdopted()
+        public async Task<IActionResult> MostAdopted()
         {
-            return View();
+            List<Animal> animals = new List<Animal>();
+            var applicationDbContext = _context.Animal;
+
+            foreach (Animal a in await applicationDbContext.ToListAsync())
+            {
+                if (!a.Available)
+                {
+                    animals.Add(a);
+                }
+            }
+            return View(animals);
         }
 
         public IActionResult ExitFormSubmited()

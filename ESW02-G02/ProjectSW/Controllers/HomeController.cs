@@ -31,21 +31,6 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-        public async Task<IActionResult> MostAdopted()
-        {
-            List<Animal> animals = new List<Animal>();
-            var applicationDbContext = _context.Animal;
-
-            foreach (Animal a in await applicationDbContext.ToListAsync())
-            {
-                if (!a.Available)
-                {
-                    animals.Add(a);
-                }
-            }
-            return View(animals);
-        }
-
         public IActionResult ExitFormSubmited()
         {
             return View();
@@ -58,26 +43,16 @@ namespace ProjectSW.Controllers
             return View();
         }
 
-
-
         public IActionResult Privacy()
         {
             return View();
         }
 
-        public async Task<IActionResult> ShowHeatMap()
+        public IActionResult Statistics()
         {
-            List<Location> locations = new List<Location>();
-            var applicationDbContext = _context.Adopter;
-    
-            foreach(Adopter a in await applicationDbContext.ToListAsync())
-            {
-                locations.Add(GetLocationRequest(a.PostalCode));
-            }
-
-
-            return View(locations);
+            return View();
         }
+
 
         public async Task<IActionResult> DetailsAnimal(string id)
         {
@@ -107,35 +82,6 @@ namespace ProjectSW.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        private Location GetLocationRequest(string postalcode)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.geonames.org/postalCodeLookupJSON?postalcode="+ postalcode + "&country=PT&username=tesing_software");
-            request.Method = Http.Get;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            {
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
-                    throw new ApplicationException("Error: Response status " + response.StatusCode);
-                }
-
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    if (responseStream != null)
-                    {
-                        using (StreamReader reader = new StreamReader(responseStream))
-                        {
-                            var locations = JsonConvert.DeserializeObject<dynamic>(reader.ReadToEnd());
-                            Location location = new Location { Lat = locations.postalcodes[0].lat, Lng = locations.postalcodes[0].lng };
-                            return location;
-                        }
-                    }//end of reader
-                }//End of stream
-            }//End of response
-
-            return null;
         }
     }
 }

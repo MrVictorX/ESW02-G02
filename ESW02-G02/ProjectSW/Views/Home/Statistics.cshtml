@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Statistics";
+}
+<br><br><br><br>
+
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#first" aria-controls="first" role="tab" data-toggle="tab">HeatMap</a>
+        </li>
+        <li role="presentation">
+            <a href="#second" aria-controls="second" role="tab" data-toggle="tab">Grafico da idade</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="first" style="background-color:transparent; width:450px; height:300px; margin-top:1%">
+            <h3>Heatmap com a localização dos animais adotados</h3>
+            @(await Component.InvokeAsync("HeatMap"))
+        </div>
+        <div role="tabpanel" class="tab-pane" id="second" style="background-color:transparent;">
+            <h2>Idades dos animais mais adotados</h2>
+            @(await Component.InvokeAsync("MostAdopted"))
+        </div>
+    </div>
+</div>

@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<ProjectSW.Models.Animal>
 @{
-    ViewData["Title"] = "MostAdoptedView";
-    Layout = "~/Views/Shared/_LayoutLogged.cshtml";
+    Layout = null;
 }
-<br /><br /><br />
-
-<h2>Idades dos animais mais adotados</h2>
 
 <div class="col-md-5">
     <canvas id="myChart" style="background-color:white;"></canvas>
 </div>
+
+
 
 <script type="text/javascript">
     function GetAnimalData() {

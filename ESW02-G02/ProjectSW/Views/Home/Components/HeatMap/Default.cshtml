@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectSW.Models.Location>
+
+@{
+    Layout = null;
+}
+
+<div id="map" style="width:100%; height:100%"></div>
+<script>
+    var map, heatmap;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: { lat: 38.5254, lng: -8.8941 }
+        });
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+            data: getPoints(),
+            map: map
+        });
+    }
+
+    // Heatmap data: 500 Points
+    function getPoints() {
+        var locations = @Html.Raw(Json.Serialize(Model));
+
+        var points = new Array();
+
+        for (i = 0; i < locations.length; i++) {
+            console.log(locations[i].lat);
+            console.log(locations[i].lng);
+            points.push(new google.maps.LatLng(locations[i].lat, locations[i].lng));
+        }
+        return points;
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQUh-y09sPFiNiCYFRjJ-ixrf76nYt-yw&libraries=visualization&callback=initMap">
+</script>

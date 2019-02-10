@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-ProjectSW-28DF642F-ABDC-45AF-8D2D-C2FDEABC5582</UserSecretsId>
-    <StartupObject>ProjectSW.Program</StartupObject>
+    <StartupObject></StartupObject>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
   </PropertyGroup>

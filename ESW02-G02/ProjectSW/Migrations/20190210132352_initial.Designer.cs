@@ -10,14 +10,14 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190210082945_Initial")]
-    partial class Initial
+    [Migration("20190210132352_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -364,6 +364,8 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Motive");
 
+                    b.Property<string>("ReportId");
+
                     b.Property<string>("State");
 
                     b.HasKey("Id");
@@ -456,7 +458,7 @@ namespace ProjectSW.Migrations
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("ProjectSW.Models.ExitForm", "ExitForm")
-                        .WithMany()
+                        .WithMany("Report")
                         .HasForeignKey("ExitFormId");
                 });
 

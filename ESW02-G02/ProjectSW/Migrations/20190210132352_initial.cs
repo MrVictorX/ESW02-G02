@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -301,15 +301,16 @@ namespace ProjectSW.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AnimalId = table.Column<string>(nullable: true),
+                    ReportId = table.Column<string>(nullable: true),
                     AdopterName = table.Column<string>(nullable: true),
                     AdopterAddress = table.Column<string>(nullable: true),
                     AdopterEmail = table.Column<string>(nullable: true),
-                    AdopterCitizenCard = table.Column<string>(nullable: true),
-                    AdopterPostalCode = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Motive = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    State = table.Column<string>(nullable: true)
+                    State = table.Column<string>(nullable: true),
+                    AdopterCitizenCard = table.Column<string>(nullable: true),
+                    AdopterPostalCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

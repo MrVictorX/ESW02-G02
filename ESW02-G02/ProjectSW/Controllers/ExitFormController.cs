@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +10,6 @@ using ProjectSW.Data;
 using ProjectSW.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjectSW.Controllers
 {
@@ -50,13 +51,13 @@ namespace ProjectSW.Controllers
 
         // GET: ExitForm/Create
         [AllowAnonymous]
-        public async Task<IActionResult> Create(string animalId)
+        public async Task<IActionResult> Create(string id)
         {
-            if (animalId == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id == animalId);
+            var animal = await _context.Animal.Include(e => e.Breed).FirstOrDefaultAsync(m => m.Id == id);
             if (animal == null)
             {
                 return NotFound();
@@ -73,7 +74,7 @@ namespace ProjectSW.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([Bind("Id,AnimalId,AdopterName,AdopterAddress,AdopterEmail,AdopterCitizenCard,AdopterPostalCode,Description,Date,Motive,State")] ExitForm exitForm)
+        public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +119,6 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Edit/5
-        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -142,7 +142,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,AdopterName,AdopterAddress,AdopterEmail,AdopterCitizenCard,AdopterPostalCode,Description,Date,Motive,State")] ExitForm exitForm)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (id != exitForm.Id)
             {
@@ -163,19 +163,7 @@ namespace ProjectSW.Controllers
                         return NotFound();
                     }
 
-                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
-                    //Antes de fazer push remover chave
-                    var client = new SendGridClient(apiKey);
-
-                    var msg = new SendGridMessage()
-                    {
-                        From = new EmailAddress("QuintaDoMiao@exemplo.com", "Quinta do Miao"),
-                        PlainTextContent = "Pedido de adoção",
-                        Subject = "Pedido de adoção",
-                    };
-
-
-                    if (exitForm.State == "Granted" || exitForm.State == "Denied")
+                    if(exitForm.State == "Granted" || exitForm.State == "Denied")
                     {
                         _context.AdoptionsHist.Add(new AdoptionsHist
                         {
@@ -188,48 +176,13 @@ namespace ProjectSW.Controllers
                             EntryDate = animal.EntryDate,
                             Result = exitForm.State
                         });
-
-                        Adopter adopter = await _context.Adopter.FirstOrDefaultAsync(m => m.CitizenCard == exitForm.AdopterCitizenCard);
-
-                        if (adopter == null)
-                        {
-                            _context.Adopter.Add(new Adopter
-                            {
-                                Email = exitForm.AdopterEmail,
-                                Address = exitForm.AdopterAddress,
-                                CitizenCard = exitForm.AdopterCitizenCard,
-                                PostalCode = exitForm.AdopterPostalCode
-                            });
-                        }
                     }
                     if (exitForm.State == "Granted")
                     {
                         animal.Available = false;
-
-                        foreach(ExitForm ef in _context.ExitForm.Where(e => e.AnimalId == animal.Id))
-                        {
-                            if (ef.Id != exitForm.Id)
-                            {
-                                ef.State = "Denied";
-                            }
-                            else
-                            {
-                                ef.State = "Granted";
-                            }
-                        }
-
-                        msg.AddContent(MimeType.Text, $"Olá {exitForm.AdopterName}.<br><br>O seu pedido de adoção do {animal.Name} foi aceite." +
-                            $"<br>Poderá comparecer no local para se efetuar a entrevista e terminar o processo de avaliação e levar o mesmo." +
-                            $"<br><br>Com os melhores cumprimentos,<br>Quinta do Mião.");
-                    }
-                    else if (exitForm.State == "Denied")
-                    {
-                        msg.AddContent(MimeType.Text, $"Olá {exitForm.AdopterName}.<br><br>Pedimos desculpa mas o seu pedido foi recusado.<br>Obrigado pelo contacto.<br><br>Com os melhores cumprimentos,<br>Quinta do Mião.");
                     }
                     _context.Update(animal);
-
-                    msg.AddTo(new EmailAddress(exitForm.AdopterEmail, exitForm.AdopterName));
-                    var response2 = await client.SendEmailAsync(msg);
+                    _context.Update(exitForm);
 
                     await _context.SaveChangesAsync();
                 }
@@ -251,7 +204,6 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Delete/5
-        [Authorize(Roles = "Administrador, Funcionario")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

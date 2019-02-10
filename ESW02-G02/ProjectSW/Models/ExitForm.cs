@@ -45,5 +45,4 @@ namespace ProjectSW.Models
         public Animal Animal { get; set; }
     }
 
-   }
-
+}

@@ -46,10 +46,11 @@
                     <p class="info-animal"><b>@item.Name</b></p>
                 </div>
                 <div class="modal-body" style="font-size:20px;">
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@year ano(s)</b></p><br /><br />
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Breed.Name</b></p><br /><br />
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Size</b></p><br /><br />
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Gender</b></p><br /><br />
+                    <img class="img-animal" src="@imgSrc" style="height:200px; width:200px; float:left;" alt="Sem foto disponivel" />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@year ano(s)</b></p><br /><br />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@item.Breed.Name</b></p><br /><br />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@item.Size</b></p><br /><br />
+                    <img src="~/images/pawprint.png" />   <p class="info-animal" style="margin-right:22%"><b>@item.Gender</b></p><br /><br />
                 </div>
                 <div class="modal-footer">
                     <p style="text-align: center;"> <a asp-area="" asp-controller="ExitForm" asp-action="Create" asp-route-id="@item.Id" style="color:white;">Fazer Pedido</a></p>

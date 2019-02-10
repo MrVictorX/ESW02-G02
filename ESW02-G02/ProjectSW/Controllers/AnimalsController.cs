@@ -86,7 +86,7 @@ namespace ProjectSW.Controllers
                     }
                 }
 
-                
+
                 _context.Add(animal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -116,9 +116,9 @@ namespace ProjectSW.Controllers
         // POST: Animals/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto")] Animal animal, IFormFile foto, IFormFile attachment)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Size,Gender,BreedId,EntryDate,DateOfBirth,Foto")] Animal animal, IFormFile foto, IFormFile attachment)
         {
             if (id != animal.Id)
             {
@@ -136,7 +136,8 @@ namespace ProjectSW.Controllers
                 {
                     var filePath = Path.GetTempFileName();
 
-                    if(foto != null) { 
+                    if (foto != null)
+                    {
                         if (foto.Length > 0)
                         {
                             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -245,8 +246,8 @@ namespace ProjectSW.Controllers
         public async Task<IActionResult> DeleteAttachment(string id)
         {
             var attachment = _context.Attachment.Select(att => att).Where(att => att.AnimalId == id).First();
-            if(attachment != null)
-            _context.Attachment.Remove(attachment);
+            if (attachment != null)
+                _context.Attachment.Remove(attachment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

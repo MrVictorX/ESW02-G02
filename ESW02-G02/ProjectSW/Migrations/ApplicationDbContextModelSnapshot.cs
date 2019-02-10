@@ -217,7 +217,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AdopterAddress");
 
+                    b.Property<string>("AdopterCitizenCard");
+
                     b.Property<string>("AdopterEmail");
+
+                    b.Property<string>("AdopterPostalCode");
 
                     b.Property<string>("AnimalBreedName");
 
@@ -380,7 +384,8 @@ namespace ProjectSW.Migrations
 
                     b.Property<DateTime>("Hour");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

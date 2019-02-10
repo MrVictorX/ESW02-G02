@@ -9,77 +9,24 @@
     <h2 style="font-size: 30px;  margin-bottom: 50px; color:#164C48;"><b>Lista de Animais</b></h2>
 
 
-
     @foreach (var item in Model)
     {
         string base64 = null;
         string imgSrc = null;
-        string nome = item.Name;
-
-        var year = DateTime.Now.Year - item.DateOfBirth.Date.Year;
-
-        
-
         if (item.Foto != null)
         {
             base64 = Convert.ToBase64String(item.Foto);
             imgSrc = String.Format("data:image/gif;base64,{0}", base64);
         }
 
-
-
         <div class="container-img">
             <div class="hovereffect">
                 <img class="img-animal" src="@imgSrc" height="200px" width="200px" alt="Sem foto disponivel" />
                 <div class="overlay">
-                    <button onclick="showModal(@item.Name);" style="background: transparent; border: none; margin-right: 15px;  margin-top: 20px; outline:0;">
-                        <p class="info">@nome</p>
-                    </button>
+                    <a class="info" asp-action="DetailsAnimal" asp-route-id="@item.Id"> @Html.DisplayFor(model => item.Name)</a>
                 </div>
             </div>
         </div>
-
-        <div id="@item.Name" class="modal">
-            <div class="modal-content" style="text-align:center; font-size:24px;">
-                <div class="modal-header">
-                    <span class="close @item.Id">&times;</span>
-                    <p class="info-animal"><b>@item.Name</b></p>
-                </div>
-                <div class="modal-body" style="font-size:20px;">
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@year ano(s)</b></p><br /><br />
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Breed.Name</b></p><br /><br />
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Size</b></p><br /><br />
-                    <img src="~/images/pawprint.png" />   <p class="info-animal"><b>@item.Gender</b></p><br /><br />
-                </div>
-                <div class="modal-footer">
-                    <p style="text-align: center;"> <a asp-area="" asp-controller="ExitForm" asp-action="Create" asp-route-id="@item.Id" style="color:white;">Fazer Pedido</a></p>
-                </div>
-
-            </div>
-        </div>
-
-
-        <script>
-            var modal = document.getElementById("myModal @item.Id");
-            var span = document.getElementsByClassName("close @item.Id")[0];
-
-            function showModal(id) {
-                modal = id;
-                id.style.display = "block";
-            }
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-           
-        </script>
-
-
-
     }
 
 

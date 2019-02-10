@@ -60,6 +60,11 @@
                     <span asp-validation-for="EntryDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="DateOfBirth" class="control-label"></label>
+                    <input asp-for="DateOfBirth" class="form-control" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Foto" class="control-label"></label>
                     <input asp-for="Foto" class="form-control" type="file" name="foto" id="foto" onchange="loadFile(event)" value="fileSrc = String.Format('data:application/pdf;base64,{0}', Convert.ToBase64String(Model.Attachment));" />
                     <span asp-validation-for="Foto" class="text-danger"></span>
@@ -75,7 +80,7 @@
                 <div class="form-group">
                     <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;" />
                 </div>
-                
+
             </form>
         </div>
     </div>

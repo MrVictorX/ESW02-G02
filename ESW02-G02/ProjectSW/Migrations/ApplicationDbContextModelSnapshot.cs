@@ -217,11 +217,7 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AdopterAddress");
 
-                    b.Property<string>("AdopterCitizenCard");
-
                     b.Property<string>("AdopterEmail");
-
-                    b.Property<string>("AdopterPostalCode");
 
                     b.Property<string>("AnimalBreedName");
 
@@ -362,8 +358,6 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Motive");
 
-                    b.Property<string>("ReportId");
-
                     b.Property<string>("State");
 
                     b.HasKey("Id");
@@ -386,8 +380,7 @@ namespace ProjectSW.Migrations
 
                     b.Property<DateTime>("Hour");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -456,7 +449,7 @@ namespace ProjectSW.Migrations
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("ProjectSW.Models.ExitForm", "ExitForm")
-                        .WithMany("Report")
+                        .WithMany()
                         .HasForeignKey("ExitFormId");
                 });
 

@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -48,11 +49,11 @@ namespace ProjectSW.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Statistics()
         {
             return View();
         }
-
 
         public async Task<IActionResult> DetailsAnimal(string id)
         {

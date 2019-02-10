@@ -28,6 +28,7 @@ namespace ProjectSW.Models
         public string Gender { get; set; }
 
         [DataType(DataType.Date)]
+        [ValidateYearsAnimal]
         [Display(Name = "Data de nascimento")]
         public DateTime DateOfBirth { get; set; }
 

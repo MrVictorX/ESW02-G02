@@ -41,7 +41,11 @@
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Cargo" data-content="Aqui irá inserir o cargo do funcionário.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
-                        <input asp-for="Type" class="form-control" id="user-type"/>
+                        <select asp-for="Type" class="form-control custom-select" id="Registar-user-type">
+                            <option value="Funcionario" selected>Funcionario</option>
+                            <option value="Voluntario">Voluntario</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
                         <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
                     <div class="form-group">

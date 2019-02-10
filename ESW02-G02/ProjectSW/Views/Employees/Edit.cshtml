@@ -18,18 +18,18 @@
                         <select asp-for="AccountId" class="form-control" asp-items="ViewBag.AccountId"></select>
                         <span asp-validation-for="AccountId" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Type" class="control-label"></label>
-                        <input asp-for="Type" class="form-control" />
-                        <span asp-validation-for="Type" class="text-danger"></span>
-                    </div>
+                    <select asp-for="Type" class="form-control custom-select" id="Registar-user-type">
+                        <option value="Funcionario" selected>Funcionario</option>
+                        <option value="Voluntario">Voluntario</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
                     <div class="form-group">
                         <label asp-for="AditionalInformation" class="control-label"></label>
                         <textarea asp-for="AditionalInformation" class="form-control"></textarea>
                         <span asp-validation-for="AditionalInformation" class="text-danger" id="edit-info"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;" id="edit-submit"/>
+                        <input type="submit" value="Guardar" class="button-format" style="margin-left:-1%;" id="edit-submit" />
                     </div>
                 </form>
             </div>

@@ -50,7 +50,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Employees/Create
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador, Funcionario")]
         /// <summary>Ação que resulta numa pagina com o formulario da criação de uma utilizadores</summary>
         public IActionResult Create()
         {

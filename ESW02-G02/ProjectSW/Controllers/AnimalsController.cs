@@ -51,7 +51,7 @@ namespace ProjectSW.Controllers
         }
 
         // GET: Animals/Create
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador, Funcionario")]
         public IActionResult Create()
         {
             ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name");
@@ -63,7 +63,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,EntryDate,Foto,Available")] Animal animal, IFormFile foto)
+        public async Task<IActionResult> Create([Bind("Id,Name,Size,Gender,BreedId,DateOfBirth,EntryDate,Foto,Available")] Animal animal, IFormFile foto)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace ProjectSW.Controllers
                         animal.Foto = memoryStream.ToArray();
                     }
                 }
-
+                animal.Available = true;
 
                 _context.Add(animal);
                 await _context.SaveChangesAsync();

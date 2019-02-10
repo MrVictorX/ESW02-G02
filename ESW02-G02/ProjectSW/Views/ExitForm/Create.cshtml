@@ -77,35 +77,43 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="AdopterName" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o nome do adotante.">
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Name" data-content="Aqui irá inserir o nome do adotante.">
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <input asp-for="AdopterName" class="form-control" />
                         <span asp-validation-for="AdopterName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="AdopterCitizenCard"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Numero de identificação" data-content="Aqui irá inserir o seu numero de identificação.">
+                            <img style="width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <input asp-for="AdopterCitizenCard" class="form-control" placeholder="ex: 653253653" />
+                        <span asp-validation-for="AdopterCitizenCard" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="AdopterAddress" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir a data de criação da ficha.">
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Address" data-content="Aqui irá inserir a sua morada atual.">
                             <img style=" width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <input asp-for="AdopterAddress" class="form-control" />
                         <span asp-validation-for="AdopterAddress" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="AdopterEmail">Email*</label>
+                        <label asp-for="AdopterPostalCode"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Codigo Postal" data-content="Aqui irá inserir o codigo postal da sua morada.">
+                            <img style="width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <input asp-for="AdopterPostalCode" class="form-control" placeholder="ex: 2552-214" />
+                        <span asp-validation-for="AdopterPostalCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AdopterEmail"></label>
                         <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir o seu email não institucional.">
                             <img style="width:100%" src="~/images/info_popup.png" alt="info">
                         </button>
                         <input asp-for="AdopterEmail" class="form-control" id="Registar-email" placeholder="ex: victor.miguel@hotmail.com" />
                         <span asp-validation-for="AdopterEmail" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Email" data-content="Aqui irá inserir a descrição da ficha de saída.">
-                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
-                        </button>
-                        <textarea asp-for="Description" class="form-control"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Motive" class="control-label"></label>
@@ -114,6 +122,14 @@
                         </button>
                         <textarea asp-for="Motive" class="form-control"></textarea>
                         <span asp-validation-for="Motive" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <button style="background-color:#164C48; width:3em; float:right;" type="button" class="btn btn-outline-info form-control" data-toggle="popover" data-trigger="focus" title="Description" data-content="Aqui irá inserir a informação adicional.">
+                            <img style=" width:100%" src="~/images/info_popup.png" alt="info">
+                        </button>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Criar" class="button-format" style="margin-left:0%" />

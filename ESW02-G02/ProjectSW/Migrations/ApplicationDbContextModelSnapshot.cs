@@ -15,7 +15,7 @@ namespace ProjectSW.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -85,11 +85,9 @@ namespace ProjectSW.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -120,11 +118,9 @@ namespace ProjectSW.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -199,9 +195,13 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Address");
+                    b.Property<string>("Address");
+
+                    b.Property<string>("CitizenCard");
 
                     b.Property<string>("Email");
+
+                    b.Property<string>("PostalCode");
 
                     b.HasKey("Id");
 
@@ -217,7 +217,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AdopterAddress");
 
+                    b.Property<string>("AdopterCitizenCard");
+
                     b.Property<string>("AdopterEmail");
+
+                    b.Property<string>("AdopterPostalCode");
 
                     b.Property<string>("AnimalBreedName");
 
@@ -338,9 +342,13 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AdopterAddress");
 
+                    b.Property<string>("AdopterCitizenCard");
+
                     b.Property<string>("AdopterEmail");
 
                     b.Property<string>("AdopterName");
+
+                    b.Property<string>("AdopterPostalCode");
 
                     b.Property<string>("AnimalId");
 
@@ -376,7 +384,8 @@ namespace ProjectSW.Migrations
 
                     b.Property<DateTime>("Hour");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

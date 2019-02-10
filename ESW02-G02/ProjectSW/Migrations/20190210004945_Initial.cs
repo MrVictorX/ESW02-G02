@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectSW.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,9 @@ namespace ProjectSW.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
-                    Address = table.Column<bool>(nullable: false)
+                    Address = table.Column<string>(nullable: true),
+                    CitizenCard = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,6 +30,8 @@ namespace ProjectSW.Migrations
                     Id = table.Column<string>(nullable: false),
                     AdopterEmail = table.Column<string>(nullable: true),
                     AdopterAddress = table.Column<string>(nullable: true),
+                    AdopterCitizenCard = table.Column<string>(nullable: true),
+                    AdopterPostalCode = table.Column<string>(nullable: true),
                     Motive = table.Column<string>(nullable: true),
                     AnimalDateOfBirth = table.Column<DateTime>(nullable: false),
                     AnimalBreedName = table.Column<string>(nullable: true),
@@ -144,8 +148,8 @@ namespace ProjectSW.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -189,8 +193,8 @@ namespace ProjectSW.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -275,7 +279,7 @@ namespace ProjectSW.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     EmployeeId = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Day = table.Column<DateTime>(nullable: false),
                     Hour = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true)
@@ -321,6 +325,8 @@ namespace ProjectSW.Migrations
                     AdopterName = table.Column<string>(nullable: true),
                     AdopterAddress = table.Column<string>(nullable: true),
                     AdopterEmail = table.Column<string>(nullable: true),
+                    AdopterCitizenCard = table.Column<string>(nullable: true),
+                    AdopterPostalCode = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Motive = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),

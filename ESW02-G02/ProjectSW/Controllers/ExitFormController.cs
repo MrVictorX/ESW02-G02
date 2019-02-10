@@ -24,7 +24,6 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm
-        /// <summary>Ação que resulta numa pagina com uma lista de ExitForms</summary>
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.ExitForm.Include(e => e.Animal);
@@ -32,7 +31,6 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Details/5
-        /// <summary>Ação que resulta numa pagina com os detalhes de uma exitForm</summary>
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -53,7 +51,6 @@ namespace ProjectSW.Controllers
 
         // GET: ExitForm/Create
         [AllowAnonymous]
-        /// <summary>Ação que resulta numa pagina com o formulario da criação de uma exitForm</summary>
         public async Task<IActionResult> Create(string id)
         {
             if (id == null)
@@ -77,7 +74,6 @@ namespace ProjectSW.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        /// <summary>Ação que resulta na criação de uma exitForm</summary>
         public async Task<IActionResult> Create([Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (ModelState.IsValid)
@@ -123,7 +119,6 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Edit/5
-        /// <summary>Ação que resulta numa pagina com os detalhes de uma exitForm de forma a poderem ser editados</summary>
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -147,8 +142,7 @@ namespace ProjectSW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        /// <summary>Ação que resulta numa pagina com a edição de uma exitForm</summary>
-        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,ReportId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,AnimalId,AdopterName,AdopterAddress,AdopterEmail,Description,Date,Motive,State")] ExitForm exitForm)
         {
             if (id != exitForm.Id)
             {
@@ -210,7 +204,6 @@ namespace ProjectSW.Controllers
         }
 
         // GET: ExitForm/Delete/5
-        /// <summary>Ação que resulta num prompt para apagar uma exitForm</summary>
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -232,7 +225,6 @@ namespace ProjectSW.Controllers
         // POST: ExitForm/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        /// <summary>Ação que resulta numa exitForm apagada</summary>
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var exitForm = await _context.ExitForm.FindAsync(id);

@@ -13,6 +13,7 @@
                 <form asp-action="Edit" style="margin-left: 100%; margin-top: 10%; width:130%">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ExitFormId" />
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
                         <input asp-for="Description" class="form-control" />

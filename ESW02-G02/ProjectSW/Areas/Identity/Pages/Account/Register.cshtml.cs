@@ -50,6 +50,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "A Data de Nascimento é um campo obrigatório.")]
             [DataType(DataType.Date)]
             [Display(Name = "Data de Nascimento")]
+            [ValidateYearsAtribute]
             public DateTime DateOfBirth { get; set; }
 
             [Required(ErrorMessage = "O Tipo de Utilizador é um campo obrigatório.")]

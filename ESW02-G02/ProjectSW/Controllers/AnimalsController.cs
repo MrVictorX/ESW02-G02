@@ -91,7 +91,7 @@ namespace ProjectSW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Id", animal.BreedId);
+            ViewData["BreedId"] = new SelectList(_context.Set<Breed>(), "Id", "Name", animal.BreedId);
             return View(animal);
         }
 

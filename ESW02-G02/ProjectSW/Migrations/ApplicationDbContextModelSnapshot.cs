@@ -279,9 +279,13 @@ namespace ProjectSW.Migrations
 
                     b.Property<DateTime>("EntryDate");
 
+                    b.Property<string>("ExitFormId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ExitFormId");
 
                     b.ToTable("AnimalMonitoringReport");
                 });
@@ -358,15 +362,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Motive");
 
-                    b.Property<string>("ReportId");
-
                     b.Property<string>("State");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
-
-                    b.HasIndex("ReportId");
 
                     b.ToTable("ExitForm");
                 });
@@ -452,6 +452,10 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
+
+                    b.HasOne("ProjectSW.Models.ExitForm", "ExitForm")
+                        .WithMany()
+                        .HasForeignKey("ExitFormId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
@@ -473,10 +477,6 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Animal", "Animal")
                         .WithMany()
                         .HasForeignKey("AnimalId");
-
-                    b.HasOne("ProjectSW.Models.AnimalMonitoringReport", "Report")
-                        .WithMany()
-                        .HasForeignKey("ReportId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>

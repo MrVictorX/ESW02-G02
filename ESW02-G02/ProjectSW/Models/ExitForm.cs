@@ -13,8 +13,6 @@ namespace ProjectSW.Models
         [Display(Name = "Animal")]
         public string AnimalId { get; set; }
 
-        public string ReportId { get; set; }
-
         [Display(Name = "Nome do Adotante")]
         public string AdopterName { get; set; }
 
@@ -45,8 +43,6 @@ namespace ProjectSW.Models
         public string State { get; set; }
 
         public Animal Animal { get; set; }
-
-        public AnimalMonitoringReport Report { get; set; }
     }
 
    }

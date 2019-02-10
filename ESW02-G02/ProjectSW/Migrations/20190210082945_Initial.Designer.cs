@@ -10,14 +10,14 @@ using ProjectSW.Data;
 namespace ProjectSW.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190210001648_Initial")]
+    [Migration("20190210082945_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -197,9 +197,13 @@ namespace ProjectSW.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Address");
+                    b.Property<string>("Address");
+
+                    b.Property<string>("CitizenCard");
 
                     b.Property<string>("Email");
+
+                    b.Property<string>("PostalCode");
 
                     b.HasKey("Id");
 
@@ -215,7 +219,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AdopterAddress");
 
+                    b.Property<string>("AdopterCitizenCard");
+
                     b.Property<string>("AdopterEmail");
+
+                    b.Property<string>("AdopterPostalCode");
 
                     b.Property<string>("AnimalBreedName");
 
@@ -273,9 +281,13 @@ namespace ProjectSW.Migrations
 
                     b.Property<DateTime>("EntryDate");
 
+                    b.Property<string>("ExitFormId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ExitFormId");
 
                     b.ToTable("AnimalMonitoringReport");
                 });
@@ -336,9 +348,13 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("AdopterAddress");
 
+                    b.Property<string>("AdopterCitizenCard");
+
                     b.Property<string>("AdopterEmail");
 
                     b.Property<string>("AdopterName");
+
+                    b.Property<string>("AdopterPostalCode");
 
                     b.Property<string>("AnimalId");
 
@@ -348,15 +364,11 @@ namespace ProjectSW.Migrations
 
                     b.Property<string>("Motive");
 
-                    b.Property<string>("ReportId");
-
                     b.Property<string>("State");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
-
-                    b.HasIndex("ReportId");
 
                     b.ToTable("ExitForm");
                 });
@@ -442,6 +454,10 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
+
+                    b.HasOne("ProjectSW.Models.ExitForm", "ExitForm")
+                        .WithMany()
+                        .HasForeignKey("ExitFormId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Attachment", b =>
@@ -463,10 +479,6 @@ namespace ProjectSW.Migrations
                     b.HasOne("ProjectSW.Models.Animal", "Animal")
                         .WithMany()
                         .HasForeignKey("AnimalId");
-
-                    b.HasOne("ProjectSW.Models.AnimalMonitoringReport", "Report")
-                        .WithMany()
-                        .HasForeignKey("ReportId");
                 });
 
             modelBuilder.Entity("ProjectSW.Models.Job", b =>

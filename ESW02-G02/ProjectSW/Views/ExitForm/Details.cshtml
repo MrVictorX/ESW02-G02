@@ -78,7 +78,7 @@
     </div>
     <div style="margin-left:25%">
         <div class="return-link">
-            <a asp-area="" asp-controller="AnimalMonitoringReport" asp-action="Index" class="edit-link">Relatórios</a>
+            <a asp-area="" asp-controller="AnimalMonitoringReport" asp-action="Index" asp-route-exitFormId="@Model.Id" class="edit-link">Relatórios</a>
             </div>
             <div class="return-link">
                 <a asp-action="Edit" asp-route-id="@Model.Id" class="edit-link">Editar</a>

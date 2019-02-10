@@ -14,7 +14,9 @@ namespace ProjectSW.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
-                    Address = table.Column<bool>(nullable: false)
+                    Address = table.Column<string>(nullable: true),
+                    CitizenCard = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,6 +30,8 @@ namespace ProjectSW.Migrations
                     Id = table.Column<string>(nullable: false),
                     AdopterEmail = table.Column<string>(nullable: true),
                     AdopterAddress = table.Column<string>(nullable: true),
+                    AdopterCitizenCard = table.Column<string>(nullable: true),
+                    AdopterPostalCode = table.Column<string>(nullable: true),
                     Motive = table.Column<string>(nullable: true),
                     AnimalDateOfBirth = table.Column<DateTime>(nullable: false),
                     AnimalBreedName = table.Column<string>(nullable: true),
@@ -250,26 +254,6 @@ namespace ProjectSW.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AnimalMonitoringReport",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    EntryDate = table.Column<DateTime>(nullable: false),
-                    EmployeeId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AnimalMonitoringReport", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AnimalMonitoringReport_Employee_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Job",
                 columns: table => new
                 {
@@ -317,10 +301,11 @@ namespace ProjectSW.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AnimalId = table.Column<string>(nullable: true),
-                    ReportId = table.Column<string>(nullable: true),
                     AdopterName = table.Column<string>(nullable: true),
                     AdopterAddress = table.Column<string>(nullable: true),
                     AdopterEmail = table.Column<string>(nullable: true),
+                    AdopterCitizenCard = table.Column<string>(nullable: true),
+                    AdopterPostalCode = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Motive = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -335,10 +320,31 @@ namespace ProjectSW.Migrations
                         principalTable: "Animal",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AnimalMonitoringReport",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    ExitFormId = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    EntryDate = table.Column<DateTime>(nullable: false),
+                    EmployeeId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnimalMonitoringReport", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExitForm_AnimalMonitoringReport_ReportId",
-                        column: x => x.ReportId,
-                        principalTable: "AnimalMonitoringReport",
+                        name: "FK_AnimalMonitoringReport_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AnimalMonitoringReport_ExitForm_ExitFormId",
+                        column: x => x.ExitFormId,
+                        principalTable: "ExitForm",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -352,6 +358,11 @@ namespace ProjectSW.Migrations
                 name: "IX_AnimalMonitoringReport_EmployeeId",
                 table: "AnimalMonitoringReport",
                 column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimalMonitoringReport_ExitFormId",
+                table: "AnimalMonitoringReport",
+                column: "ExitFormId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -408,11 +419,6 @@ namespace ProjectSW.Migrations
                 column: "AnimalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExitForm_ReportId",
-                table: "ExitForm",
-                column: "ReportId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Job_EmployeeId",
                 table: "Job",
                 column: "EmployeeId");
@@ -425,6 +431,9 @@ namespace ProjectSW.Migrations
 
             migrationBuilder.DropTable(
                 name: "AdoptionsHist");
+
+            migrationBuilder.DropTable(
+                name: "AnimalMonitoringReport");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -445,28 +454,25 @@ namespace ProjectSW.Migrations
                 name: "Attachment");
 
             migrationBuilder.DropTable(
-                name: "ExitForm");
+                name: "Job");
 
             migrationBuilder.DropTable(
-                name: "Job");
+                name: "ExitForm");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Animal");
-
-            migrationBuilder.DropTable(
-                name: "AnimalMonitoringReport");
-
-            migrationBuilder.DropTable(
-                name: "Breed");
-
-            migrationBuilder.DropTable(
                 name: "Employee");
 
             migrationBuilder.DropTable(
+                name: "Animal");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Breed");
         }
     }
 }

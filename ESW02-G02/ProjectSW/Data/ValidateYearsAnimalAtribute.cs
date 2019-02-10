@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace ProjectSW.Data
 {
     /// <summary> Classe de validação, usada para validar a data inserida no campo "Data de nascimento"</summary>
-    public class ValidateYearsAtribute : ValidationAttribute
+    public class ValidateYearsAnimalAttribute : ValidationAttribute
     {
-        private readonly DateTime _minValue = DateTime.UtcNow.AddYears(-99);
-        private readonly DateTime _maxValue = DateTime.UtcNow.AddYears(-16);
+        private readonly DateTime _minValue = DateTime.UtcNow.AddYears(-20);
+        private readonly DateTime _maxValue = DateTime.UtcNow.AddYears(0);
 
         /// <summary> Metodo de validação da data inserida, verifica se a data inserida representa uma data com no minimo de 16 anos</summary>
         /// <param name="value">Objeto passado pelo input da Data de nascimento.</param>

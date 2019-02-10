@@ -23,6 +23,11 @@ namespace ProjectSW.Controllers
             return View();
         }
 
+        public IActionResult MostAdopted()
+        {
+            return View();
+        }
+
         public IActionResult ExitFormSubmited()
         {
             return View();

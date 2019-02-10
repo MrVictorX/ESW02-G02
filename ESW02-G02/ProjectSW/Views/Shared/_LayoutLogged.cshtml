@@ -8,6 +8,7 @@
     <environment include="Development">
         <link rel="stylesheet" href='@Url.Content("~/lib/bootstrap/dist/css/bootstrap.css")'>
         <link rel="stylesheet" href='@Url.Content("~/css/site.css")'>
+        <script src="~/js/Chart.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </environment>
     <environment exclude="Development">
@@ -37,7 +38,7 @@
                 <ul class="nav navbar-nav" style="flex-direction: unset; font-size:1em">
                     <li><a asp-area="" asp-controller="Animals" asp-action="Index">Animais</a></li>
                     <li><a asp-area="" asp-controller="ExitForm" asp-action="Index">Adoções</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Estatisticas</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="MostAdopted">Estatisticas</a></li>
                     <li><a asp-area="" asp-controller="User" asp-action="UserList">Contas</a></li>
                     <li><a asp-area="" asp-controller="Employees" asp-action="Index">Funcionários</a></li>
                     <li><a asp-area="" asp-controller="Jobs" asp-action="Index">Tarefas</a></li>

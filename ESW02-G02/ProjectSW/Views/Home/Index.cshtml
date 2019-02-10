@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<ProjectSW.Models.Animal>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,7 +7,7 @@
     <div class="slideshow-container">
 
         <div class="mySlides">
-             <img style="width: 60%; filter: drop-shadow(0px 0px 3px #000000);" src="~/images/quinta.jpg" />
+            <img style="width: 60%; filter: drop-shadow(0px 0px 3px #000000);" src="~/images/quinta.jpg" />
         </div>
 
         <div class="mySlides">
@@ -59,4 +60,94 @@
         }
     </script>
 </div>
+
+<h2>Idades dos animais mais adotados</h2>
+
+<div class="col-md-5">
+    <canvas id="myChart" style="background-color:white;"></canvas>
+</div>
+
+<script>
+    var userObj = @Html.Raw(Json.Serialize(Model));
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["0-2", "3-5", "6-8", "9-10", "10>"],
+            datasets: [{
+                label: 'idade dos animais adotados',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    }
+    
+
+    @{
+        var years2 = 0;
+        var years5 = 0;
+        var years8 = 0;
+        var years10 = 0;
+        var moreYears = 0;
+
+        foreach (Animal animal in Model)
+        {
+            if (!animal.Available)
+            {
+                var age = DateTime.Now.Year - animal.DateOfBirth.Year;
+                switch (age)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                        years2++;
+                        break;
+                    case 3:
+                    case 4:
+                    case 5:
+                        years5++;
+                        break;
+                    case 6:
+                    case 7:
+                    case 8:
+                        years8++;
+                        break;
+                    case 9:
+                    case 10:
+                        years10++;
+                        break;
+                    default:
+                        moreYears++;
+                        break;
+                }
+            }
+        }
+    }
+    
+
+</script>
 

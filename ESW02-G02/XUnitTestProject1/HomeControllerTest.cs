@@ -74,33 +74,33 @@ namespace UnitTestProject1
 
             Assert.IsType<NotFoundResult>(result);
         }
-        /*
-        [Fact]
-        public async Task DetailsAnimal_RetunrsViewResult_WhenAnimalExists()
-        {
-            var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseSqlite(connection)
-                .Options;
 
-            using (var context = new ApplicationDbContext(options))
-            {
-                context.Database.EnsureCreated();
-                context.Breed.Add(new Breed { Name = "Bulldog" });
-                context.Animal.Add(new Animal { BreedId = (context.Breed.FirstOrDefault(m => m.Name.Contains("Bulldog"))).Id, Name = "Max", Size = "Pequeno", Gender = "Macho", DateOfBirth = new DateTime(2017, 08, 08), Available=false, Foto=null, Attachments=null});
-                context.SaveChanges();
-            }
-            using (var context = new ApplicationDbContext(options))
-            {
-                var controller = new HomeController(context);
+        //[Fact]
+        //public async Task DetailsAnimal_RetunrsViewResult_WhenAnimalExists()
+        //{
+        //    var connection = new SqliteConnection("DataSource=:memory:");
+        //    connection.Open();
+        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        //        .UseSqlite(connection)
+        //        .Options;
 
-                var animal = _context.Animal.FirstOrDefault(a => a.Name == "Max");
-                var result = await controller.DetailsAnimal(animal.Id);
-                
-                var viewResult = Assert.IsType<ViewResult>(result);
-            }
-        }*/
+        //    using (var context = new ApplicationDbContext(options))
+        //    {
+        //        context.Database.EnsureCreated();
+        //        context.Breed.Add(new Breed { Name = "Bulldog" });
+        //        context.Animal.Add(new Animal { BreedId = (context.Breed.FirstOrDefault(m => m.Name.Contains("Bulldog"))).Id, Name = "Max", Size = "Pequeno", Gender = "Macho", DateOfBirth = new DateTime(2017, 08, 08), Available = false, Foto = null, Attachments = null });
+        //        context.SaveChanges();
+        //    }
+        //    using (var context = new ApplicationDbContext(options))
+        //    {
+        //        var controller = new HomeController(context);
+
+        //        var animal = _context.Animal.FirstOrDefault(a => a.Name == "Max");
+        //        var result = await controller.DetailsAnimal(animal.Id);
+
+        //        var viewResult = Assert.IsType<ViewResult>(result);
+        //    }
+        //}
 
         [Fact]
         public async Task ListAnimals_CanLoadFromContext()

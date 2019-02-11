@@ -64,6 +64,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [EmailAddress]
+            [Display(Name = "E-mail")]
             public string Email { get; set; }
 
             [Phone]

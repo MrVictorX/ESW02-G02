@@ -11,12 +11,16 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
+        [Display(Name = "Animal")]
         public string AnimalId { get; set; }
 
+        [Display(Name = "Animal")]
         public Animal Animal { get; set; }
 
+        [Display(Name = "Nome")]
         public string Name { get; set; }
 
+        [Display(Name = "Ficheiros")]
         public byte[] File { get; set; }
     }
 }

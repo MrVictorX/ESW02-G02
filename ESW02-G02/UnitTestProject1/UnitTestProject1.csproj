@@ -40,6 +40,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="dotnet-aspnet-codegenerator-design, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.Web.CodeGeneration.Design.2.2.0\lib\net461\dotnet-aspnet-codegenerator-design.exe</HintPath>

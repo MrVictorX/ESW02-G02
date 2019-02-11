@@ -11,7 +11,7 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string AccountId { get; set; }
 
         [Display(Name = "Cargo")]
@@ -20,7 +20,7 @@ namespace ProjectSW.Models
         [Display(Name = "Informação Adicional")]
         public string AditionalInformation { get; set; }
 
-        
+        [Display(Name = "Conta")]
         public ProjectSWUser Account { get; set; }
 
         

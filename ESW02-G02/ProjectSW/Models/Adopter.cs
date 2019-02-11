@@ -10,13 +10,17 @@ namespace ProjectSW.Models
     {
         public string Id { get; set; }
 
+        [Display(Name = "E-mail")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Display(Name = "Morada")]
         public string Address { get; set; }
 
+        [Display(Name = "Número de identificação")]
         public string CitizenCard { get; set; }
 
+        [Display(Name = "Código Postal")]
         public string PostalCode { get; set; }
     }
 }

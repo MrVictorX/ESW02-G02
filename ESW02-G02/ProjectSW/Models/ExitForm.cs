@@ -20,10 +20,10 @@ namespace ProjectSW.Models
         public string AdopterAddress { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string AdopterEmail { get; set; }
 
-        [Display(Name = "Numero de identificação (CC)")]
+        [Display(Name = "Numero de identificação")]
         public string AdopterCitizenCard { get; set; }
 
         [Display(Name = "Codigo Postal")]
@@ -42,6 +42,7 @@ namespace ProjectSW.Models
         [Display(Name = "Estado")]
         public string State { get; set; }
 
+        [Display(Name = "Animal")]
         public Animal Animal { get; set; }
     }
 

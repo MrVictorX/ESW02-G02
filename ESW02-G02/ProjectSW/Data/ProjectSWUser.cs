@@ -17,12 +17,15 @@ namespace ProjectSW.Data
         public string Name { get; set; }
 
         [PersonalData]
+        [Display(Name = "Morada")]
         public string Address { get; set; }
 
         [PersonalData]
+        [Display(Name = "Data de nascimento")]
         public DateTime DateOfBirth { get; set; }
 
         [PersonalData]
+        [Display(Name = "Cargo")]
         public string UserType { get; set; }
 
         [PersonalData]

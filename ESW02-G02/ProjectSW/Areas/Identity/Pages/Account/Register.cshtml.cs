@@ -60,7 +60,7 @@ namespace ProjectSW.Areas.Identity.Pages.Account
 
             [Required(ErrorMessage = "O Email é um campo obrigatório.")]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "E-mail")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "A Password é um campo obrigatório.")]
